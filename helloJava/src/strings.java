@@ -4,7 +4,7 @@ public class strings {
 
     public static void main(String[] args) {
         String mesaj = "    Lorem ipsum dolor sit amet : ";
-        /*    System.out.println("Mesajım : " + mesaj);
+        System.out.println("Mesajım : " + mesaj);
          System.out.println("Uzunluk : " + mesaj.length());
          System.out.println("5. eleman : " + mesaj.charAt(4)); // index numarası verilir.
          System.out.println(mesaj.concat(" Bunlar mıgır metinlerdir!"));
@@ -16,7 +16,7 @@ public class strings {
          System.out.println(mesaj.indexOf("a")); // a harfinin kaçıncı karakter olacağı - ilk bulduğunu verir. - baştan itibaren arar.
          System.out.println(mesaj.lastIndexOf(":")); // sondan aramaya başlar.
 
-         System.out.println("---------------------");*/
+         System.out.println("---------------------");
 
         System.out.println(mesaj.replace(" ", "-"));
         System.out.println("---------------------");
