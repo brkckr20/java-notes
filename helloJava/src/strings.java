@@ -12,7 +12,7 @@ public class strings {
          System.out.println(mesaj.endsWith(" ")); // boşluk ile mi bitiyor.
          char[] karakterler = new char[5];
          mesaj.getChars(0, 5, karakterler, 0);
-         System.out.println("Karakterler : " + Arrays.toString(karakterler));
+         //System.out.println("Karakterler : " + Arrays.toString(karakterler));
          System.out.println(mesaj.indexOf("a")); // a harfinin kaçıncı karakter olacağı - ilk bulduğunu verir. - baştan itibaren arar.
          System.out.println(mesaj.lastIndexOf(":")); // sondan aramaya başlar.
 
