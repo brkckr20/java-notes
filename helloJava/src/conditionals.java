@@ -43,6 +43,7 @@ public class conditionals {
                 System.out.println("Perfect : Geçtiniz");
                 break;
             case 'B':
+            case 'D':
                 System.out.println("Ehh işte idare eder");
                 break;
             default:
