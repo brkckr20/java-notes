@@ -4,7 +4,7 @@ public class ProductManager {
 
     public void Add(Product product) {
         //jdbc kullanarak db ye kayıt işlemleri yapılacak
-        System.out.println("Ürün eklendi : " + product.name);
+        System.out.println("Ürün eklendi : " + product.getName());
     }
 
     // bu kullanım genel olarak hatalı kullanımdır. farklı ekranlarda kullanılınca ve yeni bir özellik eklendiğinde her ekranda teker teker düzenleme ihtiyacı gelebilir
