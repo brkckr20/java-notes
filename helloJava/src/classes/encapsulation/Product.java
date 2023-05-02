@@ -2,6 +2,21 @@ package classes.encapsulation;
 
 public class Product {
 
+    //constructor tanımlama
+    public Product(int id, String name, String description, double price, int stokAmount, String kod) {
+        System.out.println("Yapıcı blok calıştı");
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stokAmount = stokAmount;
+        this.kod = kod;
+    }
+
+    // constructor - overloading denir.
+    public Product() {
+        //parametre geçmeden de kullanabilmek için
+    }
     // attributes - özellik
     // özellikler varsayılan olarak public olarak gelir
     // private String name; // private olan değerler sadece kapsamındaki blogundan erişilebilir
@@ -82,8 +97,7 @@ public class Product {
      * @return the kod
      */
     public String getKod() {
-        return this.name.substring(0,1) + id;
+        return this.name.substring(0, 1) + id;
     }
-
 
 }
