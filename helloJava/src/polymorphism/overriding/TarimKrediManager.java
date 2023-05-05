@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package polymorphism;
+package polymorphism.overriding;
 
 /**
  *
  * @author BILGIISLEM
  */
-public class EmailLogger extends BaseLogger{
-    public void log(String message) {
-        System.out.println("Logged to email : " + message);
-    }
+public class TarimKrediManager extends BaseKrediManager {
+
 }

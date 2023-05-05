@@ -8,8 +8,8 @@ public class CustomerManager {
         this.baseLogger = logger;
     }
     
-    public void Add() {
+    public void add() {
         System.out.println("Müşteri veritabanına eklendi...");
-        this.baseLogger.Log("Log mesajı customerManager");
+        this.baseLogger.log("Log mesajı customerManager");
     }
 }
