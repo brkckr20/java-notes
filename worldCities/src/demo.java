@@ -227,10 +227,7 @@ public class demo extends javax.swing.JFrame {
         TableRowSorter<DefaultTableModel> tableRowSorter = new TableRowSorter<DefaultTableModel>(model);
         tblCities.setRowSorter(tableRowSorter);
         tableRowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchKey)); // (?i) ifadesi büyük küçük harf duyarlılığını kapatır
-        /*String searchKey = txtSearch.getText();
-         TableRowSorter<DefaultTableModel> tableRowSorter = new TableRowSorter<DefaultTableModel>(model);
-         tblCities.setRowSorter(tableRowSorter);
-         tableRowSorter.setRowFilter(RowFilter.regexFilter(searchKey));*/
+        
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
