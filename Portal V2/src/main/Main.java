@@ -1,5 +1,6 @@
 package main;
 
+import gui.kartlar.SarfMalzemeKarti;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tbp1 = new javax.swing.JTabbedPane();
         MainMenu = new javax.swing.JMenuBar();
         menuAyarlar = new javax.swing.JMenu();
         menuAyarlarSirketBilgileri = new javax.swing.JMenuItem();
@@ -55,6 +57,11 @@ public class Main extends javax.swing.JFrame {
 
         menuSarfMalzemeKartlari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/cards.png"))); // NOI18N
         menuSarfMalzemeKartlari.setText("Sarf Malzeme Kartları");
+        menuSarfMalzemeKartlari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSarfMalzemeKartlariActionPerformed(evt);
+            }
+        });
         menuKartTanimlamalari.add(menuSarfMalzemeKartlari);
 
         menuFirmaKartlari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/cards.png"))); // NOI18N
@@ -99,16 +106,30 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1046, Short.MAX_VALUE)
+            .addComponent(tbp1, javax.swing.GroupLayout.DEFAULT_SIZE, 1046, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
+            .addComponent(tbp1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuSarfMalzemeKartlariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSarfMalzemeKartlariActionPerformed
+        SarfMalzemeKarti smk = new SarfMalzemeKarti();
+        smk.setClosable(false);
+        String tabTitle = "Malzeme Kartı" + " " + " ";
+        tbp1.addTab(tabTitle, smk);
+        
+        // Sekmeye çarpı simgesi ekle
+        int tabCount = tbp1.getTabCount();
+        tbp1.setTabComponentAt(tabCount - 1, new components.ButtonTabComponent(tbp1));
+
+        // Yeni oluşturulan sekmeyi seçin
+        tbp1.setSelectedIndex(tabCount - 1);
+    }//GEN-LAST:event_menuSarfMalzemeKartlariActionPerformed
 
     public static void main(String args[]) {
         for (UIManager.LookAndFeelInfo lafInfo : UIManager.getInstalledLookAndFeels()) {
@@ -146,5 +167,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuTeknikDestekMevcutTalepListesi;
     private javax.swing.JMenuItem menuTeknikDestekTamamlanmisTalepler;
     private javax.swing.JMenuItem menuTeknikDestekYeniKayit;
+    private javax.swing.JTabbedPane tbp1;
     // End of variables declaration//GEN-END:variables
 }
