@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="pnlButtonGroup" max="32767" attributes="0"/>
+          <Component id="pnlMainForm" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="pnlButtonGroup" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnlMainForm" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="pnlButtonGroup">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="btnYeniMalzemeKarti" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnKaydetMalzemeKarti" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="864" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                  <Component id="btnKaydetMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnYeniMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btnKaydetMalzemeKarti">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/assets/save.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Kaydet"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKaydetMalzemeKartiActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnYeniMalzemeKarti">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/assets/plus.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Yeni"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnlMainForm">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="lblFirmaKodu" max="32767" attributes="0"/>
+                      <Component id="lblFirmaUnvan1" pref="145" max="32767" attributes="0"/>
+                      <Component id="lblFirmaUnvan2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAdres1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblAdres2" max="32767" attributes="0"/>
+                      <Component id="lblUlke" max="32767" attributes="0"/>
+                      <Component id="lblSehir" max="32767" attributes="0"/>
+                      <Component id="lblIlce" max="32767" attributes="0"/>
+                      <Component id="lblPostaKodu" max="32767" attributes="0"/>
+                      <Component id="lblVergiDairesi" max="32767" attributes="0"/>
+                      <Component id="lblVergiNo" max="32767" attributes="0"/>
+                      <Component id="lblTelefon" max="32767" attributes="0"/>
+                      <Component id="lblFax" max="32767" attributes="0"/>
+                      <Component id="lblGibMail" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtGibMail" pref="194" max="32767" attributes="0"/>
+                      <Component id="txtFax" max="32767" attributes="0"/>
+                      <Component id="txtTelefon" max="32767" attributes="0"/>
+                      <Component id="txtVergiNo" max="32767" attributes="0"/>
+                      <Component id="txtVergiDairesi" max="32767" attributes="0"/>
+                      <Component id="txtPostaKodu" max="32767" attributes="0"/>
+                      <Component id="txtIlce" max="32767" attributes="0"/>
+                      <Component id="txtSehir" max="32767" attributes="0"/>
+                      <Component id="txtUlke" max="32767" attributes="0"/>
+                      <Component id="txtAdres2" max="32767" attributes="0"/>
+                      <Component id="txtAdres1" max="32767" attributes="0"/>
+                      <Component id="txtFirmaUnvan2" max="32767" attributes="0"/>
+                      <Component id="txtFirmaUnvan1" max="32767" attributes="0"/>
+                      <Component id="txtFirmaKodu" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnUlkeSec" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblUlkeKodu" min="-2" pref="64" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblUlkeKoduText" min="-2" pref="64" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtFirmaKodu" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFirmaKodu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtFirmaUnvan1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFirmaUnvan1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtFirmaUnvan2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFirmaUnvan2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtAdres1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAdres1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtAdres2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAdres2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtUlke" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblUlke" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnUlkeSec" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblUlkeKodu" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblUlkeKoduText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtSehir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSehir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtIlce" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblIlce" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtPostaKodu" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPostaKodu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtVergiDairesi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblVergiDairesi" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtVergiNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblVergiNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtFax" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFax" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtGibMail" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblGibMail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="438" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JTextField" name="txtFirmaKodu">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFirmaKodu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Firma Kodu :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFirmaUnvan1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFirmaUnvan1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Firma Unvan 1 :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFirmaUnvan2">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFirmaUnvan2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Firma Unvan 2 :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtAdres1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblAdres1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Adres 1 :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtAdres2">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblAdres2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Adres 2 :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtUlke">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblUlke">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xdc;lke :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnUlkeSec">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Se&#xe7;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUlkeSecActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblUlkeKodu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xdc;lke Kodu :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblUlkeKoduText">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xdc;lke Kodu :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSehir">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblSehir">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x15e;ehir :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtIlce">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblIlce">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x130;l&#xe7;e :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPostaKodu">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPostaKodu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Posta Kodu :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtVergiDairesi">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblVergiDairesi">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Vergi Dairesi :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtVergiNo">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblVergiNo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Vergi No :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtTelefon">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTelefon">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Telefon : "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFax">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFax">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fax :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtGibMail">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblGibMail">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gib Mail :"/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="tblFirmaListesi">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="15" rowCount="0">
+                    <Column editable="false" title="Firma Kodu" type="java.lang.String"/>
+                    <Column editable="false" title="Firma Unvan 1" type="java.lang.String"/>
+                    <Column editable="false" title="Firma Unvan 2" type="java.lang.String"/>
+                    <Column editable="false" title="Adres 1" type="java.lang.String"/>
+                    <Column editable="false" title="Adres 2" type="java.lang.String"/>
+                    <Column editable="false" title="&#xdc;lke" type="java.lang.String"/>
+                    <Column editable="false" title="&#xdc;lke Kodu" type="java.lang.String"/>
+                    <Column editable="false" title="&#x15e;ehir" type="java.lang.String"/>
+                    <Column editable="false" title="&#x130;l&#xe7;e" type="java.lang.String"/>
+                    <Column editable="false" title="Posta Kodu" type="java.lang.String"/>
+                    <Column editable="false" title="Vergi Dairesi" type="java.lang.String"/>
+                    <Column editable="false" title="Vergi No" type="java.lang.String"/>
+                    <Column editable="false" title="Telefon" type="java.lang.String"/>
+                    <Column editable="false" title="Fax" type="java.lang.String"/>
+                    <Column editable="false" title="Gib Mail" type="java.lang.String"/>
+                  </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

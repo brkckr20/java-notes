@@ -1,5 +1,7 @@
 package main;
 
+import gui.depolar.SarfMalzemeGiris;
+import gui.kartlar.FirmaKarti;
 import gui.kartlar.SarfMalzemeKarti;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,11 +16,12 @@ public class Main extends javax.swing.JFrame {
         setLogo();
     }
 
-    public void setLogo(){
+    public void setLogo() {
         ImageIcon img;
         img = new ImageIcon("C:\\Users\\BILGIISLEM\\Desktop\\New Folder\\udemy\\Portal V2\\src\\assets\\logo.png");
         this.setIconImage(img.getImage());
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,6 +40,7 @@ public class Main extends javax.swing.JFrame {
         menuTeknikDestekYeniKayit = new javax.swing.JMenuItem();
         menuTeknikDestekMevcutTalepListesi = new javax.swing.JMenuItem();
         menuTeknikDestekTamamlanmisTalepler = new javax.swing.JMenuItem();
+        menuKodlama = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stok Takip Programı [Portal v.2.0.0]");
@@ -66,6 +70,11 @@ public class Main extends javax.swing.JFrame {
 
         menuFirmaKartlari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/cards.png"))); // NOI18N
         menuFirmaKartlari.setText("Firma Kartları");
+        menuFirmaKartlari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFirmaKartlariActionPerformed(evt);
+            }
+        });
         menuKartTanimlamalari.add(menuFirmaKartlari);
 
         MainMenu.add(menuKartTanimlamalari);
@@ -75,6 +84,11 @@ public class Main extends javax.swing.JFrame {
 
         menuSarfMalzemeDepoGiris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/package.png"))); // NOI18N
         menuSarfMalzemeDepoGiris.setText("Sarf Malzeme Depo Giriş");
+        menuSarfMalzemeDepoGiris.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSarfMalzemeDepoGirisActionPerformed(evt);
+            }
+        });
         menuSarfMalzemeDepo.add(menuSarfMalzemeDepoGiris);
 
         menuSarfMalzemeDepoCikis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/package.png"))); // NOI18N
@@ -100,6 +114,10 @@ public class Main extends javax.swing.JFrame {
 
         MainMenu.add(menuTeknikDestek);
 
+        menuKodlama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/settings.png"))); // NOI18N
+        menuKodlama.setText("Kodlama");
+        MainMenu.add(menuKodlama);
+
         setJMenuBar(MainMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,7 +140,7 @@ public class Main extends javax.swing.JFrame {
         smk.setClosable(false);
         String tabTitle = "Malzeme Kartı" + " " + " ";
         tbp1.addTab(tabTitle, smk);
-        
+
         // Sekmeye çarpı simgesi ekle
         int tabCount = tbp1.getTabCount();
         tbp1.setTabComponentAt(tabCount - 1, new components.ButtonTabComponent(tbp1));
@@ -131,9 +149,37 @@ public class Main extends javax.swing.JFrame {
         tbp1.setSelectedIndex(tabCount - 1);
     }//GEN-LAST:event_menuSarfMalzemeKartlariActionPerformed
 
+    private void menuSarfMalzemeDepoGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSarfMalzemeDepoGirisActionPerformed
+        SarfMalzemeGiris smg = new SarfMalzemeGiris();
+        smg.setClosable(false);
+        String tabTitle = "Sarf Malzeme Depo Giriş İşlemleri" + " " + " ";
+        tbp1.addTab(tabTitle, smg);
+
+        // Sekmeye çarpı simgesi ekle
+        int tabCount = tbp1.getTabCount();
+        tbp1.setTabComponentAt(tabCount - 1, new components.ButtonTabComponent(tbp1));
+
+        // Yeni oluşturulan sekmeyi seçin
+        tbp1.setSelectedIndex(tabCount - 1);
+    }//GEN-LAST:event_menuSarfMalzemeDepoGirisActionPerformed
+
+    private void menuFirmaKartlariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFirmaKartlariActionPerformed
+        FirmaKarti firmaKarti = new FirmaKarti();
+        firmaKarti.setClosable(false);
+        String tabTitle = "Firma Kartı " + " " + " ";
+        tbp1.addTab(tabTitle, firmaKarti);
+
+        // Sekmeye çarpı simgesi ekle
+        int tabCount = tbp1.getTabCount();
+        tbp1.setTabComponentAt(tabCount - 1, new components.ButtonTabComponent(tbp1));
+
+        // Yeni oluşturulan sekmeyi seçin
+        tbp1.setSelectedIndex(tabCount - 1);
+    }//GEN-LAST:event_menuFirmaKartlariActionPerformed
+
     public static void main(String args[]) {
         for (UIManager.LookAndFeelInfo lafInfo : UIManager.getInstalledLookAndFeels()) {
-            System.out.println(lafInfo.getClassName());
+            // System.out.println(lafInfo.getClassName());
         }
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -148,7 +194,7 @@ public class Main extends javax.swing.JFrame {
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                  new Main().setVisible(true);
+                new Main().setVisible(true);
             }
         });
     }
@@ -159,6 +205,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuAyarlarSirketBilgileri;
     private javax.swing.JMenuItem menuFirmaKartlari;
     private javax.swing.JMenu menuKartTanimlamalari;
+    private javax.swing.JMenu menuKodlama;
     private javax.swing.JMenu menuSarfMalzemeDepo;
     private javax.swing.JMenuItem menuSarfMalzemeDepoCikis;
     private javax.swing.JMenuItem menuSarfMalzemeDepoGiris;
