@@ -1,5 +1,6 @@
 package gui.kartlar;
 
+import components.UlkeModal;
 import helpers.DbHelper;
 import interfaces.FirmaKartiYonetimi;
 import java.sql.Connection;
@@ -19,10 +20,15 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
 
     public FirmaKarti() {
         initComponents();
-        firmalariTabloyaYansit();
         this.setBorder(null);
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
+    }
+    
+    @Override
+    public void onFirmaSelected(String ulke, String ulke_kodu){
+        txtUlke.setText(ulke);
+        lblUlkeKoduText.setText(ulke_kodu);
     }
 
     @Override
@@ -191,6 +197,7 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         tblFirmaListesi = new javax.swing.JTable();
         cmbCariTipi = new javax.swing.JComboBox();
         lblCariTipi = new javax.swing.JLabel();
+        btnListeyiYukle = new javax.swing.JButton();
 
         btnKaydetFirmaKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/save.png"))); // NOI18N
         btnKaydetFirmaKarti.setText("Kaydet");
@@ -264,7 +271,7 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
 
             },
             new String [] {
-                "Firma Kodu", "Firma Unvan 1", "Firma Unvan 2", "Adres 1", "Adres 2", "Ülke", "Ülke Kodu", "Şehir", "İlçe", "Posta Kodu", "Vergi Dairesi", "Vergi No", "Telefon", "Fax", "Gib Mail"
+                "Firma Kodu", "Firma Unvan 1", "Firma Unvan 2", "Adres 1", "Adres 2", "Ülke", "Ülke Kodu", "Şehir", "İlçe", "Posta Kodu", "Vergi Dairesi", "Vergi No", "Telefon", "Cari Tipi", "Gib Mail"
             }
         ) {
             Class[] types = new Class [] {
@@ -287,6 +294,13 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         cmbCariTipi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yerli Müşteri", "Yabancı Müşteri", "Aksesuar", "Dokuma" }));
 
         lblCariTipi.setText("Cari Tipi :");
+
+        btnListeyiYukle.setText("Listeyi Yükle");
+        btnListeyiYukle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListeyiYukleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlMainFormLayout = new javax.swing.GroupLayout(pnlMainForm);
         pnlMainForm.setLayout(pnlMainFormLayout);
@@ -335,6 +349,9 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUlkeKoduText, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlMainFormLayout.createSequentialGroup()
+                .addComponent(btnListeyiYukle, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlMainFormLayout.setVerticalGroup(
             pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,8 +419,10 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                 .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbCariTipi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCariTipi))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(btnListeyiYukle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -429,12 +448,19 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
     }//GEN-LAST:event_btnKaydetFirmaKartiActionPerformed
 
     private void btnUlkeSecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUlkeSecActionPerformed
-        // TODO add your handling code here:
+        UlkeModal ulkeModal = new UlkeModal(null, true);
+        
+        ulkeModal.setVisible(true);
     }//GEN-LAST:event_btnUlkeSecActionPerformed
+
+    private void btnListeyiYukleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeyiYukleActionPerformed
+        firmalariTabloyaYansit();
+    }//GEN-LAST:event_btnListeyiYukleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKaydetFirmaKarti;
+    private javax.swing.JButton btnListeyiYukle;
     private javax.swing.JButton btnUlkeSec;
     private javax.swing.JButton btnYeniMalzemeKarti;
     private javax.swing.JComboBox cmbCariTipi;
