@@ -17,12 +17,14 @@ public class ButtonTabComponent extends JPanel {
 
     private final JTabbedPane tabbedPane;
     private Icon closeIcon;
+    private Color activeTabColor;
 
     public ButtonTabComponent(final JTabbedPane tabbedPane) {
         super(new FlowLayout(FlowLayout.LEFT, 0, 0));
         this.tabbedPane = tabbedPane;
         setOpaque(false);
         closeIcon = new ImageIcon(getClass().getResource("Multiply.png"));
+        activeTabColor = UIManager.getColor("TabbedPane.selected"); // Aktif sekme rengini al
 
         JLabel label = new JLabel() {
             public String getText() {
@@ -33,7 +35,7 @@ public class ButtonTabComponent extends JPanel {
                 return null;
             }
         };
-        
+
         add(label);
         add(new CloseButton());
     }
@@ -68,7 +70,11 @@ public class ButtonTabComponent extends JPanel {
             int y = (getHeight() - closeIcon.getIconHeight()) / 2;
             closeIcon.paintIcon(this, g, x, y);
 
+            // Eğer bu ButtonTabComponent aktif sekmenin içerisinde ise, arkaplan rengini ayarla
+            if (tabbedPane.getSelectedComponent() == ButtonTabComponent.this) {
+                g.setColor(activeTabColor);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
         }
     }
-
 }

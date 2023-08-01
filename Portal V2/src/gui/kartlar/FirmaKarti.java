@@ -13,6 +13,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import utils.Bildirim;
 import models.MFirmaKarti;
+import components.UlkeModal;
 
 public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKartiYonetimi {
 
@@ -24,13 +25,13 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
     }
-    
+
     @Override
-    public void onFirmaSelected(String ulke, String ulke_kodu){
+    public void onFirmaSelected(String ulke, String ulke_kodu) {
         txtUlke.setText(ulke);
         lblUlkeKoduText.setText(ulke_kodu);
     }
-
+    
     @Override
     public void firmaEkle() {
         Connection connection = null;
@@ -175,7 +176,6 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         txtUlke = new javax.swing.JTextField();
         lblUlke = new javax.swing.JLabel();
         btnUlkeSec = new javax.swing.JButton();
-        lblUlkeKodu = new javax.swing.JLabel();
         lblUlkeKoduText = new javax.swing.JLabel();
         txtSehir = new javax.swing.JTextField();
         lblSehir = new javax.swing.JLabel();
@@ -245,10 +245,6 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                 btnUlkeSecActionPerformed(evt);
             }
         });
-
-        lblUlkeKodu.setText("Ülke Kodu :");
-
-        lblUlkeKoduText.setText("Ülke Kodu :");
 
         lblSehir.setText("Şehir :");
 
@@ -345,8 +341,6 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUlkeSec)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblUlkeKodu, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUlkeKoduText, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlMainFormLayout.createSequentialGroup()
@@ -381,7 +375,6 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                     .addComponent(txtUlke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUlke)
                     .addComponent(btnUlkeSec)
-                    .addComponent(lblUlkeKodu)
                     .addComponent(lblUlkeKoduText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -419,7 +412,7 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                 .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbCariTipi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCariTipi))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(btnListeyiYukle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -449,7 +442,7 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
 
     private void btnUlkeSecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUlkeSecActionPerformed
         UlkeModal ulkeModal = new UlkeModal(null, true);
-        
+        ulkeModal.setSelectionListener(this);
         ulkeModal.setVisible(true);
     }//GEN-LAST:event_btnUlkeSecActionPerformed
 
@@ -478,7 +471,6 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
     private javax.swing.JLabel lblSehir;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JLabel lblUlke;
-    private javax.swing.JLabel lblUlkeKodu;
     private javax.swing.JLabel lblUlkeKoduText;
     private javax.swing.JLabel lblVergiDairesi;
     private javax.swing.JLabel lblVergiNo;

@@ -11,10 +11,17 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import models.MUlke;
 
+import interfaces.FirmaKartiYonetimi;
+
+
 public class UlkeModal extends javax.swing.JDialog {
 
     DefaultTableModel model;
-    private UlkeModal selectionListener;
+    private FirmaKartiYonetimi selectionListener;
+
+    public void setSelectionListener(FirmaKartiYonetimi listener) {
+        this.selectionListener = listener;
+    }
 
     public UlkeModal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -22,9 +29,6 @@ public class UlkeModal extends javax.swing.JDialog {
         ulkeleriTabloyaYansit();
     }
 
-    public void setSelectionListener(UlkeModal listener) {
-        this.selectionListener = listener;
-    }
     public ArrayList<MUlke> ulkeListele() throws SQLException {
         Connection connection = null;
         DbHelper dbHelper = new DbHelper();
@@ -175,47 +179,21 @@ public class UlkeModal extends javax.swing.JDialog {
     }//GEN-LAST:event_txtFirmaAraKeyReleased
 
     private void tblUlkeListesiModalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUlkeListesiModalMouseClicked
-        
+
         if (evt.getClickCount() == 2) {
             int row = tblUlkeListesiModal.getSelectedRow();
             String ulke = tblUlkeListesiModal.getValueAt(row, 0).toString();
             String ulke_kodu = tblUlkeListesiModal.getValueAt(row, 1).toString();
             if (selectionListener != null) {
-              //  selectionListener.selectionListener(ulke, ulke_kodu);
+                selectionListener.onFirmaSelected(ulke, ulke_kodu);
             }
-            
+
             this.dispose();
         }
     }//GEN-LAST:event_tblUlkeListesiModalMouseClicked
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UlkeModal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UlkeModal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UlkeModal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UlkeModal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 UlkeModal dialog = new UlkeModal(new javax.swing.JFrame(), true);

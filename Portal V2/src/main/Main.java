@@ -12,6 +12,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Main extends javax.swing.JFrame {
 
     public Main() {
+
         initComponents();
         setLogo();
     }
@@ -114,7 +115,7 @@ public class Main extends javax.swing.JFrame {
 
         MainMenu.add(menuTeknikDestek);
 
-        menuKodlama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/settings.png"))); // NOI18N
+        menuKodlama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/code.png"))); // NOI18N
         menuKodlama.setText("Kodlama");
         MainMenu.add(menuKodlama);
 
