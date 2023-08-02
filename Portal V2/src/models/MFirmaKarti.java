@@ -19,6 +19,12 @@ public class MFirmaKarti {
     private String cari_tipi;
     private String gib_mail;
 
+    public MFirmaKarti(int id, String firma_kodu, String firma_unvan1) {
+        this.id = id;
+        this.firma_kodu = firma_kodu;
+        this.firma_unvan1 = firma_unvan1;
+    }
+
     public MFirmaKarti(String firma_kodu, String firma_unvan1, String firma_unvan2, String adres1, String adres2, String ulke_adi, String ulke_kodu, String sehir, String ilce, String posta_kodu, String vergi_dairesi, String vergi_no, String telefon, String cari_tipi, String gib_mail) {
         this.firma_kodu = firma_kodu;
         this.firma_unvan1 = firma_unvan1;

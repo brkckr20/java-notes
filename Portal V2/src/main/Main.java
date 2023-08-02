@@ -1,11 +1,13 @@
 package main;
 
 import gui.depolar.SarfMalzemeGiris;
+import gui.depolar.SarfMalzemeCikis;
 import gui.kartlar.FirmaKarti;
 import gui.kartlar.SarfMalzemeKarti;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -19,7 +21,7 @@ public class Main extends javax.swing.JFrame {
 
     public void setLogo() {
         ImageIcon img;
-        img = new ImageIcon("C:\\Users\\BILGIISLEM\\Desktop\\New Folder\\udemy\\Portal V2\\src\\assets\\logo.png");
+        img = new ImageIcon("C:\\Users\\BILGIISLEM\\Desktop\\Klasörler\\New Folder\\udemy\\Portal V2\\src\\logo.png");
         this.setIconImage(img.getImage());
     }
 
@@ -94,6 +96,11 @@ public class Main extends javax.swing.JFrame {
 
         menuSarfMalzemeDepoCikis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/package.png"))); // NOI18N
         menuSarfMalzemeDepoCikis.setText("Sarf Malzeme Depo Çıkış");
+        menuSarfMalzemeDepoCikis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSarfMalzemeDepoCikisActionPerformed(evt);
+            }
+        });
         menuSarfMalzemeDepo.add(menuSarfMalzemeDepoCikis);
 
         MainMenu.add(menuSarfMalzemeDepo);
@@ -139,44 +146,42 @@ public class Main extends javax.swing.JFrame {
     private void menuSarfMalzemeKartlariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSarfMalzemeKartlariActionPerformed
         SarfMalzemeKarti smk = new SarfMalzemeKarti();
         smk.setClosable(false);
-        String tabTitle = "Malzeme Kartı" + " " + " ";
-        tbp1.addTab(tabTitle, smk);
-
-        // Sekmeye çarpı simgesi ekle
-        int tabCount = tbp1.getTabCount();
-        tbp1.setTabComponentAt(tabCount - 1, new components.ButtonTabComponent(tbp1));
-
-        // Yeni oluşturulan sekmeyi seçin
-        tbp1.setSelectedIndex(tabCount - 1);
+        sekmeyeBaslikAta("Malzeme Kartı", smk);
+        sekmeyeCarpiEkle();
     }//GEN-LAST:event_menuSarfMalzemeKartlariActionPerformed
 
     private void menuSarfMalzemeDepoGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSarfMalzemeDepoGirisActionPerformed
         SarfMalzemeGiris smg = new SarfMalzemeGiris();
         smg.setClosable(false);
-        String tabTitle = "Sarf Malzeme Depo Giriş İşlemleri" + " " + " ";
-        tbp1.addTab(tabTitle, smg);
+        sekmeyeBaslikAta("Sarf Malzeme Depo Giriş İşlemleri", smg);
+        sekmeyeCarpiEkle();
+    }//GEN-LAST:event_menuSarfMalzemeDepoGirisActionPerformed
 
+    private void sekmeyeBaslikAta(String baslik,JInternalFrame formInstancesi){
+        String tabTitle = baslik + " " + " " + " ";
+        tbp1.addTab(tabTitle, formInstancesi);
+    }
+    private void sekmeyeCarpiEkle(){
         // Sekmeye çarpı simgesi ekle
         int tabCount = tbp1.getTabCount();
         tbp1.setTabComponentAt(tabCount - 1, new components.ButtonTabComponent(tbp1));
-
         // Yeni oluşturulan sekmeyi seçin
         tbp1.setSelectedIndex(tabCount - 1);
-    }//GEN-LAST:event_menuSarfMalzemeDepoGirisActionPerformed
-
+    }
+    
     private void menuFirmaKartlariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFirmaKartlariActionPerformed
         FirmaKarti firmaKarti = new FirmaKarti();
         firmaKarti.setClosable(false);
-        String tabTitle = "Firma Kartı " + " " + " ";
-        tbp1.addTab(tabTitle, firmaKarti);
-
-        // Sekmeye çarpı simgesi ekle
-        int tabCount = tbp1.getTabCount();
-        tbp1.setTabComponentAt(tabCount - 1, new components.ButtonTabComponent(tbp1));
-
-        // Yeni oluşturulan sekmeyi seçin
-        tbp1.setSelectedIndex(tabCount - 1);
+        sekmeyeBaslikAta("Firma Kartı ", firmaKarti);
+        sekmeyeCarpiEkle();
     }//GEN-LAST:event_menuFirmaKartlariActionPerformed
+
+    private void menuSarfMalzemeDepoCikisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSarfMalzemeDepoCikisActionPerformed
+        SarfMalzemeCikis sarfMalzemeCikis = new SarfMalzemeCikis();
+        sarfMalzemeCikis.setClosable(true);
+        sekmeyeBaslikAta("Sarf Malzeme Depo Çıkış İşlemleri", sarfMalzemeCikis);
+        sekmeyeCarpiEkle();
+    }//GEN-LAST:event_menuSarfMalzemeDepoCikisActionPerformed
 
     public static void main(String args[]) {
         for (UIManager.LookAndFeelInfo lafInfo : UIManager.getInstalledLookAndFeels()) {

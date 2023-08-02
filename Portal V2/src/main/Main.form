@@ -80,6 +80,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sarf Malzeme Depo &#xc7;&#x131;k&#x131;&#x15f;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSarfMalzemeDepoCikisActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -172,8 +172,9 @@ public class MalzemeKoduModal extends javax.swing.JDialog {
             int row = tblMalzemeKoduListesi.getSelectedRow();
             String malzeme_kodu = tblMalzemeKoduListesi.getValueAt(row, 0).toString();
             String malzeme_adi = tblMalzemeKoduListesi.getValueAt(row, 1).toString();
+            String birim = tblMalzemeKoduListesi.getValueAt(row, 2).toString();
             if (selectionListener != null) {
-                selectionListener.onMalzemeSelected(malzeme_kodu, malzeme_adi);
+                selectionListener.onMalzemeSelected(malzeme_kodu, malzeme_adi,birim);
             }
 
             this.dispose();
