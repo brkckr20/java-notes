@@ -52,6 +52,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnIleriMalzemeKarti" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnVazgecMalzemeKarti" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnSilMalzemeGiris" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnListeMalzemeGiris" min="-2" max="-2" attributes="0"/>
@@ -68,6 +70,7 @@
                   <Component id="btnIleriMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnSilMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnListeMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnVazgecMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -139,6 +142,17 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnYeniMalzemeGirisActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="btnVazgecMalzemeKarti">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/assets/Cancel.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Vazge&#xe7;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVazgecMalzemeKartiActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pnlMainForm">
@@ -167,7 +181,14 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnFirmaSec" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblFirmaUnvan" min="-2" pref="575" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblFirmaUnvan" min="-2" pref="575" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="lblKayitNo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="lblKayitNoText" min="-2" pref="75" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace pref="59" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -185,6 +206,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtFisNo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblFisNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblKayitNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblKayitNoText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -206,7 +229,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnYeniSatir" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="452" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="460" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -339,6 +362,16 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnYeniSatirActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblKayitNo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Kay&#x131;t No :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblKayitNoText">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

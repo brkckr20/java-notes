@@ -6,6 +6,7 @@ import helpers.DbHelper;
 import interfaces.FirmaKartiYonetimi;
 import interfaces.MalzemeKartiYonetimi;
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,17 +14,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import models.MSarfMalzemeDepo;
+import methods.Methods;
 
 public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements MalzemeKartiYonetimi, FirmaKartiYonetimi {
 
     private DefaultTableModel model;
     private JComboBox<String> comboBox;
+    Methods methods = new Methods();
 
     @Override
     public void onMalzemeSelected(String malzemeKodu, String malzemeAdi, String birim) {
@@ -57,6 +64,141 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
     }
 
+    public void malzemeDepoListesiniTabloyaYansit() {
+        model = (DefaultTableModel) tblMalzemeGiris.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<MSarfMalzemeDepo> malzemeDepo = methods.malzemeDepoListele();
+            for (MSarfMalzemeDepo liste : malzemeDepo) {
+                Object[] row = {
+                    liste.getMalzeme_kodu(),
+                    liste.getMalzeme_adi(),
+                    liste.getBirim(),
+                    liste.getKalan_miktar(),
+                    liste.getUuid()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public void malzemeDepoGirisOncekiKayitGetir(int id) {
+        model = (DefaultTableModel) tblMalzemeGiris.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<MSarfMalzemeDepo> sonuc = methods.malzemeDepoGirisOncekiKayitGetir(id);
+            if (!sonuc.isEmpty()) {
+                MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
+                int kayitNoText = ilkKayit.getId();
+                if(kayitNoText == 1){
+                    btnGeriMalzemeKarti.setEnabled(false);
+                }
+                lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
+                txtCariKod.setText(ilkKayit.getFirma_kodu());
+                txtBelgeNo.setText(ilkKayit.getFatura_no());
+                lblFirmaUnvan.setText(ilkKayit.getFirma_unvan());
+                dateIslemTarihi.setDate(ilkKayit.getTarih());
+                try {
+                    for (MSarfMalzemeDepo liste : sonuc) {
+                        Object[] row = {
+                            liste.getKalem_islem(),
+                            liste.getMalzeme_kodu(),
+                            liste.getMalzeme_adi(),
+                            liste.getKalan_miktar(),
+                            liste.getBirim(),
+                            "",
+                            liste.getUuid()
+                        };
+                        model.addRow(row);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                lblKayitNoText.setText("1"); // Eğer liste boşsa
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void malzemeDepoGirisSonrakiKayitGetir(int id) {
+        model = (DefaultTableModel) tblMalzemeGiris.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<MSarfMalzemeDepo> sonuc = methods.malzemeDepoGirisSonrakiKayitGetir(id);
+            if (!sonuc.isEmpty()) {
+                MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
+                int kayitNoText = ilkKayit.getId();
+                lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
+                txtCariKod.setText(ilkKayit.getFirma_kodu());
+                txtBelgeNo.setText(ilkKayit.getFatura_no());
+                lblFirmaUnvan.setText(ilkKayit.getFirma_unvan());
+                dateIslemTarihi.setDate(ilkKayit.getTarih());
+                try {
+                    for (MSarfMalzemeDepo liste : sonuc) {
+                        Object[] row = {
+                            liste.getKalem_islem(),
+                            liste.getMalzeme_kodu(),
+                            liste.getMalzeme_adi(),
+                            liste.getKalan_miktar(),
+                            liste.getBirim(),
+                            "",
+                            liste.getUuid()
+                        };
+                        model.addRow(row);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                MSarfMalzemeDepo ilkKayit = sonuc.get(0);
+                int kayitNoText = ilkKayit.getId();
+                lblKayitNoText.setText(Integer.toString(kayitNoText));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void malzemeDepoGirisSonKayitGetir() {
+        model = (DefaultTableModel) tblMalzemeGiris.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<MSarfMalzemeDepo> sonuc = methods.malzemeDepoGirisSonKayitGetir();
+            if (!sonuc.isEmpty()) {
+                MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
+                int kayitNoText = ilkKayit.getId();
+                lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
+                txtCariKod.setText(ilkKayit.getFirma_kodu());
+                txtBelgeNo.setText(ilkKayit.getFatura_no());
+                lblFirmaUnvan.setText(ilkKayit.getFirma_unvan());
+                dateIslemTarihi.setDate(ilkKayit.getTarih());
+                try {
+                    for (MSarfMalzemeDepo liste : sonuc) {
+                        Object[] row = {
+                            liste.getKalem_islem(),
+                            liste.getMalzeme_kodu(),
+                            liste.getMalzeme_adi(),
+                            liste.getKalan_miktar(),
+                            liste.getBirim(),
+                            "",
+                            liste.getUuid()
+                        };
+                        model.addRow(row);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                lblKayitNoText.setText(Integer.toString(1)); // Eğer liste boşsa
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -68,6 +210,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         btnSilMalzemeGiris = new javax.swing.JButton();
         btnListeMalzemeGiris = new javax.swing.JButton();
         btnYeniMalzemeGiris = new javax.swing.JButton();
+        btnVazgecMalzemeKarti = new javax.swing.JButton();
         pnlMainForm = new javax.swing.JPanel();
         txtFisNo = new javax.swing.JTextField();
         lblFisNo = new javax.swing.JLabel();
@@ -82,6 +225,8 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMalzemeGiris = new javax.swing.JTable();
         btnYeniSatir = new javax.swing.JButton();
+        lblKayitNo = new javax.swing.JLabel();
+        lblKayitNoText = new javax.swing.JLabel();
 
         btnKaydetMalzemeKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/save.png"))); // NOI18N
         btnKaydetMalzemeKarti.setText("Kaydet");
@@ -131,6 +276,14 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
             }
         });
 
+        btnVazgecMalzemeKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cancel.png"))); // NOI18N
+        btnVazgecMalzemeKarti.setText("Vazgeç");
+        btnVazgecMalzemeKarti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVazgecMalzemeKartiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlButtonGroupLayout = new javax.swing.GroupLayout(pnlButtonGroup);
         pnlButtonGroup.setLayout(pnlButtonGroupLayout);
         pnlButtonGroupLayout.setHorizontalGroup(
@@ -145,6 +298,8 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnIleriMalzemeKarti)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVazgecMalzemeKarti)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSilMalzemeGiris)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnListeMalzemeGiris)
@@ -158,7 +313,8 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 .addComponent(btnGeriMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnIleriMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnSilMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnListeMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnListeMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVazgecMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         txtFisNo.setEditable(false);
@@ -221,6 +377,10 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
             }
         });
 
+        lblKayitNo.setText("Kayıt No :");
+
+        lblKayitNoText.setText("0");
+
         javax.swing.GroupLayout pnlMainFormLayout = new javax.swing.GroupLayout(pnlMainForm);
         pnlMainForm.setLayout(pnlMainFormLayout);
         pnlMainFormLayout.setHorizontalGroup(
@@ -244,7 +404,12 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFirmaSec)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblFirmaUnvan, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFirmaUnvan, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlMainFormLayout.createSequentialGroup()
+                                .addComponent(lblKayitNo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblKayitNoText, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(59, Short.MAX_VALUE))
                     .addGroup(pnlMainFormLayout.createSequentialGroup()
                         .addComponent(btnYeniSatir)
@@ -256,7 +421,9 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 .addContainerGap()
                 .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFisNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFisNo))
+                    .addComponent(lblFisNo)
+                    .addComponent(lblKayitNo)
+                    .addComponent(lblKayitNoText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(dateIslemTarihi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -274,7 +441,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnYeniSatir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -403,24 +570,30 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }//GEN-LAST:event_btnFirmaSecActionPerformed
 
     private void btnGeriMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeriMalzemeKartiActionPerformed
-        // TODO add your handling code here:
+        int kayitNo = Integer.parseInt(lblKayitNoText.getText());
+        malzemeDepoGirisOncekiKayitGetir(kayitNo);
     }//GEN-LAST:event_btnGeriMalzemeKartiActionPerformed
 
     private void btnIleriMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIleriMalzemeKartiActionPerformed
-        // TODO add your handling code here:
+        int kayitNo = Integer.parseInt(lblKayitNoText.getText());
+        malzemeDepoGirisSonrakiKayitGetir(kayitNo);
     }//GEN-LAST:event_btnIleriMalzemeKartiActionPerformed
 
     private void btnSilMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilMalzemeGirisActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnSilMalzemeGirisActionPerformed
 
     private void btnListeMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeGirisActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnListeMalzemeGirisActionPerformed
 
     private void btnYeniMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYeniMalzemeGirisActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnYeniMalzemeGirisActionPerformed
+
+    private void btnVazgecMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVazgecMalzemeKartiActionPerformed
+        malzemeDepoGirisSonKayitGetir();
+    }//GEN-LAST:event_btnVazgecMalzemeKartiActionPerformed
 
     private void initTable() {
         comboBox = new JComboBox<>();
@@ -434,16 +607,6 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         //    birimiSetle();
     }
 
-    /*  private void birimiSetle() {
-     comboBox = new JComboBox<>();
-     comboBox.addItem("ADET");
-     comboBox.addItem("SET");
-     comboBox.addItem("METRE");
-     comboBox.addItem("KİLOGRAM");
-     tblMalzemeGiris.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(comboBox));
-     model = (DefaultTableModel) tblMalzemeGiris.getModel();
-     }*/
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirmaSec;
     private javax.swing.JButton btnGeriMalzemeKarti;
@@ -451,6 +614,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     private javax.swing.JButton btnKaydetMalzemeKarti;
     private javax.swing.JButton btnListeMalzemeGiris;
     private javax.swing.JButton btnSilMalzemeGiris;
+    private javax.swing.JButton btnVazgecMalzemeKarti;
     private javax.swing.JButton btnYeniMalzemeGiris;
     private javax.swing.JButton btnYeniSatir;
     private com.toedter.calendar.JDateChooser dateIslemTarihi;
@@ -459,6 +623,8 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     private javax.swing.JLabel lblFirmaKod;
     private javax.swing.JLabel lblFirmaUnvan;
     private javax.swing.JLabel lblFisNo;
+    private javax.swing.JLabel lblKayitNo;
+    private javax.swing.JLabel lblKayitNoText;
     private javax.swing.JLabel lblTarih;
     private javax.swing.JPanel pnlButtonGroup;
     private javax.swing.JPanel pnlMainForm;

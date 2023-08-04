@@ -18,10 +18,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import utils.SQLDosyasındanOku;
+import methods.Methods;
 
 public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
     DefaultTableModel model;
+    Methods methods = new Methods();
 
     public SarfMalzemeCikis() {
         initComponents();
@@ -31,40 +33,11 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         malzemeDepoListesiniTabloyaYansit();
     }
 
-    public ArrayList<MSarfMalzemeDepo> malzemeDepoListele() throws SQLException, IOException {
-        Connection connection = null;
-        DbHelper dbHelper = new DbHelper();
-        Statement statement = null;
-        ResultSet resultSet;
-        ArrayList<MSarfMalzemeDepo> depoListesi = new ArrayList<>();
-        try {
-            connection = dbHelper.getConnection();
-            statement = connection.createStatement();
-            String query = SQLDosyasındanOku.sorguGetir("SarfMalzemeDepoHavuzSorgusu.sql");
-            resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                depoListesi.add(new MSarfMalzemeDepo(
-                        resultSet.getString("malzeme_kodu"),
-                        resultSet.getString("malzeme_adi"),
-                        resultSet.getInt("kalan_miktar"),
-                        resultSet.getString("birim"),
-                        resultSet.getString("uuid")
-                ));
-            }
-        } catch (SQLException exception) {
-            dbHelper.showErrorMessage(exception);
-        } finally {
-            statement.close();
-            connection.close();
-        }
-        return depoListesi;
-    }
-
     public void malzemeDepoListesiniTabloyaYansit() {
         model = (DefaultTableModel) tblSarfMalzemeDepoDurumu.getModel();
         model.setRowCount(0);
         try {
-            ArrayList<MSarfMalzemeDepo> malzemeDepo = malzemeDepoListele();
+            ArrayList<MSarfMalzemeDepo> malzemeDepo = methods.malzemeDepoListele();
             for (MSarfMalzemeDepo liste : malzemeDepo) {
                 Object[] row = {
                     liste.getMalzeme_kodu(),
@@ -476,7 +449,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
     private void btnYeniMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYeniMalzemeGirisActionPerformed
         try {
-            malzemeDepoListele();
+            methods.malzemeDepoListele();
         } catch (SQLException ex) {
             Logger.getLogger(SarfMalzemeCikis.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
