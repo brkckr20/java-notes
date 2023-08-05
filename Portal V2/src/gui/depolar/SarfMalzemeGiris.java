@@ -84,6 +84,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }
 
     public void malzemeDepoGirisOncekiKayitGetir(int id) {
+        btnIleriMalzemeKarti.setEnabled(true);
         model = (DefaultTableModel) tblMalzemeGiris.getModel();
         model.setRowCount(0);
         try {
@@ -124,13 +125,17 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }
 
     public void malzemeDepoGirisSonrakiKayitGetir(int id) {
+        btnGeriMalzemeKarti.setEnabled(true);
         model = (DefaultTableModel) tblMalzemeGiris.getModel();
         model.setRowCount(0);
         try {
             ArrayList<MSarfMalzemeDepo> sonuc = methods.malzemeDepoGirisSonrakiKayitGetir(id);
             if (!sonuc.isEmpty()) {
-                MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
+                
+                if (!sonuc.isEmpty()) {
+                    MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
                 int kayitNoText = ilkKayit.getId();
+                
                 lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
                 txtCariKod.setText(ilkKayit.getFirma_kodu());
                 txtBelgeNo.setText(ilkKayit.getFatura_no());
@@ -152,13 +157,19 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                   
+                }else{
+                     btnIleriMalzemeKarti.setEnabled(false);
+                }
+                
             } else {
                 MSarfMalzemeDepo ilkKayit = sonuc.get(0);
                 int kayitNoText = ilkKayit.getId();
                 lblKayitNoText.setText(Integer.toString(kayitNoText));
             }
         } catch (Exception e) {
-            System.out.println(e);
+            
+            System.out.println(e.getMessage());
         }
     }
 

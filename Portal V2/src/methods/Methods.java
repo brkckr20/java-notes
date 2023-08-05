@@ -33,7 +33,7 @@ public class Methods {
                 depoListesi.add(new MSarfMalzemeDepo(
                         resultSet.getString("malzeme_kodu"),
                         resultSet.getString("malzeme_adi"),
-                        resultSet.getInt("miktar"),
+                        resultSet.getInt("kalan_miktar"),
                         resultSet.getString("birim"),
                         resultSet.getString("uuid")
                 ));
@@ -162,5 +162,6 @@ public class Methods {
         }
         return sonuc;
     }
+    
 
 }
