@@ -10,7 +10,9 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import models.MSarfMalzemeDepo;
+import utils.Bildirim;
 import utils.SQLDosyasındanOku;
 
 public class Methods {
@@ -162,6 +164,22 @@ public class Methods {
         }
         return sonuc;
     }
-    
-
+    public void sil(int id) throws SQLException{
+        int onayDurumu = Bildirim.onayAl();
+        if (onayDurumu == JOptionPane.YES_OPTION) {
+            connection = dbHelper.getConnection();
+            String sqlDeleteTablo2 = "DELETE FROM sarf_malzeme_depo2 WHERE refNoId=?";
+            preparedStatement = connection.prepareStatement(sqlDeleteTablo2);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            String sqlDeleteTablo1 = "DELETE FROM sarf_malzeme_depo1 WHERE id=?";
+            preparedStatement = connection.prepareStatement(sqlDeleteTablo1);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Veri başarıyla silindi.");
+        } else {
+            // Kullanıcı "Hayır" dedi, hiçbir işlem yapma
+            JOptionPane.showMessageDialog(null, "Veri silme işlemi iptal edildi.");
+        }
+    }
 }

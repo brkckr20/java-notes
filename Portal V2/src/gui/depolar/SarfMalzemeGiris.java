@@ -1,6 +1,7 @@
 package gui.depolar;
 
 import components.FirmaModal;
+import components.ListeModal;
 import components.MalzemeKoduModal;
 import helpers.DbHelper;
 import interfaces.FirmaKartiYonetimi;
@@ -15,6 +16,7 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -23,8 +25,10 @@ import javax.swing.table.DefaultTableModel;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.AbstractTableModel;
 import models.MSarfMalzemeDepo;
 import methods.Methods;
+import utils.Bildirim;
 
 public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements MalzemeKartiYonetimi, FirmaKartiYonetimi {
 
@@ -61,7 +65,6 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         bui.setNorthPane(null);
         initTable();
         tblMalzemeGiris.setSelectionBackground(Color.decode("#ff9f43"));
-
     }
 
     public void malzemeDepoListesiniTabloyaYansit() {
@@ -92,7 +95,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
             if (!sonuc.isEmpty()) {
                 MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
                 int kayitNoText = ilkKayit.getId();
-                if(kayitNoText == 1){
+                if (kayitNoText == 1) {
                     btnGeriMalzemeKarti.setEnabled(false);
                 }
                 lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
@@ -131,44 +134,44 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         try {
             ArrayList<MSarfMalzemeDepo> sonuc = methods.malzemeDepoGirisSonrakiKayitGetir(id);
             if (!sonuc.isEmpty()) {
-                
+
                 if (!sonuc.isEmpty()) {
                     MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
-                int kayitNoText = ilkKayit.getId();
-                
-                lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
-                txtCariKod.setText(ilkKayit.getFirma_kodu());
-                txtBelgeNo.setText(ilkKayit.getFatura_no());
-                lblFirmaUnvan.setText(ilkKayit.getFirma_unvan());
-                dateIslemTarihi.setDate(ilkKayit.getTarih());
-                try {
-                    for (MSarfMalzemeDepo liste : sonuc) {
-                        Object[] row = {
-                            liste.getKalem_islem(),
-                            liste.getMalzeme_kodu(),
-                            liste.getMalzeme_adi(),
-                            liste.getKalan_miktar(),
-                            liste.getBirim(),
-                            "",
-                            liste.getUuid()
-                        };
-                        model.addRow(row);
+                    int kayitNoText = ilkKayit.getId();
+
+                    lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
+                    txtCariKod.setText(ilkKayit.getFirma_kodu());
+                    txtBelgeNo.setText(ilkKayit.getFatura_no());
+                    lblFirmaUnvan.setText(ilkKayit.getFirma_unvan());
+                    dateIslemTarihi.setDate(ilkKayit.getTarih());
+                    try {
+                        for (MSarfMalzemeDepo liste : sonuc) {
+                            Object[] row = {
+                                liste.getKalem_islem(),
+                                liste.getMalzeme_kodu(),
+                                liste.getMalzeme_adi(),
+                                liste.getKalan_miktar(),
+                                liste.getBirim(),
+                                "",
+                                liste.getUuid()
+                            };
+                            model.addRow(row);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+
+                } else {
+                    btnIleriMalzemeKarti.setEnabled(false);
                 }
-                   
-                }else{
-                     btnIleriMalzemeKarti.setEnabled(false);
-                }
-                
+
             } else {
                 MSarfMalzemeDepo ilkKayit = sonuc.get(0);
                 int kayitNoText = ilkKayit.getId();
                 lblKayitNoText.setText(Integer.toString(kayitNoText));
             }
         } catch (Exception e) {
-            
+
             System.out.println(e.getMessage());
         }
     }
@@ -484,64 +487,127 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         ResultSet generatedKeys = null;
         java.util.Date talepTarihiDate = dateIslemTarihi.getDate();
         DateFormat tarihFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            connection = dbHelper.getConnection();
-            connection.setAutoCommit(false);
-            String sqlTablo1 = "INSERT INTO sarf_malzeme_depo1 (islem_cinsi, firma_kodu, firma_unvan,fatura_no,tarih) VALUES (?, ?, ?, ?,?)";
-            statementTablo1 = connection.prepareStatement(sqlTablo1, Statement.RETURN_GENERATED_KEYS);
-            statementTablo1.setString(1, txtFisNo.getText());
-            statementTablo1.setString(2, txtCariKod.getText());
-            statementTablo1.setString(3, lblFirmaUnvan.getText());
-            statementTablo1.setString(4, txtBelgeNo.getText());
-            statementTablo1.setString(5, tarihFormat.format(talepTarihiDate));
-            statementTablo1.executeUpdate();
-
-            // Eklenen satırın id'sini almak için auto-generated keys'i al
-            generatedKeys = statementTablo1.getGeneratedKeys();
-            int tablo1Id = -1;
-            if (generatedKeys.next()) {
-                tablo1Id = generatedKeys.getInt(1);
-            } else {
-                throw new SQLException("Tablo1'e veri eklenirken bir hata oluştu, id alınamadı.");
-            }
-
-            int rowCount = model.getRowCount();
-            for (int i = 0; i < rowCount; i++) {
-                String kalemIslem = (String) model.getValueAt(i, 0);
-                String malzemeKodu = (String) model.getValueAt(i, 1);
-                String malzemeAdi = (String) model.getValueAt(i, 2);
-                int miktar = (int) model.getValueAt(i, 3);
-                String birim = (String) model.getValueAt(i, 4);
-                String uuid = (String) model.getValueAt(i, 6);
-
-                String sql = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                statement = connection.prepareStatement(sql);
-                statement.setString(1, kalemIslem);
-                statement.setString(2, malzemeKodu);
-                statement.setString(3, malzemeAdi);
-                statement.setInt(4, miktar);
-                statement.setString(5, birim);
-                statement.setInt(6, tablo1Id);
-                statement.setString(7, uuid);
-                statement.executeUpdate();
-            }
-            // Veritabanı işlemlerini onayla ve işlemi tamamla
-            connection.commit();
-            JOptionPane.showMessageDialog(this, "Veriler başarıyla veritabanına kaydedildi.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, "Veritabanına kaydetme işlemi başarısız oldu.");
-        } finally {
-            // Kapatma işlemlerini yapın
+        // yeni kayıt ekleme işlemi
+        if (Integer.parseInt(lblKayitNoText.getText()) == 0) {
             try {
-                if (statement != null) {
-                    statement.close();
+                connection = dbHelper.getConnection();
+                connection.setAutoCommit(false);
+                String sqlTablo1 = "INSERT INTO sarf_malzeme_depo1 (islem_cinsi, firma_kodu, firma_unvan,fatura_no,tarih) VALUES (?, ?, ?, ?,?)";
+                statementTablo1 = connection.prepareStatement(sqlTablo1, Statement.RETURN_GENERATED_KEYS);
+                statementTablo1.setString(1, txtFisNo.getText());
+                statementTablo1.setString(2, txtCariKod.getText());
+                statementTablo1.setString(3, lblFirmaUnvan.getText());
+                statementTablo1.setString(4, txtBelgeNo.getText());
+                statementTablo1.setString(5, tarihFormat.format(talepTarihiDate));
+                statementTablo1.executeUpdate();
+
+                // Eklenen satırın id'sini almak için auto-generated keys'i al
+                generatedKeys = statementTablo1.getGeneratedKeys();
+                int tablo1Id = -1;
+                if (generatedKeys.next()) {
+                    tablo1Id = generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Tablo1'e veri eklenirken bir hata oluştu, id alınamadı.");
                 }
-                if (connection != null) {
-                    connection.close();
+
+                int rowCount = model.getRowCount();
+                for (int i = 0; i < rowCount; i++) {
+                    String kalemIslem = (String) model.getValueAt(i, 0);
+                    String malzemeKodu = (String) model.getValueAt(i, 1);
+                    String malzemeAdi = (String) model.getValueAt(i, 2);
+                    int miktar = (int) model.getValueAt(i, 3);
+                    String birim = (String) model.getValueAt(i, 4);
+                    String uuid = (String) model.getValueAt(i, 6);
+
+                    String sql = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    statement = connection.prepareStatement(sql);
+                    statement.setString(1, kalemIslem);
+                    statement.setString(2, malzemeKodu);
+                    statement.setString(3, malzemeAdi);
+                    statement.setInt(4, miktar);
+                    statement.setString(5, birim);
+                    statement.setInt(6, tablo1Id);
+                    statement.setString(7, uuid);
+                    statement.executeUpdate();
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                // Veritabanı işlemlerini onayla ve işlemi tamamla
+                connection.commit();
+                JOptionPane.showMessageDialog(this, "Veriler başarıyla veritabanına kaydedildi.");
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(this, "Veritabanına kaydetme işlemi başarısız oldu.");
+            } finally {
+                // Kapatma işlemlerini yapın
+                try {
+                    if (statement != null) {
+                        statement.close();
+                    }
+                    if (connection != null) {
+                        connection.close();
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        } else {
+            try {
+                connection = dbHelper.getConnection();
+                connection.setAutoCommit(false);
+                String sqlTablo1 = "UPDATE sarf_malzeme_depo1 SET tarih = ? , firma_kodu = ? , firma_unvan = ? , fatura_no = ? where id = ?";
+                statementTablo1 = connection.prepareStatement(sqlTablo1);
+                statementTablo1.setString(1, tarihFormat.format(talepTarihiDate));
+                statementTablo1.setString(2, txtCariKod.getText());
+                statementTablo1.setString(3, lblFirmaUnvan.getText());
+                statementTablo1.setString(4, txtBelgeNo.getText());
+                statementTablo1.setInt(5, Integer.parseInt(lblKayitNoText.getText()));
+                statementTablo1.executeUpdate();
+
+                int rowCount = model.getRowCount();
+
+                for (int i = 0; i < rowCount; i++) {
+                    String kalemIslem = (String) model.getValueAt(i, 0);
+                    String malzemeKodu = (String) model.getValueAt(i, 1);
+                    String malzemeAdi = (String) model.getValueAt(i, 2);
+                    int miktar = (int) model.getValueAt(i, 3);
+                    String uuid = (String) model.getValueAt(i, 6);
+                    tblMalzemeGiris.repaint();
+                    String sqlTablo2 = "UPDATE sarf_malzeme_depo2 SET kalem_islem = ?, malzeme_kodu = ?, malzeme_adi = ?, miktar = ? WHERE uuid = ?";
+                    statement = connection.prepareStatement(sqlTablo2);
+                    statement.setString(1, kalemIslem);
+                    statement.setString(2, malzemeKodu);
+                    statement.setString(3, malzemeAdi);
+                    statement.setInt(4, miktar);
+                    statement.setString(5, uuid);
+
+                    int affectedRows = statement.executeUpdate();
+                    System.out.println("Affected Rows: " + affectedRows);
+
+                    if (affectedRows > 0) {
+                        model.setValueAt(kalemIslem, i, 0);
+                        model.setValueAt(malzemeKodu, i, 1);
+                        model.setValueAt(malzemeAdi, i, 2);
+                        model.setValueAt(miktar, i, 3);
+                        model.setValueAt(uuid, i, 6);
+                    }
+                }
+                // Veritabanı işlemlerini onayla ve işlemi tamamla  7bc06951-3592-4fcd-86a0-cb35fcb8c3ec
+                connection.commit();
+                JOptionPane.showMessageDialog(this, "Veriler başarıyla veritabanına kaydedildi.");
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(this, "Veritabanına kaydetme işlemi başarısız oldu.");
+            } finally {
+                // Kapatma işlemlerini yapın
+                try {
+                    if (statement != null) {
+                        statement.close();
+                    }
+                    if (connection != null) {
+                        connection.close();
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }//GEN-LAST:event_btnKaydetMalzemeKartiActionPerformed
@@ -591,19 +657,36 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }//GEN-LAST:event_btnIleriMalzemeKartiActionPerformed
 
     private void btnSilMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilMalzemeGirisActionPerformed
+        int kayitNo = Integer.parseInt(lblKayitNoText.getText());
+        try {
+            methods.sil(kayitNo);
+            malzemeDepoGirisSonKayitGetir();
+        } catch (SQLException ex) {
+            System.out.println("Btn sil : " + ex.getMessage());
+        }
 
     }//GEN-LAST:event_btnSilMalzemeGirisActionPerformed
 
     private void btnListeMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeGirisActionPerformed
-
+        ListeModal listeModal = new ListeModal(null, true);
+       //malzemeKoduModal.setSelectionListener(this);
+        listeModal.setVisible(true);
     }//GEN-LAST:event_btnListeMalzemeGirisActionPerformed
 
     private void btnYeniMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYeniMalzemeGirisActionPerformed
-
+        lblKayitNoText.setText(Integer.toString(0));
+        Date currentDate = new Date();  // Günümüz tarihi
+        dateIslemTarihi.setDate(currentDate);
+        txtBelgeNo.setText("");
+        txtCariKod.setText("");
+        lblFirmaUnvan.setText("");
+        model.setRowCount(0);
     }//GEN-LAST:event_btnYeniMalzemeGirisActionPerformed
 
     private void btnVazgecMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVazgecMalzemeKartiActionPerformed
         malzemeDepoGirisSonKayitGetir();
+        btnGeriMalzemeKarti.setEnabled(true);
+        btnIleriMalzemeKarti.setEnabled(true);
     }//GEN-LAST:event_btnVazgecMalzemeKartiActionPerformed
 
     private void initTable() {
@@ -615,7 +698,6 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         comboBox.addItem("STOK GİRİŞ");
         tblMalzemeGiris.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
         model = (DefaultTableModel) tblMalzemeGiris.getModel();
-        //    birimiSetle();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
