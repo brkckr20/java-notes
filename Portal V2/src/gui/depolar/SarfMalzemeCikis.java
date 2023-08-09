@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import utils.SQLDosyasındanOku;
-import methods.Methods;
+import methods.SarfMalzemeDepo.Methods;
 
 public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 

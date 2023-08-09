@@ -1,4 +1,4 @@
-package methods;
+package methods.SarfMalzemeDepo;
 
 import helpers.DbHelper;
 import java.io.IOException;

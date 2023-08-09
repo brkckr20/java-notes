@@ -6,8 +6,8 @@ import components.MalzemeKoduModal;
 import helpers.DbHelper;
 import interfaces.FirmaKartiYonetimi;
 import interfaces.MalzemeKartiYonetimi;
+import interfaces.MalzemeDepoYonetimi;
 import java.awt.Color;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,14 +23,10 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.AbstractTableModel;
 import models.MSarfMalzemeDepo;
-import methods.Methods;
-import utils.Bildirim;
+import methods.SarfMalzemeDepo.Methods;
 
-public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements MalzemeKartiYonetimi, FirmaKartiYonetimi {
+public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements MalzemeKartiYonetimi, FirmaKartiYonetimi, MalzemeDepoYonetimi {
 
     private DefaultTableModel model;
     private JComboBox<String> comboBox;
@@ -54,6 +50,11 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }
 
     @Override
+    public void onSarfMalzemeGirisListeSelected(int id) {
+        lblKayitNo.setText(Integer.toString(id));
+    }
+
+    @Override
     public void firmaEkle() {
 
     }
@@ -65,6 +66,9 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         bui.setNorthPane(null);
         initTable();
         tblMalzemeGiris.setSelectionBackground(Color.decode("#ff9f43"));
+        btnIleriMalzemeKarti.setEnabled(false);
+        btnGeriMalzemeKarti.setEnabled(false);
+        btnSilMalzemeGiris.setEnabled(false);
     }
 
     public void malzemeDepoListesiniTabloyaYansit() {
@@ -669,7 +673,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
     private void btnListeMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeGirisActionPerformed
         ListeModal listeModal = new ListeModal(null, true);
-       //malzemeKoduModal.setSelectionListener(this);
+        listeModal.setSelectionListener(this);
         listeModal.setVisible(true);
     }//GEN-LAST:event_btnListeMalzemeGirisActionPerformed
 
@@ -687,6 +691,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         malzemeDepoGirisSonKayitGetir();
         btnGeriMalzemeKarti.setEnabled(true);
         btnIleriMalzemeKarti.setEnabled(true);
+        btnSilMalzemeGiris.setEnabled(true);
     }//GEN-LAST:event_btnVazgecMalzemeKartiActionPerformed
 
     private void initTable() {
