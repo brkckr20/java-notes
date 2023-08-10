@@ -2,6 +2,8 @@ package components;
 
 import interfaces.MalzemeDepoYonetimi;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.MSarfMalzemeDepo;
 import methods.Liste.ListeIslemleri;
@@ -11,7 +13,7 @@ public class ListeModal extends javax.swing.JDialog {
     DefaultTableModel model;
     ListeIslemleri listeIslemleri = new ListeIslemleri();
     private MalzemeDepoYonetimi selectionListener;
-    
+
     public void setSelectionListener(MalzemeDepoYonetimi listener) {
         this.selectionListener = listener;
     }
@@ -153,11 +155,22 @@ public class ListeModal extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             int row = tblSarfMalzemeGiris.getSelectedRow();
             int id = (int) tblSarfMalzemeGiris.getValueAt(row, 0);
-            String malzeme_adi = tblSarfMalzemeGiris.getValueAt(row, 1).toString();
-            String birim = tblSarfMalzemeGiris.getValueAt(row, 2).toString();
+            Date tarih = (Date) tblSarfMalzemeGiris.getValueAt(row, 1);
+            String firma_kodu = (String) tblSarfMalzemeGiris.getValueAt(row, 2);
+            String firma_unvan = (String) tblSarfMalzemeGiris.getValueAt(row, 3);
+            String fatura_no = (String) tblSarfMalzemeGiris.getValueAt(row, 4);
+
+            for (int i = 0; i < tblSarfMalzemeGiris.getRowCount(); i++) {
+                int currentId = (int) tblSarfMalzemeGiris.getValueAt(i, 0);
+                if (currentId == id) {
+                    String kalemIslem = (String) tblSarfMalzemeGiris.getValueAt(i, 5);
+                    String malzemeKodu = (String) tblSarfMalzemeGiris.getValueAt(i, 6); // Örnek olarak 1. sütun malzeme kodu
+                    String malzemeAdi = (String) tblSarfMalzemeGiris.getValueAt(i, 7); // Örnek olarak 2. sütun malzeme adı
+                }
+            }
             if (selectionListener != null) {
-             selectionListener.onSarfMalzemeGirisListeSelected(id);
-             }
+                selectionListener.onSarfMalzemeGirisListeSelected(id, tarih, fatura_no, firma_kodu, firma_unvan);
+            }
 
             this.dispose();
         }

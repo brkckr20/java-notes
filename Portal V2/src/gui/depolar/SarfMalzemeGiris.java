@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -50,8 +51,19 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }
 
     @Override
-    public void onSarfMalzemeGirisListeSelected(int id) {
-        lblKayitNo.setText(Integer.toString(id));
+    public void onSarfMalzemeGirisListeSelected(int id, Date tarih, String fatura_no, String firma_kodu, String firma_unvan) {
+        lblKayitNoText.setText(Integer.toString(id));
+        dateIslemTarihi.setDate(tarih);
+        txtBelgeNo.setText(fatura_no);
+        txtCariKod.setText(firma_kodu);
+        lblFirmaUnvan.setText(firma_unvan);
+
+        model = (DefaultTableModel) tblMalzemeGiris.getModel();
+        model.setRowCount(0); // Mevcut satırları temizle
+
+       /* for (String kalemIslem : kalem_islem) {
+            model.addRow(new Object[]{kalemIslem});
+        }*/
     }
 
     @Override
