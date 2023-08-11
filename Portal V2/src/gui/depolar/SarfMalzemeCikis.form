@@ -43,7 +43,7 @@
                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   <Component id="btnYeniMalzemeGiris" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnKaydetMalzemeKarti" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnKaydetMalzemeDepoCikis" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnGeriMalzemeKarti" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -61,7 +61,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                  <Component id="btnKaydetMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnKaydetMalzemeDepoCikis" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnYeniMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnGeriMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnIleriMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnKaydetMalzemeKarti">
+        <Component class="javax.swing.JButton" name="btnKaydetMalzemeDepoCikis">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/assets/save.png"/>
@@ -81,7 +81,7 @@
             <Property name="text" type="java.lang.String" value="Kaydet"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKaydetMalzemeKartiActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKaydetMalzemeDepoCikisActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnGeriMalzemeKarti">
@@ -270,7 +270,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tblMalzemeGiris">
+            <Component class="javax.swing.JTable" name="tblMalzemeCikis">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="10" rowCount="0">
@@ -345,7 +345,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblMalzemeGirisMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblMalzemeCikisMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
@@ -451,6 +451,9 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblSarfMalzemeDepoDurumuMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

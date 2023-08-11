@@ -7,23 +7,37 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import models.MSarfMalzemeDepo;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import utils.SQLDosyasındanOku;
+import utils.TabloSecilenRengiDegistir;
 import methods.SarfMalzemeDepo.Methods;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
     DefaultTableModel model;
+    DefaultTableModel model2Kalem;
     Methods methods = new Methods();
+    private JComboBox<String> comboBox;
 
     public SarfMalzemeCikis() {
         initComponents();
@@ -31,6 +45,10 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
         malzemeDepoListesiniTabloyaYansit();
+        tabloyaComboboxEkle();
+        TabloSecilenRengiDegistir.degistir(tblMalzemeCikis);
+        TabloSecilenRengiDegistir.degistir(tblSarfMalzemeDepoDurumu);
+
     }
 
     public void malzemeDepoListesiniTabloyaYansit() {
@@ -42,8 +60,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
                 Object[] row = {
                     liste.getMalzeme_kodu(),
                     liste.getMalzeme_adi(),
-                    liste.getBirim(),
                     liste.getKalan_miktar(),
+                    liste.getBirim(),
                     liste.getUuid()
                 };
                 model.addRow(row);
@@ -57,7 +75,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         pnlButtonGroup = new javax.swing.JPanel();
-        btnKaydetMalzemeKarti = new javax.swing.JButton();
+        btnKaydetMalzemeDepoCikis = new javax.swing.JButton();
         btnGeriMalzemeKarti = new javax.swing.JButton();
         btnIleriMalzemeKarti = new javax.swing.JButton();
         btnSilMalzemeGiris = new javax.swing.JButton();
@@ -74,7 +92,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         btnFirmaSec = new javax.swing.JButton();
         lblFirmaUnvan = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblMalzemeGiris = new javax.swing.JTable();
+        tblMalzemeCikis = new javax.swing.JTable();
         pnlHavuzlar = new javax.swing.JPanel();
         tbpHavuzlar = new javax.swing.JTabbedPane();
         pnlSarfMalzemeDepoHavuz = new javax.swing.JPanel();
@@ -82,11 +100,11 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         tblSarfMalzemeDepoDurumu = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
 
-        btnKaydetMalzemeKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/save.png"))); // NOI18N
-        btnKaydetMalzemeKarti.setText("Kaydet");
-        btnKaydetMalzemeKarti.addActionListener(new java.awt.event.ActionListener() {
+        btnKaydetMalzemeDepoCikis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/save.png"))); // NOI18N
+        btnKaydetMalzemeDepoCikis.setText("Kaydet");
+        btnKaydetMalzemeDepoCikis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKaydetMalzemeKartiActionPerformed(evt);
+                btnKaydetMalzemeDepoCikisActionPerformed(evt);
             }
         });
 
@@ -146,7 +164,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
                 .addGap(7, 7, 7)
                 .addComponent(btnYeniMalzemeGiris)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnKaydetMalzemeKarti)
+                .addComponent(btnKaydetMalzemeDepoCikis)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGeriMalzemeKarti)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,7 +180,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         pnlButtonGroupLayout.setVerticalGroup(
             pnlButtonGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlButtonGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnKaydetMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnKaydetMalzemeDepoCikis, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnYeniMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnGeriMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnIleriMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +210,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
             }
         });
 
-        tblMalzemeGiris.setModel(new javax.swing.table.DefaultTableModel(
+        tblMalzemeCikis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -215,12 +233,12 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblMalzemeGiris.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblMalzemeCikis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblMalzemeGirisMouseClicked(evt);
+                tblMalzemeCikisMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblMalzemeGiris);
+        jScrollPane1.setViewportView(tblMalzemeCikis);
 
         tblSarfMalzemeDepoDurumu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -243,6 +261,11 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblSarfMalzemeDepoDurumu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSarfMalzemeDepoDurumuMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblSarfMalzemeDepoDurumu);
@@ -360,76 +383,75 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnKaydetMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaydetMalzemeKartiActionPerformed
-        /*
-         Connection connection = null;
-         DbHelper dbHelper = new DbHelper();
-         PreparedStatement statement = null;
-         PreparedStatement statementTablo1 = null;
-         ResultSet generatedKeys = null;
-         java.util.Date talepTarihiDate = dateIslemTarihi.getDate();
-         DateFormat tarihFormat = new SimpleDateFormat("yyyy-MM-dd");
-         try {
-         connection = dbHelper.getConnection();
-         connection.setAutoCommit(false);
-         String sqlTablo1 = "INSERT INTO sarf_malzeme_depo1 (islem_cinsi, firma_kodu, firma_unvan,fatura_no,tarih) VALUES (?, ?, ?, ?,?)";
-         statementTablo1 = connection.prepareStatement(sqlTablo1, Statement.RETURN_GENERATED_KEYS);
-         statementTablo1.setString(1, txtFisNo.getText());
-         statementTablo1.setString(2, txtCariKod.getText());
-         statementTablo1.setString(3, lblFirmaUnvan.getText());
-         statementTablo1.setString(4, txtBelgeNo.getText());
-         statementTablo1.setString(5, tarihFormat.format(talepTarihiDate));
-         statementTablo1.executeUpdate();
+    private void btnKaydetMalzemeDepoCikisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaydetMalzemeDepoCikisActionPerformed
 
-         // Eklenen satırın id'sini almak için auto-generated keys'i al
-         generatedKeys = statementTablo1.getGeneratedKeys();
-         int tablo1Id = -1;
-         if (generatedKeys.next()) {
-         tablo1Id = generatedKeys.getInt(1);
-         } else {
-         throw new SQLException("Tablo1'e veri eklenirken bir hata oluştu, id alınamadı.");
-         }
+        Connection connection = null;
+        DbHelper dbHelper = new DbHelper();
+        PreparedStatement statement = null;
+        PreparedStatement statementTablo1 = null;
+        ResultSet generatedKeys = null;
+        java.util.Date talepTarihiDate = dateIslemTarihi.getDate();
+        DateFormat tarihFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            connection = dbHelper.getConnection();
+            connection.setAutoCommit(false);
+            String sqlTablo1 = "INSERT INTO sarf_malzeme_depo1 (islem_cinsi, firma_kodu, firma_unvan,tarih) VALUES (?, ?, ?, ?)";
+            statementTablo1 = connection.prepareStatement(sqlTablo1, Statement.RETURN_GENERATED_KEYS);
+            statementTablo1.setString(1, txtFisNo.getText());
+            statementTablo1.setString(2, txtCariKod.getText());
+            statementTablo1.setString(3, lblFirmaUnvan.getText());
+            statementTablo1.setString(4, tarihFormat.format(talepTarihiDate));
+            statementTablo1.executeUpdate();
 
-         int rowCount = model.getRowCount();
-         for (int i = 0; i < rowCount; i++) {
-         String kalemIslem = (String) model.getValueAt(i, 0);
-         String malzemeKodu = (String) model.getValueAt(i, 1);
-         String malzemeAdi = (String) model.getValueAt(i, 2);
-         int miktar = (int) model.getValueAt(i, 3);
-         String birim = (String) model.getValueAt(i, 4);
-         String uuid = (String) model.getValueAt(i, 6);
+            // Eklenen satırın id'sini almak için auto-generated keys'i al
+            generatedKeys = statementTablo1.getGeneratedKeys();
+            int tablo1Id = -1;
+            if (generatedKeys.next()) {
+                tablo1Id = generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Tablo1'e veri eklenirken bir hata oluştu, id alınamadı.");
+            }
 
-         String sql = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid) VALUES (?, ?, ?, ?, ?, ?, ?)";
-         statement = connection.prepareStatement(sql);
-         statement.setString(1, kalemIslem);
-         statement.setString(2, malzemeKodu);
-         statement.setString(3, malzemeAdi);
-         statement.setInt(4, miktar);
-         statement.setString(5, birim);
-         statement.setInt(6, tablo1Id);
-         statement.setString(7, uuid);
-         statement.executeUpdate();
-         }
-         // Veritabanı işlemlerini onayla ve işlemi tamamla
-         connection.commit();
-         JOptionPane.showMessageDialog(this, "Veriler başarıyla veritabanına kaydedildi.");
-         } catch (SQLException e) {
-         System.out.println(e.getMessage());
-         JOptionPane.showMessageDialog(this, "Veritabanına kaydetme işlemi başarısız oldu.");
-         } finally {
-         // Kapatma işlemlerini yapın
-         try {
-         if (statement != null) {
-         statement.close();
-         }
-         if (connection != null) {
-         connection.close();
-         }
-         } catch (SQLException ex) {
-         ex.printStackTrace();
-         }
-         }*/
-    }//GEN-LAST:event_btnKaydetMalzemeKartiActionPerformed
+            int rowCount = model2Kalem.getRowCount();
+            for (int i = 0; i < rowCount; i++) {
+                String kalemIslem = (String) model2Kalem.getValueAt(i, 0);
+                String malzemeKodu = (String) model2Kalem.getValueAt(i, 1);
+                String malzemeAdi = (String) model2Kalem.getValueAt(i, 2);
+                int miktar = (int) model2Kalem.getValueAt(i, 3);
+                String birim = (String) model2Kalem.getValueAt(i, 4);
+                String uuid = (String) model2Kalem.getValueAt(i, 9);
+
+                String sql = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu) VALUES (?,?)";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, kalemIslem);
+                statement.setString(2, malzemeKodu);
+                //    statement.setString(3, malzemeAdi);
+                //  statement.setInt(4, miktar);
+                //   statement.setString(5, birim);
+                //     statement.setInt(6, tablo1Id);
+                //     statement.setString(7, uuid);
+                statement.executeUpdate();
+            }
+            // Veritabanı işlemlerini onayla ve işlemi tamamla
+            connection.commit();
+            JOptionPane.showMessageDialog(this, "Veriler başarıyla veritabanına kaydedildi.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "Veritabanına kaydetme işlemi başarısız oldu.");
+        } finally {
+            // Kapatma işlemlerini yapın
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_btnKaydetMalzemeDepoCikisActionPerformed
 
     private void btnGeriMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeriMalzemeKartiActionPerformed
 
@@ -463,17 +485,17 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         //   firmaModal.setVisible(true);
     }//GEN-LAST:event_btnFirmaSecActionPerformed
 
-    private void tblMalzemeGirisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMalzemeGirisMouseClicked
+    private void tblMalzemeCikisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMalzemeCikisMouseClicked
 
         if (evt.getClickCount() == 1) {
-            int column = tblMalzemeGiris.columnAtPoint(evt.getPoint());
-            int row = tblMalzemeGiris.rowAtPoint(evt.getPoint());
+            int column = tblMalzemeCikis.columnAtPoint(evt.getPoint());
+            int row = tblMalzemeCikis.rowAtPoint(evt.getPoint());
 
             if (column != 1) {
                 return;
             }
 
-            Object cellValue = tblMalzemeGiris.getValueAt(row, column);
+            Object cellValue = tblMalzemeCikis.getValueAt(row, column);
 
             if (cellValue != null) {
                 //     MalzemeKoduModal malzemeKoduModal = new MalzemeKoduModal(null, true);
@@ -482,18 +504,43 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
             }
         }
-    }//GEN-LAST:event_tblMalzemeGirisMouseClicked
+    }//GEN-LAST:event_tblMalzemeCikisMouseClicked
 
     private void btnListeMalzemeCikisDepoYenileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeCikisDepoYenileActionPerformed
         malzemeDepoListesiniTabloyaYansit();
     }//GEN-LAST:event_btnListeMalzemeCikisDepoYenileActionPerformed
 
+    private void tblSarfMalzemeDepoDurumuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSarfMalzemeDepoDurumuMouseClicked
+        model = (DefaultTableModel) tblSarfMalzemeDepoDurumu.getModel();
+        model2Kalem = (DefaultTableModel) tblMalzemeCikis.getModel();
+        if (evt.getClickCount() == 2) {
+            int row = tblSarfMalzemeDepoDurumu.getSelectedRow();
+            if (row != -1) {
+                String malzeme_kodu = (String) tblSarfMalzemeDepoDurumu.getValueAt(row, 0);
+                String malzeme_adi = (String) tblSarfMalzemeDepoDurumu.getValueAt(row, 1);
+                String birim = (String) tblSarfMalzemeDepoDurumu.getValueAt(row, 3);
+                String uuid = (String) tblSarfMalzemeDepoDurumu.getValueAt(row, 4);
+
+                model2Kalem.addRow(new Object[]{"", malzeme_kodu, malzeme_adi, "", birim, "", "", "", "", uuid});
+            }
+        }
+    }//GEN-LAST:event_tblSarfMalzemeDepoDurumuMouseClicked
+
+    private void tabloyaComboboxEkle() {
+        comboBox = new JComboBox<>();
+        comboBox.addItem("KURUMA ÇIKIŞ");
+        comboBox.addItem("DOLUMA ÇIKIŞ");
+        comboBox.addItem("TAMİRE ÇIKIŞ");
+        comboBox.addItem("STOK DÜZELTME");
+        tblMalzemeCikis.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
+        model = (DefaultTableModel) tblMalzemeCikis.getModel();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirmaSec;
     private javax.swing.JButton btnGeriMalzemeKarti;
     private javax.swing.JButton btnIleriMalzemeKarti;
-    private javax.swing.JButton btnKaydetMalzemeKarti;
+    private javax.swing.JButton btnKaydetMalzemeDepoCikis;
     private javax.swing.JButton btnListeMalzemeCikisDepoYenile;
     private javax.swing.JButton btnListeMalzemeGiris;
     private javax.swing.JButton btnSilMalzemeGiris;
@@ -510,7 +557,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlHavuzlar;
     private javax.swing.JPanel pnlMainForm;
     private javax.swing.JPanel pnlSarfMalzemeDepoHavuz;
-    private javax.swing.JTable tblMalzemeGiris;
+    private javax.swing.JTable tblMalzemeCikis;
     private javax.swing.JTable tblSarfMalzemeDepoDurumu;
     private javax.swing.JTabbedPane tbpHavuzlar;
     private javax.swing.JTextField txtCariKod;
