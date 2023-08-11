@@ -384,7 +384,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKaydetMalzemeDepoCikisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaydetMalzemeDepoCikisActionPerformed
-
+       
         Connection connection = null;
         DbHelper dbHelper = new DbHelper();
         PreparedStatement statement = null;
@@ -414,24 +414,51 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
             int rowCount = model2Kalem.getRowCount();
             for (int i = 0; i < rowCount; i++) {
-                String kalemIslem = (String) model2Kalem.getValueAt(i, 0);
-                String malzemeKodu = (String) model2Kalem.getValueAt(i, 1);
-                String malzemeAdi = (String) model2Kalem.getValueAt(i, 2);
-                int miktar = (int) model2Kalem.getValueAt(i, 3);
-                String birim = (String) model2Kalem.getValueAt(i, 4);
-                String uuid = (String) model2Kalem.getValueAt(i, 9);
-
-                String sql = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu) VALUES (?,?)";
-                statement = connection.prepareStatement(sql);
+                String kalemIslem = (String) model.getValueAt(i, 0);
+                String malzemeKodu = (String) model.getValueAt(i, 1);
+                String malzemeAdi = (String) model.getValueAt(i, 2);
+                int miktar = (int) model.getValueAt(i, 3);
+                //String uuid = (String) model.getValueAt(i, 6);
+                tblMalzemeCikis.repaint();
+                String sqlTablo2 = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar) VALUES (?, ?, ?, ?)";
+                statement = connection.prepareStatement(sqlTablo2);
                 statement.setString(1, kalemIslem);
                 statement.setString(2, malzemeKodu);
-                //    statement.setString(3, malzemeAdi);
-                //  statement.setInt(4, miktar);
-                //   statement.setString(5, birim);
-                //     statement.setInt(6, tablo1Id);
-                //     statement.setString(7, uuid);
-                statement.executeUpdate();
+                statement.setString(3, malzemeAdi);
+                statement.setInt(4, miktar);
+              //  statement.setString(5, uuid);
+
+                int affectedRows = statement.executeUpdate();
+                System.out.println("Affected Rows: " + affectedRows);
+
+                if (affectedRows > 0) {
+                    model.setValueAt(kalemIslem, i, 0);
+                    model.setValueAt(malzemeKodu, i, 1);
+                    model.setValueAt(malzemeAdi, i, 2);
+                    model.setValueAt(miktar, i, 3);
+                //    model.setValueAt(uuid, i, 6);
+                }
             }
+            /*  for (int i = 0; i < rowCount; i++) {
+             String kalemIslem = (String) model2Kalem.getValueAt(i, 0);
+             String malzemeKodu = (String) model2Kalem.getValueAt(i, 1);
+             String malzemeAdi = (String) model2Kalem.getValueAt(i, 2);
+             int miktar = (int) model2Kalem.getValueAt(i, 3);
+             String birim = (String) model2Kalem.getValueAt(i, 4);
+             String uuid = (String) model2Kalem.getValueAt(i, 9);
+
+             String sql = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, uuid) VALUES (?, ?, ?, ?, ?, ?)";
+             statement = connection.prepareStatement(sql);
+             statement.setString(1, kalemIslem);
+             statement.setString(2, malzemeKodu);
+             statement.setString(3, malzemeAdi);
+             statement.setInt(4, miktar);
+             statement.setString(5, birim);
+             statement.setString(6, uuid);
+             statement.executeUpdate();
+             System.out.println("Miktar String Değeri: " + miktar);
+
+             }*/
             // Veritabanı işlemlerini onayla ve işlemi tamamla
             connection.commit();
             JOptionPane.showMessageDialog(this, "Veriler başarıyla veritabanına kaydedildi.");
@@ -513,8 +540,10 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private void tblSarfMalzemeDepoDurumuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSarfMalzemeDepoDurumuMouseClicked
         model = (DefaultTableModel) tblSarfMalzemeDepoDurumu.getModel();
         model2Kalem = (DefaultTableModel) tblMalzemeCikis.getModel();
+
         if (evt.getClickCount() == 2) {
             int row = tblSarfMalzemeDepoDurumu.getSelectedRow();
+
             if (row != -1) {
                 String malzeme_kodu = (String) tblSarfMalzemeDepoDurumu.getValueAt(row, 0);
                 String malzeme_adi = (String) tblSarfMalzemeDepoDurumu.getValueAt(row, 1);
