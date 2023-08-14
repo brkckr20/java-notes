@@ -61,9 +61,9 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         model = (DefaultTableModel) tblMalzemeGiris.getModel();
         model.setRowCount(0); // Mevcut satırları temizle
 
-       /* for (String kalemIslem : kalem_islem) {
-            model.addRow(new Object[]{kalemIslem});
-        }*/
+        /* for (String kalemIslem : kalem_islem) {
+         model.addRow(new Object[]{kalemIslem});
+         }*/
     }
 
     @Override
@@ -222,7 +222,8 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                     e.printStackTrace();
                 }
             } else {
-                lblKayitNoText.setText(Integer.toString(1)); // Eğer liste boşsa
+                System.out.println("kayit bulunamadı");
+                //lblKayitNoText.setText(Integer.toString(1)); // Eğer liste boşsa
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -704,6 +705,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         btnGeriMalzemeKarti.setEnabled(true);
         btnIleriMalzemeKarti.setEnabled(true);
         btnSilMalzemeGiris.setEnabled(true);
+
     }//GEN-LAST:event_btnVazgecMalzemeKartiActionPerformed
 
     private void initTable() {

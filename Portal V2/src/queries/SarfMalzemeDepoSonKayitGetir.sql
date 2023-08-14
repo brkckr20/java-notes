@@ -5,5 +5,4 @@ FROM sarf_malzeme_depo1 d1
 INNER JOIN sarf_malzeme_depo2 d2 ON d1.id = d2.refNoId
 WHERE d1.islem_cinsi = 'SARF_MALZEME_GIRIS' AND d1.id = (
 SELECT MAX(id)
-FROM sarf_malzeme_depo1)
-
+FROM sarf_malzeme_depo1 WHERE islem_cinsi = 'SARF_MALZEME_GIRIS')

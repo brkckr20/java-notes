@@ -31,6 +31,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import utils.Bildirim;
 
 public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
@@ -99,6 +100,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSarfMalzemeDepoDurumu = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
+        lblKayitNo = new javax.swing.JLabel();
+        lblKayitNoText = new javax.swing.JLabel();
 
         btnKaydetMalzemeDepoCikis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/save.png"))); // NOI18N
         btnKaydetMalzemeDepoCikis.setText("Kaydet");
@@ -313,6 +316,10 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
             .addComponent(tbpHavuzlar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        lblKayitNo.setText("Kayıt No :");
+
+        lblKayitNoText.setText("0");
+
         javax.swing.GroupLayout pnlMainFormLayout = new javax.swing.GroupLayout(pnlMainForm);
         pnlMainForm.setLayout(pnlMainFormLayout);
         pnlMainFormLayout.setHorizontalGroup(
@@ -335,9 +342,15 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
                                     .addComponent(dateIslemTarihi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtFisNo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFirmaSec)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblFirmaUnvan, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlMainFormLayout.createSequentialGroup()
+                                        .addComponent(btnFirmaSec)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblFirmaUnvan, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlMainFormLayout.createSequentialGroup()
+                                        .addComponent(lblKayitNo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblKayitNoText, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -347,7 +360,10 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFisNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFisNo))
+                    .addComponent(lblFisNo)
+                    .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblKayitNo)
+                        .addComponent(lblKayitNoText)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(dateIslemTarihi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -384,98 +400,64 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKaydetMalzemeDepoCikisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaydetMalzemeDepoCikisActionPerformed
-       
         Connection connection = null;
         DbHelper dbHelper = new DbHelper();
-        PreparedStatement statement = null;
         PreparedStatement statementTablo1 = null;
+        PreparedStatement statementTablo2 = null;
         ResultSet generatedKeys = null;
         java.util.Date talepTarihiDate = dateIslemTarihi.getDate();
         DateFormat tarihFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            connection = dbHelper.getConnection();
-            connection.setAutoCommit(false);
-            String sqlTablo1 = "INSERT INTO sarf_malzeme_depo1 (islem_cinsi, firma_kodu, firma_unvan,tarih) VALUES (?, ?, ?, ?)";
-            statementTablo1 = connection.prepareStatement(sqlTablo1, Statement.RETURN_GENERATED_KEYS);
-            statementTablo1.setString(1, txtFisNo.getText());
-            statementTablo1.setString(2, txtCariKod.getText());
-            statementTablo1.setString(3, lblFirmaUnvan.getText());
-            statementTablo1.setString(4, tarihFormat.format(talepTarihiDate));
-            statementTablo1.executeUpdate();
-
-            // Eklenen satırın id'sini almak için auto-generated keys'i al
-            generatedKeys = statementTablo1.getGeneratedKeys();
-            int tablo1Id = -1;
-            if (generatedKeys.next()) {
-                tablo1Id = generatedKeys.getInt(1);
-            } else {
-                throw new SQLException("Tablo1'e veri eklenirken bir hata oluştu, id alınamadı.");
-            }
-
-            int rowCount = model2Kalem.getRowCount();
-            for (int i = 0; i < rowCount; i++) {
-                String kalemIslem = (String) model.getValueAt(i, 0);
-                String malzemeKodu = (String) model.getValueAt(i, 1);
-                String malzemeAdi = (String) model.getValueAt(i, 2);
-                int miktar = (int) model.getValueAt(i, 3);
-                //String uuid = (String) model.getValueAt(i, 6);
-                tblMalzemeCikis.repaint();
-                String sqlTablo2 = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar) VALUES (?, ?, ?, ?)";
-                statement = connection.prepareStatement(sqlTablo2);
-                statement.setString(1, kalemIslem);
-                statement.setString(2, malzemeKodu);
-                statement.setString(3, malzemeAdi);
-                statement.setInt(4, miktar);
-              //  statement.setString(5, uuid);
-
-                int affectedRows = statement.executeUpdate();
-                System.out.println("Affected Rows: " + affectedRows);
-
-                if (affectedRows > 0) {
-                    model.setValueAt(kalemIslem, i, 0);
-                    model.setValueAt(malzemeKodu, i, 1);
-                    model.setValueAt(malzemeAdi, i, 2);
-                    model.setValueAt(miktar, i, 3);
-                //    model.setValueAt(uuid, i, 6);
-                }
-            }
-            /*  for (int i = 0; i < rowCount; i++) {
-             String kalemIslem = (String) model2Kalem.getValueAt(i, 0);
-             String malzemeKodu = (String) model2Kalem.getValueAt(i, 1);
-             String malzemeAdi = (String) model2Kalem.getValueAt(i, 2);
-             int miktar = (int) model2Kalem.getValueAt(i, 3);
-             String birim = (String) model2Kalem.getValueAt(i, 4);
-             String uuid = (String) model2Kalem.getValueAt(i, 9);
-
-             String sql = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, uuid) VALUES (?, ?, ?, ?, ?, ?)";
-             statement = connection.prepareStatement(sql);
-             statement.setString(1, kalemIslem);
-             statement.setString(2, malzemeKodu);
-             statement.setString(3, malzemeAdi);
-             statement.setInt(4, miktar);
-             statement.setString(5, birim);
-             statement.setString(6, uuid);
-             statement.executeUpdate();
-             System.out.println("Miktar String Değeri: " + miktar);
-
-             }*/
-            // Veritabanı işlemlerini onayla ve işlemi tamamla
-            connection.commit();
-            JOptionPane.showMessageDialog(this, "Veriler başarıyla veritabanına kaydedildi.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, "Veritabanına kaydetme işlemi başarısız oldu.");
-        } finally {
-            // Kapatma işlemlerini yapın
+        if (Integer.parseInt(lblKayitNoText.getText()) == 0) {
             try {
-                if (statement != null) {
-                    statement.close();
+                connection = dbHelper.getConnection();
+                connection.setAutoCommit(false);
+                String sqlTablo1 = "INSERT INTO sarf_malzeme_depo1 (islem_cinsi, firma_kodu, firma_unvan,tarih) VALUES (?, ?, ?, ?)";
+                statementTablo1 = connection.prepareStatement(sqlTablo1, Statement.RETURN_GENERATED_KEYS);
+                statementTablo1.setString(1, txtFisNo.getText());
+                statementTablo1.setString(2, txtCariKod.getText());
+                statementTablo1.setString(3, lblFirmaUnvan.getText());
+                statementTablo1.setString(4, tarihFormat.format(talepTarihiDate));
+                statementTablo1.executeUpdate();
+                generatedKeys = statementTablo1.getGeneratedKeys();
+                int tablo1Id = -1;
+                if (generatedKeys.next()) {
+                    tablo1Id = generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Tablo1'e veri eklenirken bir hata oluştu, id alınamadı.");
                 }
-                if (connection != null) {
-                    connection.close();
+
+                int rowCount = model2Kalem.getRowCount();
+                for (int i = 0; i < rowCount; i++) {
+                    String kalem_islem = (String) model2Kalem.getValueAt(i, 0);
+                    String malzeme_kodu = (String) model2Kalem.getValueAt(i, 1);
+                    String malzeme_adi = (String) model2Kalem.getValueAt(i, 2);
+                    int miktar = (int) model2Kalem.getValueAt(i, 3);
+                    String birim = (String) model2Kalem.getValueAt(i, 4);
+                    String not1 = (String) model2Kalem.getValueAt(i, 5);
+                    String not2 = (String) model2Kalem.getValueAt(i, 6);
+                    String cikilan_birim = (String) model2Kalem.getValueAt(i, 7);
+                    String teslim_alan = (String) model2Kalem.getValueAt(i, 8);
+                    String uuid = (String) model2Kalem.getValueAt(i, 9);
+                    String sqlTablo2 = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid, not1, not2, cikilan_birim, teslim_alan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    statementTablo2 = connection.prepareStatement(sqlTablo2);
+                    statementTablo2.setString(1, kalem_islem);
+                    statementTablo2.setString(2, malzeme_kodu);
+                    statementTablo2.setString(3, malzeme_adi);
+                    statementTablo2.setInt(4, miktar);
+                    statementTablo2.setString(5, birim);
+                    statementTablo2.setInt(6, tablo1Id);
+                    statementTablo2.setString(7, uuid);
+                    statementTablo2.setString(8, not1);
+                    statementTablo2.setString(9, not2);
+                    statementTablo2.setString(10, cikilan_birim);
+                    statementTablo2.setString(11, teslim_alan);
+                    statementTablo2.executeUpdate();
                 }
+                connection.commit();
+                Bildirim.basarili("Veritabanına kayıt işlemi başarıyla gerçekleştirildi");
+                malzemeDepoListesiniTabloyaYansit();
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                System.out.println("hata mesajı" + ex.getMessage());
             }
         }
     }//GEN-LAST:event_btnKaydetMalzemeDepoCikisActionPerformed
@@ -581,6 +563,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblFirmaKod;
     private javax.swing.JLabel lblFirmaUnvan;
     private javax.swing.JLabel lblFisNo;
+    private javax.swing.JLabel lblKayitNo;
+    private javax.swing.JLabel lblKayitNoText;
     private javax.swing.JLabel lblTarih;
     private javax.swing.JPanel pnlButtonGroup;
     private javax.swing.JPanel pnlHavuzlar;
