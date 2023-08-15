@@ -79,7 +79,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         initTable();
         tblMalzemeGiris.setSelectionBackground(Color.decode("#ff9f43"));
         btnIleriMalzemeKarti.setEnabled(false);
-        btnGeriMalzemeKarti.setEnabled(false);
+        btnGeriMalzemeGiris.setEnabled(false);
         btnSilMalzemeGiris.setEnabled(false);
     }
 
@@ -112,7 +112,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
                 int kayitNoText = ilkKayit.getId();
                 if (kayitNoText == 1) {
-                    btnGeriMalzemeKarti.setEnabled(false);
+                    btnGeriMalzemeGiris.setEnabled(false);
                 }
                 lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
                 txtCariKod.setText(ilkKayit.getFirma_kodu());
@@ -144,7 +144,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }
 
     public void malzemeDepoGirisSonrakiKayitGetir(int id) {
-        btnGeriMalzemeKarti.setEnabled(true);
+        btnGeriMalzemeGiris.setEnabled(true);
         model = (DefaultTableModel) tblMalzemeGiris.getModel();
         model.setRowCount(0);
         try {
@@ -236,7 +236,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
         pnlButtonGroup = new javax.swing.JPanel();
         btnKaydetMalzemeKarti = new javax.swing.JButton();
-        btnGeriMalzemeKarti = new javax.swing.JButton();
+        btnGeriMalzemeGiris = new javax.swing.JButton();
         btnIleriMalzemeKarti = new javax.swing.JButton();
         btnSilMalzemeGiris = new javax.swing.JButton();
         btnListeMalzemeGiris = new javax.swing.JButton();
@@ -267,11 +267,11 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
             }
         });
 
-        btnGeriMalzemeKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Back Arrow.png"))); // NOI18N
-        btnGeriMalzemeKarti.setText("Geri");
-        btnGeriMalzemeKarti.addActionListener(new java.awt.event.ActionListener() {
+        btnGeriMalzemeGiris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Back Arrow.png"))); // NOI18N
+        btnGeriMalzemeGiris.setText("Geri");
+        btnGeriMalzemeGiris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGeriMalzemeKartiActionPerformed(evt);
+                btnGeriMalzemeGirisActionPerformed(evt);
             }
         });
 
@@ -325,7 +325,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnKaydetMalzemeKarti)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGeriMalzemeKarti)
+                .addComponent(btnGeriMalzemeGiris)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnIleriMalzemeKarti)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -341,7 +341,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlButtonGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnKaydetMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnYeniMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnGeriMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGeriMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnIleriMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnSilMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnListeMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -663,10 +663,11 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
     }//GEN-LAST:event_btnFirmaSecActionPerformed
 
-    private void btnGeriMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeriMalzemeKartiActionPerformed
+    private void btnGeriMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeriMalzemeGirisActionPerformed
         int kayitNo = Integer.parseInt(lblKayitNoText.getText());
+        
         malzemeDepoGirisOncekiKayitGetir(kayitNo);
-    }//GEN-LAST:event_btnGeriMalzemeKartiActionPerformed
+    }//GEN-LAST:event_btnGeriMalzemeGirisActionPerformed
 
     private void btnIleriMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIleriMalzemeKartiActionPerformed
         int kayitNo = Integer.parseInt(lblKayitNoText.getText());
@@ -702,7 +703,12 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
     private void btnVazgecMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVazgecMalzemeKartiActionPerformed
         malzemeDepoGirisSonKayitGetir();
-        btnGeriMalzemeKarti.setEnabled(true);
+        int kayitNo = Integer.parseInt(lblKayitNoText.getText());
+        if (kayitNo == 1) {
+            btnGeriMalzemeGiris.setEnabled(false);
+        }else{
+            btnGeriMalzemeGiris.setEnabled(true);
+        }
         btnIleriMalzemeKarti.setEnabled(true);
         btnSilMalzemeGiris.setEnabled(true);
 
@@ -721,7 +727,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirmaSec;
-    private javax.swing.JButton btnGeriMalzemeKarti;
+    private javax.swing.JButton btnGeriMalzemeGiris;
     private javax.swing.JButton btnIleriMalzemeKarti;
     private javax.swing.JButton btnKaydetMalzemeKarti;
     private javax.swing.JButton btnListeMalzemeGiris;

@@ -48,7 +48,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnKaydetMalzemeKarti" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnGeriMalzemeKarti" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnGeriMalzemeGiris" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnIleriMalzemeKarti" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -66,7 +66,7 @@
               <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                   <Component id="btnKaydetMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnYeniMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="btnGeriMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnGeriMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnIleriMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnSilMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnListeMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
@@ -87,7 +87,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKaydetMalzemeKartiActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGeriMalzemeKarti">
+        <Component class="javax.swing.JButton" name="btnGeriMalzemeGiris">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/assets/Back Arrow.png"/>
@@ -95,7 +95,7 @@
             <Property name="text" type="java.lang.String" value="Geri"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGeriMalzemeKartiActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGeriMalzemeGirisActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnIleriMalzemeKarti">

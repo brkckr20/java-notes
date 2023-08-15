@@ -7,6 +7,7 @@ import gui.kartlar.SarfMalzemeKarti;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -14,7 +15,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Main extends javax.swing.JFrame {
 
     public Main() {
-
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
         setLogo();
     }
@@ -44,6 +45,7 @@ public class Main extends javax.swing.JFrame {
         menuTeknikDestekMevcutTalepListesi = new javax.swing.JMenuItem();
         menuTeknikDestekTamamlanmisTalepler = new javax.swing.JMenuItem();
         menuKodlama = new javax.swing.JMenu();
+        menuKodlamaKalemIslemKodlama = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stok Takip Programı [Portal v.2.0.0]");
@@ -124,6 +126,11 @@ public class Main extends javax.swing.JFrame {
 
         menuKodlama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/code.png"))); // NOI18N
         menuKodlama.setText("Kodlama");
+
+        menuKodlamaKalemIslemKodlama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/code.png"))); // NOI18N
+        menuKodlamaKalemIslemKodlama.setText("Kalem İşlem Kodlama");
+        menuKodlama.add(menuKodlamaKalemIslemKodlama);
+
         MainMenu.add(menuKodlama);
 
         setJMenuBar(MainMenu);
@@ -157,18 +164,19 @@ public class Main extends javax.swing.JFrame {
         sekmeyeCarpiEkle();
     }//GEN-LAST:event_menuSarfMalzemeDepoGirisActionPerformed
 
-    private void sekmeyeBaslikAta(String baslik,JInternalFrame formInstancesi){
+    private void sekmeyeBaslikAta(String baslik, JInternalFrame formInstancesi) {
         String tabTitle = baslik + " " + " " + " ";
         tbp1.addTab(tabTitle, formInstancesi);
     }
-    private void sekmeyeCarpiEkle(){
+
+    private void sekmeyeCarpiEkle() {
         // Sekmeye çarpı simgesi ekle
         int tabCount = tbp1.getTabCount();
         tbp1.setTabComponentAt(tabCount - 1, new components.ButtonTabComponent(tbp1));
         // Yeni oluşturulan sekmeyi seçin
         tbp1.setSelectedIndex(tabCount - 1);
     }
-    
+
     private void menuFirmaKartlariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFirmaKartlariActionPerformed
         FirmaKarti firmaKarti = new FirmaKarti();
         firmaKarti.setClosable(false);
@@ -212,6 +220,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuFirmaKartlari;
     private javax.swing.JMenu menuKartTanimlamalari;
     private javax.swing.JMenu menuKodlama;
+    private javax.swing.JMenuItem menuKodlamaKalemIslemKodlama;
     private javax.swing.JMenu menuSarfMalzemeDepo;
     private javax.swing.JMenuItem menuSarfMalzemeDepoCikis;
     private javax.swing.JMenuItem menuSarfMalzemeDepoGiris;

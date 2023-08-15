@@ -127,6 +127,16 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Kodlama"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuKodlamaKalemIslemKodlama">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/code.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Kalem &#x130;&#x15f;lem Kodlama"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

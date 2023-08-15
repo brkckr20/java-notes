@@ -86,6 +86,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         btnListeMalzemeGiris = new javax.swing.JButton();
         btnYeniMalzemeGiris = new javax.swing.JButton();
         btnListeMalzemeCikisDepoYenile = new javax.swing.JButton();
+        btnListeMalzemeCikisDepoVazgec = new javax.swing.JButton();
         pnlMainForm = new javax.swing.JPanel();
         txtFisNo = new javax.swing.JTextField();
         lblFisNo = new javax.swing.JLabel();
@@ -164,6 +165,14 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
             }
         });
 
+        btnListeMalzemeCikisDepoVazgec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cancel.png"))); // NOI18N
+        btnListeMalzemeCikisDepoVazgec.setText("Vazgeç");
+        btnListeMalzemeCikisDepoVazgec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListeMalzemeCikisDepoVazgecActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlButtonGroupLayout = new javax.swing.GroupLayout(pnlButtonGroup);
         pnlButtonGroup.setLayout(pnlButtonGroupLayout);
         pnlButtonGroupLayout.setHorizontalGroup(
@@ -177,6 +186,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
                 .addComponent(btnGeriMalzemeKarti)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnIleriMalzemeKarti)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnListeMalzemeCikisDepoVazgec)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSilMalzemeGiris)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -194,7 +205,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
                 .addComponent(btnIleriMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnSilMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnListeMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnListeMalzemeCikisDepoYenile, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnListeMalzemeCikisDepoYenile, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnListeMalzemeCikisDepoVazgec, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         txtFisNo.setEditable(false);
@@ -563,12 +575,17 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         GlobalArama.ara(txtSarfMalzemeDepoAra, model, tblSarfMalzemeDepoDurumu);
     }//GEN-LAST:event_txtSarfMalzemeDepoAraKeyReleased
 
+    private void btnListeMalzemeCikisDepoVazgecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeCikisDepoVazgecActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListeMalzemeCikisDepoVazgecActionPerformed
+
     private void tabloyaComboboxEkle() {
         comboBox = new JComboBox<>();
         comboBox.addItem("KURUMA ÇIKIŞ");
         comboBox.addItem("DOLUMA ÇIKIŞ");
         comboBox.addItem("TAMİRE ÇIKIŞ");
         comboBox.addItem("STOK DÜZELTME");
+        comboBox.addItem("DEMİRBAŞ ÇIKIŞ");
         tblMalzemeCikis.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
         model = (DefaultTableModel) tblMalzemeCikis.getModel();
     }
@@ -578,6 +595,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGeriMalzemeKarti;
     private javax.swing.JButton btnIleriMalzemeKarti;
     private javax.swing.JButton btnKaydetMalzemeDepoCikis;
+    private javax.swing.JButton btnListeMalzemeCikisDepoVazgec;
     private javax.swing.JButton btnListeMalzemeCikisDepoYenile;
     private javax.swing.JButton btnListeMalzemeGiris;
     private javax.swing.JButton btnSilMalzemeGiris;
