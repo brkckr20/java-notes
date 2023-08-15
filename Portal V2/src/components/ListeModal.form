@@ -73,6 +73,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtListeAramaIfadesi">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtListeAramaIfadesiKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

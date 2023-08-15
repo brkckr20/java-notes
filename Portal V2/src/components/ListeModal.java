@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.MSarfMalzemeDepo;
 import methods.Liste.ListeIslemleri;
+import utils.GlobalArama;
 
 public class ListeModal extends javax.swing.JDialog {
 
@@ -64,6 +65,12 @@ public class ListeModal extends javax.swing.JDialog {
         setTitle("Sarf Malzeme Giriş Liste");
 
         lblAramaIfadesi.setText("Arama İfadesi : ");
+
+        txtListeAramaIfadesi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtListeAramaIfadesiKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlSearchBarLayout = new javax.swing.GroupLayout(pnlSearchBar);
         pnlSearchBar.setLayout(pnlSearchBarLayout);
@@ -175,6 +182,10 @@ public class ListeModal extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_tblSarfMalzemeGirisMouseClicked
+
+    private void txtListeAramaIfadesiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtListeAramaIfadesiKeyReleased
+        GlobalArama.ara(txtListeAramaIfadesi, model, tblSarfMalzemeGiris);
+    }//GEN-LAST:event_txtListeAramaIfadesiKeyReleased
 
     public static void main(String args[]) {
 

@@ -29,9 +29,12 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 import utils.Bildirim;
+import utils.GlobalArama;
 
 public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
@@ -99,6 +102,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         pnlSarfMalzemeDepoHavuz = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSarfMalzemeDepoDurumu = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txtSarfMalzemeDepoAra = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lblKayitNo = new javax.swing.JLabel();
         lblKayitNoText = new javax.swing.JLabel();
@@ -273,18 +278,34 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblSarfMalzemeDepoDurumu);
 
+        jLabel1.setText("Arama İfadesi : ");
+
+        txtSarfMalzemeDepoAra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSarfMalzemeDepoAraKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlSarfMalzemeDepoHavuzLayout = new javax.swing.GroupLayout(pnlSarfMalzemeDepoHavuz);
         pnlSarfMalzemeDepoHavuz.setLayout(pnlSarfMalzemeDepoHavuzLayout);
         pnlSarfMalzemeDepoHavuzLayout.setHorizontalGroup(
             pnlSarfMalzemeDepoHavuzLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSarfMalzemeDepoHavuzLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 438, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSarfMalzemeDepoAra, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 151, Short.MAX_VALUE))
         );
         pnlSarfMalzemeDepoHavuzLayout.setVerticalGroup(
             pnlSarfMalzemeDepoHavuzLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSarfMalzemeDepoHavuzLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlSarfMalzemeDepoHavuzLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlSarfMalzemeDepoHavuzLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtSarfMalzemeDepoAra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 5, Short.MAX_VALUE))
         );
 
@@ -358,12 +379,13 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
             pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainFormLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFisNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFisNo)
+                .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblKayitNo)
-                        .addComponent(lblKayitNoText)))
+                        .addComponent(lblKayitNoText))
+                    .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtFisNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFisNo)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(dateIslemTarihi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -537,6 +559,10 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblSarfMalzemeDepoDurumuMouseClicked
 
+    private void txtSarfMalzemeDepoAraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSarfMalzemeDepoAraKeyReleased
+        GlobalArama.ara(txtSarfMalzemeDepoAra, model, tblSarfMalzemeDepoDurumu);
+    }//GEN-LAST:event_txtSarfMalzemeDepoAraKeyReleased
+
     private void tabloyaComboboxEkle() {
         comboBox = new JComboBox<>();
         comboBox.addItem("KURUMA ÇIKIŞ");
@@ -557,6 +583,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSilMalzemeGiris;
     private javax.swing.JButton btnYeniMalzemeGiris;
     private com.toedter.calendar.JDateChooser dateIslemTarihi;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -575,6 +602,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane tbpHavuzlar;
     private javax.swing.JTextField txtCariKod;
     private javax.swing.JTextField txtFisNo;
+    private javax.swing.JTextField txtSarfMalzemeDepoAra;
     // End of variables declaration//GEN-END:variables
 
 }
