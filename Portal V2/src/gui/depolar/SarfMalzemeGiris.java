@@ -258,6 +258,9 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         btnYeniSatir = new javax.swing.JButton();
         lblKayitNo = new javax.swing.JLabel();
         lblKayitNoText = new javax.swing.JLabel();
+        pnlHavuz = new javax.swing.JPanel();
+        tbpSarfMalzemeDepoGiris = new javax.swing.JTabbedPane();
+        pnlDolumTamirBekleyenler = new javax.swing.JPanel();
 
         btnKaydetMalzemeKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/save.png"))); // NOI18N
         btnKaydetMalzemeKarti.setText("Kaydet");
@@ -412,6 +415,35 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
         lblKayitNoText.setText("0");
 
+        javax.swing.GroupLayout pnlDolumTamirBekleyenlerLayout = new javax.swing.GroupLayout(pnlDolumTamirBekleyenler);
+        pnlDolumTamirBekleyenler.setLayout(pnlDolumTamirBekleyenlerLayout);
+        pnlDolumTamirBekleyenlerLayout.setHorizontalGroup(
+            pnlDolumTamirBekleyenlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 950, Short.MAX_VALUE)
+        );
+        pnlDolumTamirBekleyenlerLayout.setVerticalGroup(
+            pnlDolumTamirBekleyenlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 207, Short.MAX_VALUE)
+        );
+
+        tbpSarfMalzemeDepoGiris.addTab("Dolum / Tamir Bekleyenler", pnlDolumTamirBekleyenler);
+
+        javax.swing.GroupLayout pnlHavuzLayout = new javax.swing.GroupLayout(pnlHavuz);
+        pnlHavuz.setLayout(pnlHavuzLayout);
+        pnlHavuzLayout.setHorizontalGroup(
+            pnlHavuzLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHavuzLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tbpSarfMalzemeDepoGiris)
+                .addContainerGap())
+        );
+        pnlHavuzLayout.setVerticalGroup(
+            pnlHavuzLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHavuzLayout.createSequentialGroup()
+                .addComponent(tbpSarfMalzemeDepoGiris)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout pnlMainFormLayout = new javax.swing.GroupLayout(pnlMainForm);
         pnlMainForm.setLayout(pnlMainFormLayout);
         pnlMainFormLayout.setHorizontalGroup(
@@ -441,10 +473,11 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                                 .addComponent(lblKayitNo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblKayitNoText, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(59, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlMainFormLayout.createSequentialGroup()
                         .addComponent(btnYeniSatir)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addComponent(pnlHavuz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlMainFormLayout.setVerticalGroup(
             pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,7 +505,9 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnYeniSatir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlHavuz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -745,8 +780,11 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     private javax.swing.JLabel lblKayitNoText;
     private javax.swing.JLabel lblTarih;
     private javax.swing.JPanel pnlButtonGroup;
+    private javax.swing.JPanel pnlDolumTamirBekleyenler;
+    private javax.swing.JPanel pnlHavuz;
     private javax.swing.JPanel pnlMainForm;
     private javax.swing.JTable tblMalzemeGiris;
+    private javax.swing.JTabbedPane tbpSarfMalzemeDepoGiris;
     private javax.swing.JTextField txtBelgeNo;
     private javax.swing.JTextField txtCariKod;
     private javax.swing.JTextField txtFisNo;

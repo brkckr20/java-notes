@@ -16,6 +16,15 @@ public class MMalzemeKarti {
         this.birim = birim;
     }
 
+    public MMalzemeKarti(int id, String malzeme_kodu, String malzeme_adi, String depo_adi, String birim, String malzeme_marka) {
+        this.id = id;
+        this.malzeme_kodu = malzeme_kodu;
+        this.malzeme_adi = malzeme_adi;
+        this.depo_adi = depo_adi;
+        this.birim = birim;
+        this.malzeme_marka = malzeme_marka;
+    }
+
     public int getId() {
         return id;
     }

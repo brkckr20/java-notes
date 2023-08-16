@@ -36,6 +36,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
+import models.MMalzemeKarti;
 import utils.Bildirim;
 import utils.GlobalArama;
 
@@ -52,6 +53,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
         malzemeDepoListesiniTabloyaYansit();
+        malzemeKartListesiniTabloyaYansit();
         tabloyaComboboxEkle();
         TabloSecilenRengiDegistir.degistir(tblMalzemeCikis);
         TabloSecilenRengiDegistir.degistir(tblSarfMalzemeDepoDurumu);
@@ -76,6 +78,56 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
+    
+    public ArrayList<MMalzemeKarti> malzemeKartiListele() throws SQLException {
+        Connection connection = null;
+        DbHelper dbHelper = new DbHelper();
+        Statement statement = null;
+        ResultSet resultSet;
+        ArrayList<MMalzemeKarti> malzemeKartiListesi = null;
+        try {
+            connection = dbHelper.getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM malzeme_kodlama");
+            malzemeKartiListesi = new ArrayList<MMalzemeKarti>();
+            while (resultSet.next()) {
+                malzemeKartiListesi.add(new MMalzemeKarti(
+                        resultSet.getInt("id"),
+                        resultSet.getString("malzeme_kodu"),
+                        resultSet.getString("malzeme_adi"),
+                        resultSet.getString("depo_adi"),
+                        resultSet.getString("birim"),
+                        resultSet.getString("malzeme_marka")
+                ));
+            }
+        } catch (SQLException exception) {
+            dbHelper.showErrorMessage(exception);
+        } finally {
+            statement.close();
+            connection.close();
+        }
+        return malzemeKartiListesi;
+    }
+    
+    public void malzemeKartListesiniTabloyaYansit() {
+        model = (DefaultTableModel) tblSMCMalzemeKartiListesi.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<MMalzemeKarti> kartListesi = malzemeKartiListele();
+            for (MMalzemeKarti liste : kartListesi) {
+                Object[] row = {
+                    liste.getMalzeme_kodu(),
+                    liste.getMalzeme_adi(),
+                    liste.getDepo_adi(),
+                    liste.getBirim(),
+                    liste.getMalzeme_marka()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+    }
+    
 
     public void malzemeDepoCikisSonKayitGetir() {
         model = (DefaultTableModel) tblMalzemeCikis.getModel();
@@ -151,6 +203,10 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtSarfMalzemeDepoAra = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtSMCMalzemeKartiListesi = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblSMCMalzemeKartiListesi = new javax.swing.JTable();
         lblKayitNo = new javax.swing.JLabel();
         lblKayitNoText = new javax.swing.JLabel();
 
@@ -383,18 +439,58 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
         tbpHavuzlar.addTab("Sarf Malzeme Depo", pnlSarfMalzemeDepoHavuz);
 
+        jLabel2.setText("Arama İfadesi :");
+
+        tblSMCMalzemeKartiListesi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Malzeme Kodu", "Malzeme Adı", "Depo Adı", "Malzeme Marka"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblSMCMalzemeKartiListesi);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1106, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1086, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSMCMalzemeKartiListesi)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 167, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtSMCMalzemeKartiListesi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
         );
 
-        tbpHavuzlar.addTab("Sarf Malzeme Kartı Listesi", jPanel2);
+        tbpHavuzlar.addTab("Malzeme Kartı Listesi", jPanel2);
 
         javax.swing.GroupLayout pnlHavuzlarLayout = new javax.swing.GroupLayout(pnlHavuzlar);
         pnlHavuzlar.setLayout(pnlHavuzlarLayout);
@@ -676,9 +772,11 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnYeniMalzemeGiris;
     private com.toedter.calendar.JDateChooser dateIslemTarihi;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblFirmaKod;
     private javax.swing.JLabel lblFirmaUnvan;
     private javax.swing.JLabel lblFisNo;
@@ -692,10 +790,12 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JPopupMenu popUp;
     private javax.swing.JMenuItem popupMenuZimmetYazdir;
     private javax.swing.JTable tblMalzemeCikis;
+    private javax.swing.JTable tblSMCMalzemeKartiListesi;
     private javax.swing.JTable tblSarfMalzemeDepoDurumu;
     private javax.swing.JTabbedPane tbpHavuzlar;
     private javax.swing.JTextField txtCariKod;
     private javax.swing.JTextField txtFisNo;
+    private javax.swing.JTextField txtSMCMalzemeKartiListesi;
     private javax.swing.JTextField txtSarfMalzemeDepoAra;
     // End of variables declaration//GEN-END:variables
 
