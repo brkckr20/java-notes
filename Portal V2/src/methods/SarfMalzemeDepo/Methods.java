@@ -125,8 +125,8 @@ public class Methods {
         }
         return sonuc;
     }
-    
-     public ArrayList<MSarfMalzemeDepo> malzemeDepoGirisSonrakiKayitGetir(int id) throws SQLException, IOException {
+
+    public ArrayList<MSarfMalzemeDepo> malzemeDepoGirisSonrakiKayitGetir(int id) throws SQLException, IOException {
         ArrayList<MSarfMalzemeDepo> sonuc = new ArrayList<>();
         try {
             connection = dbHelper.getConnection();
@@ -164,7 +164,8 @@ public class Methods {
         }
         return sonuc;
     }
-    public void sil(int id) throws SQLException{
+
+    public void sil(int id) throws SQLException {
         int onayDurumu = Bildirim.onayAl();
         if (onayDurumu == JOptionPane.YES_OPTION) {
             connection = dbHelper.getConnection();
@@ -181,5 +182,66 @@ public class Methods {
             // Kullanıcı "Hayır" dedi, hiçbir işlem yapma
             JOptionPane.showMessageDialog(null, "Veri silme işlemi iptal edildi.");
         }
+    }
+    /*
+     public MSarfMalzemeDepo(int id, String malzeme_kodu, String malzeme_adi, String birim, String uuid, int miktar, String not1, String not2, String cikilan_birim, String teslim_alan, String firma_kodu, String firma_unvan, String kalem_islem, Date tarih) {
+     this.id = id;
+     this.malzeme_kodu = malzeme_kodu;
+     this.malzeme_adi = malzeme_adi;
+     this.birim = birim;
+     this.uuid = uuid;
+     this.miktar = miktar;
+     this.not1 = not1;
+     this.not2 = not2;
+     this.cikilan_birim = cikilan_birim;
+     this.teslim_alan = teslim_alan;
+     this.firma_kodu = firma_kodu;
+     this.firma_unvan = firma_unvan;
+     this.kalem_islem = kalem_islem;
+     this.tarih = tarih;
+     }
+     */
+
+    public ArrayList<MSarfMalzemeDepo> malzemeDepoCikisSonKayitGetir() throws SQLException, IOException {
+        ArrayList<MSarfMalzemeDepo> sonuc = new ArrayList<>();
+        try {
+            connection = dbHelper.getConnection();
+            String query = SQLDosyasındanOku.sorguGetir("SarfMalzemeDepoCikisSonKayit.sql");
+            preparedStatement = connection.prepareStatement(query); // PreparedStatement oluşturuldu
+            resultSet = preparedStatement.executeQuery(); // Sorgu çalıştırıldı
+            while (resultSet.next()) {
+                sonuc.add(new MSarfMalzemeDepo(
+                        resultSet.getInt("id"),
+                        resultSet.getString("malzeme_kodu"),
+                        resultSet.getString("malzeme_adi"),
+                        resultSet.getString("birim"),
+                        resultSet.getString("uuid"),
+                        resultSet.getInt("miktar"),
+                        resultSet.getString("not1"),
+                        resultSet.getString("not2"),
+                        resultSet.getString("cikilan_birim"), 
+                        resultSet.getString("firma_kodu"),
+                        resultSet.getString("firma_unvan"),
+                        resultSet.getString("teslim_alan"),
+                        resultSet.getString("kalem_islem"),
+                        resultSet.getDate("tarih") // tarih değeri getDate() ile alınır
+
+                ));
+            }
+
+        } catch (SQLException exception) {
+            dbHelper.showErrorMessage(exception);
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return sonuc;
     }
 }

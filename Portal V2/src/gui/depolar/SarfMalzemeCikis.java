@@ -1,6 +1,7 @@
 package gui.depolar;
 
 import helpers.DbHelper;
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,7 +29,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JFormattedTextField;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.RowFilter;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -74,10 +77,52 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         }
     }
 
+    public void malzemeDepoCikisSonKayitGetir() {
+        model = (DefaultTableModel) tblMalzemeCikis.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<MSarfMalzemeDepo> sonuc = methods.malzemeDepoCikisSonKayitGetir();
+            if (!sonuc.isEmpty()) {
+                MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
+                int kayitNoText = ilkKayit.getId();
+                lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
+                txtCariKod.setText(ilkKayit.getFirma_kodu());
+                lblFirmaUnvan.setText(ilkKayit.getFirma_unvan());
+                dateIslemTarihi.setDate(ilkKayit.getTarih());
+                try {
+                    for (MSarfMalzemeDepo liste : sonuc) {
+                        Object[] row = {
+                            liste.getKalem_islem(),
+                            liste.getMalzeme_kodu(),
+                            liste.getMalzeme_adi(),
+                            liste.getMiktar(),
+                            liste.getBirim(),
+                            liste.getNot1(),
+                            liste.getNot2(),
+                            liste.getCikilan_birim(),
+                            liste.getTeslim_alan(),
+                            liste.getUuid()
+                        };
+                        model.addRow(row);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("kayit bulunamadı");
+                //lblKayitNoText.setText(Integer.toString(1)); // Eğer liste boşsa
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popUp = new javax.swing.JPopupMenu();
+        popupMenuZimmetYazdir = new javax.swing.JMenuItem();
         pnlButtonGroup = new javax.swing.JPanel();
         btnKaydetMalzemeDepoCikis = new javax.swing.JButton();
         btnGeriMalzemeKarti = new javax.swing.JButton();
@@ -108,6 +153,15 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         lblKayitNo = new javax.swing.JLabel();
         lblKayitNoText = new javax.swing.JLabel();
+
+        popUp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                popUpMouseReleased(evt);
+            }
+        });
+
+        popupMenuZimmetYazdir.setText("Zimmet Formu Yazdır");
+        popUp.add(popupMenuZimmetYazdir);
 
         btnKaydetMalzemeDepoCikis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/save.png"))); // NOI18N
         btnKaydetMalzemeDepoCikis.setText("Kaydet");
@@ -208,6 +262,12 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
                 .addComponent(btnListeMalzemeCikisDepoYenile, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnListeMalzemeCikisDepoVazgec, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        pnlMainForm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                pnlMainFormMouseReleased(evt);
+            }
+        });
 
         txtFisNo.setEditable(false);
         txtFisNo.setText("SARF_MALZEME_CIKIS");
@@ -576,8 +636,22 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSarfMalzemeDepoAraKeyReleased
 
     private void btnListeMalzemeCikisDepoVazgecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeCikisDepoVazgecActionPerformed
-        // TODO add your handling code here:
+        malzemeDepoCikisSonKayitGetir();
     }//GEN-LAST:event_btnListeMalzemeCikisDepoVazgecActionPerformed
+
+    private void pnlMainFormMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainFormMouseReleased
+        if (evt.isPopupTrigger()) {
+            popUp.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_pnlMainFormMouseReleased
+
+    private void popUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popUpMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_popUpMouseReleased
+
+    private static void showPopupMenu(Component component, int x, int y) {
+
+    }
 
     private void tabloyaComboboxEkle() {
         comboBox = new JComboBox<>();
@@ -615,6 +689,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlHavuzlar;
     private javax.swing.JPanel pnlMainForm;
     private javax.swing.JPanel pnlSarfMalzemeDepoHavuz;
+    private javax.swing.JPopupMenu popUp;
+    private javax.swing.JMenuItem popupMenuZimmetYazdir;
     private javax.swing.JTable tblMalzemeCikis;
     private javax.swing.JTable tblSarfMalzemeDepoDurumu;
     private javax.swing.JTabbedPane tbpHavuzlar;
