@@ -12,12 +12,18 @@ import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.plaf.BorderUIResource;
+
 public class Main extends javax.swing.JFrame {
 
     public Main() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
         setLogo();
+        FlatLightLaf.setup();
     }
 
     public void setLogo() {
@@ -37,6 +43,7 @@ public class Main extends javax.swing.JFrame {
         menuKartTanimlamalari = new javax.swing.JMenu();
         menuSarfMalzemeKartlari = new javax.swing.JMenuItem();
         menuFirmaKartlari = new javax.swing.JMenuItem();
+        menuPersonelKartlari = new javax.swing.JMenuItem();
         menuSarfMalzemeDepo = new javax.swing.JMenu();
         menuSarfMalzemeDepoGiris = new javax.swing.JMenuItem();
         menuSarfMalzemeDepoCikis = new javax.swing.JMenuItem();
@@ -81,6 +88,15 @@ public class Main extends javax.swing.JFrame {
             }
         });
         menuKartTanimlamalari.add(menuFirmaKartlari);
+
+        menuPersonelKartlari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/cards.png"))); // NOI18N
+        menuPersonelKartlari.setText("Personel Kartları");
+        menuPersonelKartlari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPersonelKartlariActionPerformed(evt);
+            }
+        });
+        menuKartTanimlamalari.add(menuPersonelKartlari);
 
         MainMenu.add(menuKartTanimlamalari);
 
@@ -191,18 +207,24 @@ public class Main extends javax.swing.JFrame {
         sekmeyeCarpiEkle();
     }//GEN-LAST:event_menuSarfMalzemeDepoCikisActionPerformed
 
+    private void menuPersonelKartlariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonelKartlariActionPerformed
+
+    }//GEN-LAST:event_menuPersonelKartlariActionPerformed
+
     public static void main(String args[]) {
         for (UIManager.LookAndFeelInfo lafInfo : UIManager.getInstalledLookAndFeels()) {
-            // System.out.println(lafInfo.getClassName());
+            System.out.println(lafInfo.getClassName());
         }
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            //  UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.put("TabbedPane.selectedBackground", Color.white);
+            UIManager.put("Table.selectionBackground", Color.decode("#ff9f43"));
+            UIManager.put("TableHeader.separatorColor", Color.gray);
+            UIManager.put("TableHeader.bottomSeparatorColor", Color.gray);
+            UIManager.put("Table.showVerticalLines", true);
+            UIManager.put("Table.showHorizontalLines", true);
+
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -221,6 +243,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu menuKartTanimlamalari;
     private javax.swing.JMenu menuKodlama;
     private javax.swing.JMenuItem menuKodlamaKalemIslemKodlama;
+    private javax.swing.JMenuItem menuPersonelKartlari;
     private javax.swing.JMenu menuSarfMalzemeDepo;
     private javax.swing.JMenuItem menuSarfMalzemeDepoCikis;
     private javax.swing.JMenuItem menuSarfMalzemeDepoGiris;

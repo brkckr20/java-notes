@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.UUID;
 import models.MSarfMalzemeDepo;
 import methods.SarfMalzemeDepo.Methods;
+import utils.Bildirim;
 
 public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements MalzemeKartiYonetimi, FirmaKartiYonetimi, MalzemeDepoYonetimi {
 
@@ -584,7 +585,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 }
                 // Veritabanı işlemlerini onayla ve işlemi tamamla
                 connection.commit();
-                JOptionPane.showMessageDialog(this, "Veriler başarıyla veritabanına kaydedildi.");
+                Bildirim.basarili("Veriler başarıyla veritabanına kaydedildi.");
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 JOptionPane.showMessageDialog(this, "Veritabanına kaydetme işlemi başarısız oldu.");
@@ -644,7 +645,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 }
                 // Veritabanı işlemlerini onayla ve işlemi tamamla  7bc06951-3592-4fcd-86a0-cb35fcb8c3ec
                 connection.commit();
-                JOptionPane.showMessageDialog(this, "Veriler başarıyla veritabanına kaydedildi.");
+                Bildirim.basarili("Veriler başarıyla veritabanına kaydedildi.");
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 JOptionPane.showMessageDialog(this, "Veritabanına kaydetme işlemi başarısız oldu.");
