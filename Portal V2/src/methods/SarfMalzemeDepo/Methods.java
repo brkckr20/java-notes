@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import models.MSarfMalzemeDepo;
 import utils.Bildirim;
@@ -183,24 +184,54 @@ public class Methods {
             JOptionPane.showMessageDialog(null, "Veri silme işlemi iptal edildi.");
         }
     }
-    /*
-     public MSarfMalzemeDepo(int id, String malzeme_kodu, String malzeme_adi, String birim, String uuid, int miktar, String not1, String not2, String cikilan_birim, String teslim_alan, String firma_kodu, String firma_unvan, String kalem_islem, Date tarih) {
-     this.id = id;
-     this.malzeme_kodu = malzeme_kodu;
-     this.malzeme_adi = malzeme_adi;
-     this.birim = birim;
-     this.uuid = uuid;
-     this.miktar = miktar;
-     this.not1 = not1;
-     this.not2 = not2;
-     this.cikilan_birim = cikilan_birim;
-     this.teslim_alan = teslim_alan;
-     this.firma_kodu = firma_kodu;
-     this.firma_unvan = firma_unvan;
-     this.kalem_islem = kalem_islem;
-     this.tarih = tarih;
-     }
-     */
+
+    public int sonrakiKayitSayisi(int kayitNo, JButton btn) {
+        int sayi = 0;
+
+        try {
+            connection = dbHelper.getConnection();
+            String sql = "SELECT COUNT(*) AS kayitSayisi FROM sarf_malzeme_depo1 WHERE islem_cinsi = 'SARF_MALZEME_GIRIS' AND id > ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, kayitNo);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int kayitSayisi = resultSet.getInt("kayitSayisi");
+                if (kayitSayisi == 0) {
+                    btn.setEnabled(false); // Butonu devre dışı bırak
+                } else {
+                    btn.setEnabled(true); // Butonu etkinleştir
+                }
+                sayi = kayitSayisi; // sayi değişkenini güncelle
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sayi;
+    }
+    
+    public int oncekiKayitSayisi(int kayitNo, JButton btn) {
+        int sayi = 0;
+
+        try {
+            connection = dbHelper.getConnection();
+            String sql = "SELECT COUNT(*) AS kayitSayisi FROM sarf_malzeme_depo1 WHERE islem_cinsi = 'SARF_MALZEME_GIRIS' AND id < ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, kayitNo);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int kayitSayisi = resultSet.getInt("kayitSayisi");
+                if (kayitSayisi == 0) {
+                    btn.setEnabled(false); // Butonu devre dışı bırak
+                } else {
+                    btn.setEnabled(true); // Butonu etkinleştir
+                }
+                sayi = kayitSayisi; // sayi değişkenini güncelle
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sayi;
+    }
 
     public ArrayList<MSarfMalzemeDepo> malzemeDepoCikisSonKayitGetir() throws SQLException, IOException {
         ArrayList<MSarfMalzemeDepo> sonuc = new ArrayList<>();
@@ -219,7 +250,7 @@ public class Methods {
                         resultSet.getInt("miktar"),
                         resultSet.getString("not1"),
                         resultSet.getString("not2"),
-                        resultSet.getString("cikilan_birim"), 
+                        resultSet.getString("cikilan_birim"),
                         resultSet.getString("firma_kodu"),
                         resultSet.getString("firma_unvan"),
                         resultSet.getString("teslim_alan"),

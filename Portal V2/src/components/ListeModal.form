@@ -120,7 +120,7 @@
                     <Column editable="false" title="Kalem &#x130;&#x15f;lem" type="java.lang.String"/>
                     <Column editable="false" title="Malzeme Kodu" type="java.lang.Object"/>
                     <Column editable="false" title="Malzeme Ad&#x131;" type="java.lang.String"/>
-                    <Column editable="false" title="Miktar" type="java.lang.String"/>
+                    <Column editable="false" title="Miktar" type="java.lang.Integer"/>
                     <Column editable="false" title="Birim" type="java.lang.String"/>
                     <Column editable="false" title="Uuid" type="java.lang.String"/>
                   </Table>

@@ -40,8 +40,8 @@ public class ListeModal extends javax.swing.JDialog {
                     liste.getKalem_islem(),
                     liste.getMalzeme_kodu(),
                     liste.getMalzeme_adi(),
-                    liste.getBirim(),
                     liste.getKalan_miktar(),
+                    liste.getBirim(),
                     liste.getUuid()
                 };
                 model.addRow(row);
@@ -102,7 +102,7 @@ public class ListeModal extends javax.swing.JDialog {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false
@@ -166,17 +166,25 @@ public class ListeModal extends javax.swing.JDialog {
             String firma_kodu = (String) tblSarfMalzemeGiris.getValueAt(row, 2);
             String firma_unvan = (String) tblSarfMalzemeGiris.getValueAt(row, 3);
             String fatura_no = (String) tblSarfMalzemeGiris.getValueAt(row, 4);
-
+            List<Object[]> selectedRowData = new ArrayList<>();
             for (int i = 0; i < tblSarfMalzemeGiris.getRowCount(); i++) {
                 int currentId = (int) tblSarfMalzemeGiris.getValueAt(i, 0);
                 if (currentId == id) {
                     String kalemIslem = (String) tblSarfMalzemeGiris.getValueAt(i, 5);
-                    String malzemeKodu = (String) tblSarfMalzemeGiris.getValueAt(i, 6); // Örnek olarak 1. sütun malzeme kodu
-                    String malzemeAdi = (String) tblSarfMalzemeGiris.getValueAt(i, 7); // Örnek olarak 2. sütun malzeme adı
+                    String malzemeKodu = (String) tblSarfMalzemeGiris.getValueAt(i, 6);
+                    String malzemeAdi = (String) tblSarfMalzemeGiris.getValueAt(i, 7);
+
+                    int miktar = (int) tblSarfMalzemeGiris.getValueAt(i, 8);
+                    String birim = (String) tblSarfMalzemeGiris.getValueAt(i, 9);
+                    String uuid = (String) tblSarfMalzemeGiris.getValueAt(i, 10);
+                    Object[] rowData = new Object[]{
+                        kalemIslem, malzemeKodu, malzemeAdi, miktar, birim, uuid
+                    };
+                    selectedRowData.add(rowData);
                 }
             }
             if (selectionListener != null) {
-                selectionListener.onSarfMalzemeGirisListeSelected(id, tarih, fatura_no, firma_kodu, firma_unvan);
+                selectionListener.onSarfMalzemeGirisListeSelected(id, tarih, fatura_no, firma_kodu, firma_unvan, (ArrayList<Object[]>) selectedRowData);
             }
 
             this.dispose();

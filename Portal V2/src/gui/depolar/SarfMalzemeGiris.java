@@ -17,7 +17,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -33,6 +32,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     private DefaultTableModel model;
     private JComboBox<String> comboBox;
     Methods methods = new Methods();
+    int kayitNumarasi = 0; // kayit numarası vazgeç tıklandıktan sonra alınacak
 
     @Override
     public void onMalzemeSelected(String malzemeKodu, String malzemeAdi, String birim) {
@@ -52,7 +52,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }
 
     @Override
-    public void onSarfMalzemeGirisListeSelected(int id, Date tarih, String fatura_no, String firma_kodu, String firma_unvan) {
+    public void onSarfMalzemeGirisListeSelected(int id, Date tarih, String fatura_no, String firma_kodu, String firma_unvan, ArrayList<Object[]> selectedRowData) {
         lblKayitNoText.setText(Integer.toString(id));
         dateIslemTarihi.setDate(tarih);
         txtBelgeNo.setText(fatura_no);
@@ -62,9 +62,18 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         model = (DefaultTableModel) tblMalzemeGiris.getModel();
         model.setRowCount(0); // Mevcut satırları temizle
 
-        /* for (String kalemIslem : kalem_islem) {
-         model.addRow(new Object[]{kalemIslem});
-         }*/
+        for (int i = 0; i < selectedRowData.size(); i++) {
+            Object[] rowData = selectedRowData.get(i);
+
+            String kalemIslem = (String) rowData[0];
+            String malzemeKodu = (String) rowData[1];
+            String malzemeAdi = (String) rowData[2];
+            int miktar = (int) rowData[3];
+            String birim = (String) rowData[4];
+            String uuid = (String) rowData[5];
+            model.addRow(new Object[]{kalemIslem, malzemeKodu, malzemeAdi, miktar, birim, "", uuid});
+
+        }
     }
 
     @Override
@@ -79,9 +88,6 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         bui.setNorthPane(null);
         initTable();
         tblMalzemeGiris.setSelectionBackground(Color.decode("#ff9f43"));
-        btnIleriMalzemeKarti.setEnabled(false);
-        btnGeriMalzemeGiris.setEnabled(false);
-        btnSilMalzemeGiris.setEnabled(false);
     }
 
     public void malzemeDepoListesiniTabloyaYansit() {
@@ -112,9 +118,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
             if (!sonuc.isEmpty()) {
                 MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
                 int kayitNoText = ilkKayit.getId();
-                if (kayitNoText == 1) {
-                    btnGeriMalzemeGiris.setEnabled(false);
-                }
+                kayitNumarasi = kayitNoText;
                 lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
                 txtCariKod.setText(ilkKayit.getFirma_kodu());
                 txtBelgeNo.setText(ilkKayit.getFatura_no());
@@ -193,15 +197,17 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         }
     }
 
-    public void malzemeDepoGirisSonKayitGetir() {
+    public int malzemeDepoGirisSonKayitGetir() {
         model = (DefaultTableModel) tblMalzemeGiris.getModel();
         model.setRowCount(0);
+        int sonKayitNo = 0;
         try {
             ArrayList<MSarfMalzemeDepo> sonuc = methods.malzemeDepoGirisSonKayitGetir();
             if (!sonuc.isEmpty()) {
-                MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
+                MSarfMalzemeDepo ilkKayit = sonuc.get(0);
                 int kayitNoText = ilkKayit.getId();
-                lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
+                sonKayitNo = kayitNoText;
+                lblKayitNoText.setText(Integer.toString(kayitNoText));
                 txtCariKod.setText(ilkKayit.getFirma_kodu());
                 txtBelgeNo.setText(ilkKayit.getFatura_no());
                 lblFirmaUnvan.setText(ilkKayit.getFirma_unvan());
@@ -229,6 +235,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         } catch (Exception e) {
             System.out.println(e);
         }
+        return sonKayitNo;
     }
 
     @SuppressWarnings("unchecked")
@@ -700,13 +707,17 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }//GEN-LAST:event_btnFirmaSecActionPerformed
 
     private void btnGeriMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeriMalzemeGirisActionPerformed
-        int kayitNo = Integer.parseInt(lblKayitNoText.getText());
-        
-        malzemeDepoGirisOncekiKayitGetir(kayitNo);
+        malzemeDepoGirisOncekiKayitGetir(kayitNumarasi);
+        /*
+         int sonKayitNo = malzemeDepoGirisSonKayitGetir();
+         kayitNumarasi = sonKayitNo;
+         methods.sonrakiKayitSayisi(kayitNumarasi, btnIleriMalzemeKarti);
+         */
     }//GEN-LAST:event_btnGeriMalzemeGirisActionPerformed
 
     private void btnIleriMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIleriMalzemeKartiActionPerformed
         int kayitNo = Integer.parseInt(lblKayitNoText.getText());
+        methods.sonrakiKayitSayisi(kayitNo, btnIleriMalzemeKarti);
         malzemeDepoGirisSonrakiKayitGetir(kayitNo);
     }//GEN-LAST:event_btnIleriMalzemeKartiActionPerformed
 
@@ -738,15 +749,9 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     }//GEN-LAST:event_btnYeniMalzemeGirisActionPerformed
 
     private void btnVazgecMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVazgecMalzemeKartiActionPerformed
-        malzemeDepoGirisSonKayitGetir();
-        int kayitNo = Integer.parseInt(lblKayitNoText.getText());
-        if (kayitNo == 1) {
-            btnGeriMalzemeGiris.setEnabled(false);
-        }else{
-            btnGeriMalzemeGiris.setEnabled(true);
-        }
-        btnIleriMalzemeKarti.setEnabled(true);
-        btnSilMalzemeGiris.setEnabled(true);
+        int sonKayitNo = malzemeDepoGirisSonKayitGetir();
+        kayitNumarasi = sonKayitNo;
+        methods.sonrakiKayitSayisi(kayitNumarasi, btnIleriMalzemeKarti);
 
     }//GEN-LAST:event_btnVazgecMalzemeKartiActionPerformed
 

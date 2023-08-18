@@ -213,7 +213,7 @@ public class Main extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         for (UIManager.LookAndFeelInfo lafInfo : UIManager.getInstalledLookAndFeels()) {
-            System.out.println(lafInfo.getClassName());
+         //   System.out.println(lafInfo.getClassName());
         }
         try {
             //  UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
