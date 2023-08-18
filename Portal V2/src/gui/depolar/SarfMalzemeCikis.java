@@ -1,12 +1,9 @@
 package gui.depolar;
 
+import components.FirmaModal;
 import helpers.DbHelper;
-import java.awt.Component;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import interfaces.FirmaKartiYonetimi;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,48 +13,49 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import models.MSarfMalzemeDepo;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
-import utils.SQLDosyasındanOku;
 import utils.TabloSecilenRengiDegistir;
 import methods.SarfMalzemeDepo.Methods;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import javax.swing.JFormattedTextField;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
-import javax.swing.RowFilter;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableRowSorter;
 import models.MMalzemeKarti;
 import utils.Bildirim;
 import utils.GlobalArama;
 
-public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
+public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements FirmaKartiYonetimi {
 
-    DefaultTableModel model;
+    DefaultTableModel model, modelKartListesi;
     DefaultTableModel model2Kalem;
     Methods methods = new Methods();
     private JComboBox<String> comboBox;
 
     public SarfMalzemeCikis() {
         initComponents();
+        /* - border kaldırma */
         this.setBorder(null);
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
+         /* - border kaldırma */
         malzemeDepoListesiniTabloyaYansit();
         malzemeKartListesiniTabloyaYansit();
         tabloyaComboboxEkle();
         TabloSecilenRengiDegistir.degistir(tblMalzemeCikis);
         TabloSecilenRengiDegistir.degistir(tblSarfMalzemeDepoDurumu);
 
+    }
+    
+        @Override
+    public void firmaEkle() {
+        
+    }
+
+    @Override
+    public void onFirmaSelected(String ulke, String ulke_kodu) {
+        txtCariKod.setText(ulke);
+        lblFirmaUnvan.setText(ulke_kodu);
     }
 
     public void malzemeDepoListesiniTabloyaYansit() {
@@ -78,7 +76,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
-    
+
     public ArrayList<MMalzemeKarti> malzemeKartiListele() throws SQLException {
         Connection connection = null;
         DbHelper dbHelper = new DbHelper();
@@ -108,7 +106,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         }
         return malzemeKartiListesi;
     }
-    
+
     public void malzemeKartListesiniTabloyaYansit() {
         model = (DefaultTableModel) tblSMCMalzemeKartiListesi.getModel();
         model.setRowCount(0);
@@ -127,7 +125,6 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
-    
 
     public void malzemeDepoCikisSonKayitGetir() {
         model = (DefaultTableModel) tblMalzemeCikis.getModel();
@@ -202,7 +199,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         tblSarfMalzemeDepoDurumu = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txtSarfMalzemeDepoAra = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        pnlMalzemeKarti = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtSMCMalzemeKartiListesi = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -439,14 +436,22 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
 
         tbpHavuzlar.addTab("Sarf Malzeme Depo", pnlSarfMalzemeDepoHavuz);
 
+        pnlMalzemeKarti.setPreferredSize(new java.awt.Dimension(1106, 216));
+
         jLabel2.setText("Arama İfadesi :");
+
+        txtSMCMalzemeKartiListesi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSMCMalzemeKartiListesiKeyReleased(evt);
+            }
+        });
 
         tblSMCMalzemeKartiListesi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Malzeme Kodu", "Malzeme Adı", "Depo Adı", "Malzeme Marka"
+                "Malzeme Kodu", "Malzeme Adı", "Depo Adı", "Birim"
             }
         ) {
             Class[] types = new Class [] {
@@ -466,31 +471,33 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tblSMCMalzemeKartiListesi);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlMalzemeKartiLayout = new javax.swing.GroupLayout(pnlMalzemeKarti);
+        pnlMalzemeKarti.setLayout(pnlMalzemeKartiLayout);
+        pnlMalzemeKartiLayout.setHorizontalGroup(
+            pnlMalzemeKartiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMalzemeKartiLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlMalzemeKartiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1086, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(pnlMalzemeKartiLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSMCMalzemeKartiListesi)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        pnlMalzemeKartiLayout.setVerticalGroup(
+            pnlMalzemeKartiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMalzemeKartiLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlMalzemeKartiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtSMCMalzemeKartiListesi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        tbpHavuzlar.addTab("Malzeme Kartı Listesi", jPanel2);
+        tbpHavuzlar.addTab("Malzeme Kartı Listesi", pnlMalzemeKarti);
 
         javax.swing.GroupLayout pnlHavuzlarLayout = new javax.swing.GroupLayout(pnlHavuzlar);
         pnlHavuzlar.setLayout(pnlHavuzlarLayout);
@@ -568,7 +575,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHavuzlar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -583,7 +590,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlButtonGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlMainForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlMainForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -679,9 +687,9 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnYeniMalzemeGirisActionPerformed
 
     private void btnFirmaSecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirmaSecActionPerformed
-        //  FirmaModal firmaModal = new FirmaModal(null, true);
-        //    firmaModal.setSelectionListener(this);
-        //   firmaModal.setVisible(true);
+        FirmaModal firmaModal = new FirmaModal(null, true);
+        firmaModal.setSelectionListener(this);
+        firmaModal.setVisible(true);
     }//GEN-LAST:event_btnFirmaSecActionPerformed
 
     private void tblMalzemeCikisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMalzemeCikisMouseClicked
@@ -745,9 +753,9 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_popUpMouseReleased
 
-    private static void showPopupMenu(Component component, int x, int y) {
-
-    }
+    private void txtSMCMalzemeKartiListesiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSMCMalzemeKartiListesiKeyReleased
+        GlobalArama.ara(txtSMCMalzemeKartiListesi, modelKartListesi, tblSMCMalzemeKartiListesi);
+    }//GEN-LAST:event_txtSMCMalzemeKartiListesiKeyReleased
 
     private void tabloyaComboboxEkle() {
         comboBox = new JComboBox<>();
@@ -773,7 +781,6 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser dateIslemTarihi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -786,6 +793,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlButtonGroup;
     private javax.swing.JPanel pnlHavuzlar;
     private javax.swing.JPanel pnlMainForm;
+    private javax.swing.JPanel pnlMalzemeKarti;
     private javax.swing.JPanel pnlSarfMalzemeDepoHavuz;
     private javax.swing.JPopupMenu popUp;
     private javax.swing.JMenuItem popupMenuZimmetYazdir;
@@ -798,5 +806,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSMCMalzemeKartiListesi;
     private javax.swing.JTextField txtSarfMalzemeDepoAra;
     // End of variables declaration//GEN-END:variables
+
+
 
 }

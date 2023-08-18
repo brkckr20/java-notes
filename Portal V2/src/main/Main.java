@@ -13,6 +13,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import gui.kodlama.DepoKodlama;
+import gui.kodlama.KalemIslemKodlama;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.plaf.BorderUIResource;
@@ -53,6 +55,7 @@ public class Main extends javax.swing.JFrame {
         menuTeknikDestekTamamlanmisTalepler = new javax.swing.JMenuItem();
         menuKodlama = new javax.swing.JMenu();
         menuKodlamaKalemIslemKodlama = new javax.swing.JMenuItem();
+        menuDepoKodlama = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stok Takip Programı [Portal v.2.0.0]");
@@ -145,7 +148,21 @@ public class Main extends javax.swing.JFrame {
 
         menuKodlamaKalemIslemKodlama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/code.png"))); // NOI18N
         menuKodlamaKalemIslemKodlama.setText("Kalem İşlem Kodlama");
+        menuKodlamaKalemIslemKodlama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuKodlamaKalemIslemKodlamaActionPerformed(evt);
+            }
+        });
         menuKodlama.add(menuKodlamaKalemIslemKodlama);
+
+        menuDepoKodlama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/code.png"))); // NOI18N
+        menuDepoKodlama.setText("Depo Kodlama");
+        menuDepoKodlama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDepoKodlamaActionPerformed(evt);
+            }
+        });
+        menuKodlama.add(menuDepoKodlama);
 
         MainMenu.add(menuKodlama);
 
@@ -183,6 +200,7 @@ public class Main extends javax.swing.JFrame {
     private void sekmeyeBaslikAta(String baslik, JInternalFrame formInstancesi) {
         String tabTitle = baslik + " " + " " + " ";
         tbp1.addTab(tabTitle, formInstancesi);
+        sekmeyeCarpiEkle();
     }
 
     private void sekmeyeCarpiEkle() {
@@ -211,9 +229,21 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_menuPersonelKartlariActionPerformed
 
+    private void menuKodlamaKalemIslemKodlamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuKodlamaKalemIslemKodlamaActionPerformed
+        KalemIslemKodlama kalemIslemKodlama = new KalemIslemKodlama();
+        kalemIslemKodlama.setClosable(false);
+        sekmeyeBaslikAta("Kalem İşlem Kodlama", kalemIslemKodlama);
+    }//GEN-LAST:event_menuKodlamaKalemIslemKodlamaActionPerformed
+
+    private void menuDepoKodlamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDepoKodlamaActionPerformed
+        DepoKodlama depoKodlama = new DepoKodlama();
+        depoKodlama.setClosable(false);
+        sekmeyeBaslikAta("Depo Kodlama", depoKodlama);
+    }//GEN-LAST:event_menuDepoKodlamaActionPerformed
+
     public static void main(String args[]) {
         for (UIManager.LookAndFeelInfo lafInfo : UIManager.getInstalledLookAndFeels()) {
-         //   System.out.println(lafInfo.getClassName());
+            //   System.out.println(lafInfo.getClassName());
         }
         try {
             //  UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -239,6 +269,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar MainMenu;
     private javax.swing.JMenu menuAyarlar;
     private javax.swing.JMenuItem menuAyarlarSirketBilgileri;
+    private javax.swing.JMenuItem menuDepoKodlama;
     private javax.swing.JMenuItem menuFirmaKartlari;
     private javax.swing.JMenu menuKartTanimlamalari;
     private javax.swing.JMenu menuKodlama;

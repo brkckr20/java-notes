@@ -146,6 +146,20 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Kalem &#x130;&#x15f;lem Kodlama"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuKodlamaKalemIslemKodlamaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuDepoKodlama">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/code.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Depo Kodlama"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDepoKodlamaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
