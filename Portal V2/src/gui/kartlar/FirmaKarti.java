@@ -14,10 +14,14 @@ import javax.swing.table.DefaultTableModel;
 import utils.Bildirim;
 import models.MFirmaKarti;
 import components.UlkeModal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKartiYonetimi {
 
     DefaultTableModel model;
+    String secilenFirmaKodu = "";
 
     public FirmaKarti() {
         initComponents();
@@ -31,40 +35,44 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         txtUlke.setText(ulke);
         lblUlkeKoduText.setText(ulke_kodu);
     }
-    
+
     @Override
     public void firmaEkle() {
         Connection connection = null;
         DbHelper dbHelper = new DbHelper();
         PreparedStatement statement = null;
-        try {
-            connection = dbHelper.getConnection();
-            String sql = "INSERT INTO firma_karti (firma_kodu,firma_unvan1,firma_unvan2,adres1,adres2,ulke_adi,ulke_kodu,sehir,ilce,posta_kodu,vergi_dairesi,vergi_no,"
-                    + "telefon,cari_tipi,gib_mail) "
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, txtFirmaKodu.getText());
-            statement.setString(2, txtFirmaUnvan1.getText());
-            statement.setString(3, txtFirmaUnvan2.getText());
-            statement.setString(4, txtAdres1.getText());
-            statement.setString(5, txtAdres2.getText());
-            statement.setString(6, txtUlke.getText());
-            statement.setString(7, lblUlkeKoduText.getText());
-            statement.setString(8, txtSehir.getText());
-            statement.setString(9, txtIlce.getText());
-            statement.setString(10, txtPostaKodu.getText());
-            statement.setString(11, txtVergiDairesi.getText());
-            statement.setString(12, txtVergiNo.getText());
-            statement.setString(13, txtTelefon.getText());
-            statement.setString(14, (String) cmbCariTipi.getSelectedItem());
-            statement.setString(15, txtGibMail.getText());
+        if (secilenFirmaKodu == "") {
+            try {
+                connection = dbHelper.getConnection();
+                String sql = "INSERT INTO firma_karti (firma_kodu,firma_unvan1,firma_unvan2,adres1,adres2,ulke_adi,ulke_kodu,sehir,ilce,posta_kodu,vergi_dairesi,vergi_no,"
+                        + "telefon,cari_tipi,gib_mail) "
+                        + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, txtFirmaKodu.getText());
+                statement.setString(2, txtFirmaUnvan1.getText());
+                statement.setString(3, txtFirmaUnvan2.getText());
+                statement.setString(4, txtAdres1.getText());
+                statement.setString(5, txtAdres2.getText());
+                statement.setString(6, txtUlke.getText());
+                statement.setString(7, lblUlkeKoduText.getText());
+                statement.setString(8, txtSehir.getText());
+                statement.setString(9, txtIlce.getText());
+                statement.setString(10, txtPostaKodu.getText());
+                statement.setString(11, txtVergiDairesi.getText());
+                statement.setString(12, txtVergiNo.getText());
+                statement.setString(13, txtTelefon.getText());
+                statement.setString(14, (String) cmbCariTipi.getSelectedItem());
+                statement.setString(15, txtGibMail.getText());
 
-            statement.executeUpdate();
-            Bildirim.basarili("Kayıt işlemi başarılı!");
-            firmalariTabloyaYansit();
+                statement.executeUpdate();
+                Bildirim.basarili("Kayıt işlemi başarılı!");
+                firmalariTabloyaYansit();
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+
         }
 
     }
@@ -137,8 +145,8 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         } catch (Exception e) {
         }
     }
-    
-      public void resetForm() {
+
+    public void resetForm() {
         txtFirmaKodu.setText("");
         txtFirmaUnvan1.setText("");
         txtFirmaUnvan2.setText("");
@@ -162,6 +170,7 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         pnlButtonGroup = new javax.swing.JPanel();
         btnKaydetFirmaKarti = new javax.swing.JButton();
         btnYeniMalzemeKarti = new javax.swing.JButton();
+        btnSilFirmaKarti = new javax.swing.JButton();
         pnlMainForm = new javax.swing.JPanel();
         txtFirmaKodu = new javax.swing.JTextField();
         lblFirmaKodu = new javax.swing.JLabel();
@@ -210,6 +219,14 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         btnYeniMalzemeKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/plus.png"))); // NOI18N
         btnYeniMalzemeKarti.setText("Yeni");
 
+        btnSilFirmaKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Delete.png"))); // NOI18N
+        btnSilFirmaKarti.setText("Sil");
+        btnSilFirmaKarti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSilFirmaKartiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlButtonGroupLayout = new javax.swing.GroupLayout(pnlButtonGroup);
         pnlButtonGroup.setLayout(pnlButtonGroupLayout);
         pnlButtonGroupLayout.setHorizontalGroup(
@@ -218,13 +235,16 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                 .addComponent(btnYeniMalzemeKarti)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnKaydetFirmaKarti)
-                .addGap(0, 864, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSilFirmaKarti)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlButtonGroupLayout.setVerticalGroup(
             pnlButtonGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlButtonGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnKaydetFirmaKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnYeniMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnYeniMalzemeKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSilFirmaKarti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         lblFirmaKodu.setText("Firma Kodu :");
@@ -283,6 +303,11 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblFirmaListesi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblFirmaListesiMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblFirmaListesi);
@@ -450,10 +475,72 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         firmalariTabloyaYansit();
     }//GEN-LAST:event_btnListeyiYukleActionPerformed
 
+    private void btnSilFirmaKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilFirmaKartiActionPerformed
+        Connection connection = null;
+        DbHelper dbHelper = new DbHelper();
+        PreparedStatement preparedStatement = null;
+        int onayDurumu = Bildirim.onayAl();
+        if (onayDurumu == JOptionPane.YES_OPTION) {
+            try {
+                connection = dbHelper.getConnection();
+                String sqlDelete = "DELETE FROM firma_karti WHERE firma_kodu=?";
+                preparedStatement = connection.prepareStatement(sqlDelete);
+                preparedStatement.setString(1, secilenFirmaKodu);
+                preparedStatement.executeUpdate();
+                Bildirim.basarili("Firma kartı silme işlemi başarıyla gerçekleştirildi...");
+                firmalariTabloyaYansit();
+            } catch (SQLException ex) {
+                Logger.getLogger(FirmaKarti.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            System.out.println("silme işlemi başarısız");
+        }
+    }//GEN-LAST:event_btnSilFirmaKartiActionPerformed
+
+    private void tblFirmaListesiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFirmaListesiMouseClicked
+        int selectedRow = tblFirmaListesi.getSelectedRow();
+        if (selectedRow >= 0) {
+            String firmaKodu = (String) tblFirmaListesi.getValueAt(selectedRow, 0);
+            secilenFirmaKodu = firmaKodu;
+            String firmaUnvan1 = (String) tblFirmaListesi.getValueAt(selectedRow, 1);
+            String firmaUnvan2 = (String) tblFirmaListesi.getValueAt(selectedRow, 2);
+            String adres1 = (String) tblFirmaListesi.getValueAt(selectedRow, 3);
+            String adres2 = (String) tblFirmaListesi.getValueAt(selectedRow, 4);
+            String ulke = (String) tblFirmaListesi.getValueAt(selectedRow, 5);
+            String ulkeKodu = (String) tblFirmaListesi.getValueAt(selectedRow, 6);
+            String sehir = (String) tblFirmaListesi.getValueAt(selectedRow, 7);
+            String ilce = (String) tblFirmaListesi.getValueAt(selectedRow, 8);
+            String postaKodu = (String) tblFirmaListesi.getValueAt(selectedRow, 9);
+            String vergiDairesi = (String) tblFirmaListesi.getValueAt(selectedRow, 10);
+            String vergiNo = (String) tblFirmaListesi.getValueAt(selectedRow, 11);
+            String telefon = (String) tblFirmaListesi.getValueAt(selectedRow, 12);
+            String cariTipi = (String) tblFirmaListesi.getValueAt(selectedRow, 13);
+            String gibMail = (String) tblFirmaListesi.getValueAt(selectedRow, 14);
+
+            txtFirmaKodu.setText(firmaKodu);
+            txtFirmaUnvan1.setText(firmaUnvan1);
+            txtFirmaUnvan2.setText(firmaUnvan2);
+            txtAdres1.setText(adres1);
+            txtAdres2.setText(adres2);
+            txtUlke.setText(ulke);
+            lblUlkeKoduText.setText(ulkeKodu);
+            txtSehir.setText(sehir);
+            txtIlce.setText(ilce);
+            txtPostaKodu.setText(postaKodu);
+            txtVergiDairesi.setText(vergiDairesi);
+            txtVergiNo.setText(vergiNo);
+            txtTelefon.setText(telefon);
+            cmbCariTipi.setSelectedItem(cariTipi);
+            txtGibMail.setText(gibMail);
+        }
+    }//GEN-LAST:event_tblFirmaListesiMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKaydetFirmaKarti;
     private javax.swing.JButton btnListeyiYukle;
+    private javax.swing.JButton btnSilFirmaKarti;
     private javax.swing.JButton btnUlkeSec;
     private javax.swing.JButton btnYeniMalzemeKarti;
     private javax.swing.JComboBox cmbCariTipi;

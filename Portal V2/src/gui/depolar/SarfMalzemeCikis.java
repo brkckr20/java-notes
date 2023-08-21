@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import utils.TabloSecilenRengiDegistir;
 import methods.SarfMalzemeDepo.Methods;
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 import models.MMalzemeKarti;
 import utils.Bildirim;
 import utils.GlobalArama;
@@ -38,7 +39,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
         this.setBorder(null);
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
-         /* - border kaldırma */
+        /* - border kaldırma */
         malzemeDepoListesiniTabloyaYansit();
         malzemeKartListesiniTabloyaYansit();
         tabloyaComboboxEkle();
@@ -46,10 +47,10 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
         TabloSecilenRengiDegistir.degistir(tblSarfMalzemeDepoDurumu);
 
     }
-    
-        @Override
+
+    @Override
     public void firmaEkle() {
-        
+
     }
 
     @Override
@@ -469,6 +470,11 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                 return canEdit [columnIndex];
             }
         });
+        tblSMCMalzemeKartiListesi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSMCMalzemeKartiListesiMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblSMCMalzemeKartiListesi);
 
         javax.swing.GroupLayout pnlMalzemeKartiLayout = new javax.swing.GroupLayout(pnlMalzemeKarti);
@@ -757,6 +763,21 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
         GlobalArama.ara(txtSMCMalzemeKartiListesi, modelKartListesi, tblSMCMalzemeKartiListesi);
     }//GEN-LAST:event_txtSMCMalzemeKartiListesiKeyReleased
 
+    private void tblSMCMalzemeKartiListesiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSMCMalzemeKartiListesiMouseClicked
+        model2Kalem = (DefaultTableModel) tblMalzemeCikis.getModel();
+        if (evt.getClickCount() == 2) {
+            int row = tblSMCMalzemeKartiListesi.getSelectedRow();
+
+            if (row != -1) {
+                String malzeme_kodu = (String) tblSMCMalzemeKartiListesi.getValueAt(row, 0);
+                String malzeme_adi = (String) tblSMCMalzemeKartiListesi.getValueAt(row, 1);
+                String birim = (String) tblSMCMalzemeKartiListesi.getValueAt(row, 3);
+                UUID uuid = UUID.randomUUID();
+                model2Kalem.addRow(new Object[]{"", malzeme_kodu, malzeme_adi, "", birim, "", "", "", "", uuid});
+            }
+        }
+    }//GEN-LAST:event_tblSMCMalzemeKartiListesiMouseClicked
+
     private void tabloyaComboboxEkle() {
         comboBox = new JComboBox<>();
         comboBox.addItem("KURUMA ÇIKIŞ");
@@ -806,7 +827,5 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
     private javax.swing.JTextField txtSMCMalzemeKartiListesi;
     private javax.swing.JTextField txtSarfMalzemeDepoAra;
     // End of variables declaration//GEN-END:variables
-
-
 
 }

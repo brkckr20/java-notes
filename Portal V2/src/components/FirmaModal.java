@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import models.MFirmaKarti;
+import utils.GlobalArama;
 
 public class FirmaModal extends javax.swing.JDialog {
 
@@ -83,6 +84,12 @@ public class FirmaModal extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblAramaIfadesi.setText("Arama İfadesi :");
+
+        txtAramaIfadesi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAramaIfadesiKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,6 +188,10 @@ public class FirmaModal extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_tblFirmaListesiModalMouseClicked
+
+    private void txtAramaIfadesiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAramaIfadesiKeyReleased
+        GlobalArama.ara(txtAramaIfadesi, model, tblFirmaListesiModal);
+    }//GEN-LAST:event_txtAramaIfadesiKeyReleased
 
     public static void main(String args[]) {
 
