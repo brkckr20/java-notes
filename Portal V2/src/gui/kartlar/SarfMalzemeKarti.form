@@ -43,6 +43,8 @@
                   <Component id="btnYeniMalzemeKarti" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnKaydetMalzemeKarti" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnSilMalzemeKarti" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -52,6 +54,7 @@
               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                   <Component id="btnKaydetMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnYeniMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnSilMalzemeKarti" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -75,6 +78,20 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Yeni"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnYeniMalzemeKartiActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnSilMalzemeKarti">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/assets/Delete.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Sil"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSilMalzemeKartiActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -86,23 +103,33 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblMalzemeKodu" max="32767" attributes="0"/>
-                          <Component id="lblMalzemeAdi" pref="77" max="32767" attributes="0"/>
-                          <Component id="lblMarka" max="32767" attributes="0"/>
-                          <Component id="lblBirim" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="1085" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="lblAramaIfadesi" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblMalzemeKodu" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblMalzemeAdi" alignment="0" pref="77" max="32767" attributes="0"/>
+                              <Component id="lblMarka" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblBirim" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtDepoAdi" max="32767" attributes="0"/>
+                                      <Component id="cmbBirim" pref="150" max="32767" attributes="0"/>
+                                      <Component id="txtMalzemeMarka" max="32767" attributes="0"/>
+                                      <Component id="txtMalzemeAdi" max="32767" attributes="0"/>
+                                      <Component id="txtMalzemeKodu" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="txtAramaIfadesi" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtRafNo" max="32767" attributes="0"/>
-                      <Component id="cmbBirim" pref="150" max="32767" attributes="0"/>
-                      <Component id="txtMalzemeMarka" max="32767" attributes="0"/>
-                      <Component id="txtMalzemeAdi" max="32767" attributes="0"/>
-                      <Component id="txtMalzemeKodu" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="470" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -131,10 +158,17 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtRafNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDepoAdi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="306" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblAramaIfadesi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtAramaIfadesi" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="271" max="-2" attributes="0"/>
+                  <EmptySpace pref="119" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -181,10 +215,83 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Raf No :"/>
+            <Property name="text" type="java.lang.String" value="Depo Ad&#x131; :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtRafNo">
+        <Component class="javax.swing.JTextField" name="txtDepoAdi">
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="tblSarfMalzemeKartiListesi">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="6" rowCount="0">
+                    <Column editable="false" title="Kay&#x131;t No" type="java.lang.Integer"/>
+                    <Column editable="false" title="Malzeme Kodu" type="java.lang.String"/>
+                    <Column editable="false" title="Malzeme Ad&#x131;" type="java.lang.String"/>
+                    <Column editable="false" title="Depo Ad&#x131;" type="java.lang.String"/>
+                    <Column editable="false" title="Birim" type="java.lang.String"/>
+                    <Column editable="false" title="Malzeme Marka" type="java.lang.String"/>
+                  </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblSarfMalzemeKartiListesiMouseClicked"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="lblAramaIfadesi">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Arama &#x130;fadesi :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtAramaIfadesi">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtAramaIfadesiKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

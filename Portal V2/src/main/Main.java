@@ -249,7 +249,7 @@ public class Main extends javax.swing.JFrame {
             //  UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             UIManager.setLookAndFeel(new FlatLightLaf());
             UIManager.put("TabbedPane.selectedBackground", Color.white);
-            UIManager.put("Table.selectionBackground", Color.decode("#ff9f43"));
+            UIManager.put("Table.selectionBackground", Color.decode("#22a6b3"));
             UIManager.put("TableHeader.separatorColor", Color.gray);
             UIManager.put("TableHeader.bottomSeparatorColor", Color.gray);
             UIManager.put("Table.showVerticalLines", true);
