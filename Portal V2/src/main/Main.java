@@ -56,6 +56,9 @@ public class Main extends javax.swing.JFrame {
         menuKodlama = new javax.swing.JMenu();
         menuKodlamaKalemIslemKodlama = new javax.swing.JMenuItem();
         menuDepoKodlama = new javax.swing.JMenuItem();
+        menuRapor = new javax.swing.JMenu();
+        menuGorselRapor = new javax.swing.JMenu();
+        menuGuvenBilgisayarHizmetRaporu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stok Takip Programı [Portal v.2.0.0]");
@@ -166,6 +169,20 @@ public class Main extends javax.swing.JFrame {
 
         MainMenu.add(menuKodlama);
 
+        menuRapor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/report.png"))); // NOI18N
+        menuRapor.setText("Rapor");
+
+        menuGorselRapor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/report.png"))); // NOI18N
+        menuGorselRapor.setText("Görsel Rapor");
+
+        menuGuvenBilgisayarHizmetRaporu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/report.png"))); // NOI18N
+        menuGuvenBilgisayarHizmetRaporu.setText("Güven Bilgisayar Hizmet Raporu");
+        menuGorselRapor.add(menuGuvenBilgisayarHizmetRaporu);
+
+        menuRapor.add(menuGorselRapor);
+
+        MainMenu.add(menuRapor);
+
         setJMenuBar(MainMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -271,10 +288,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuAyarlarSirketBilgileri;
     private javax.swing.JMenuItem menuDepoKodlama;
     private javax.swing.JMenuItem menuFirmaKartlari;
+    private javax.swing.JMenu menuGorselRapor;
+    private javax.swing.JMenuItem menuGuvenBilgisayarHizmetRaporu;
     private javax.swing.JMenu menuKartTanimlamalari;
     private javax.swing.JMenu menuKodlama;
     private javax.swing.JMenuItem menuKodlamaKalemIslemKodlama;
     private javax.swing.JMenuItem menuPersonelKartlari;
+    private javax.swing.JMenu menuRapor;
     private javax.swing.JMenu menuSarfMalzemeDepo;
     private javax.swing.JMenuItem menuSarfMalzemeDepoCikis;
     private javax.swing.JMenuItem menuSarfMalzemeDepoGiris;

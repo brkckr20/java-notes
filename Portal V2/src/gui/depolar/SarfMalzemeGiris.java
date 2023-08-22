@@ -34,6 +34,16 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     Methods methods = new Methods();
     int kayitNumarasi = 0; // kayit numarası vazgeç tıklandıktan sonra alınacak
 
+    public SarfMalzemeGiris() {
+        initComponents();
+        this.setBorder(null);
+        BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
+        bui.setNorthPane(null);
+        initTable();
+        tblMalzemeGiris.setSelectionBackground(Color.decode("#ff9f43"));
+        methods.malzemeDepoTamirDolumBekleyenlerListesiniTabloyaYansit(tblTamirDolumBekleyenler);
+    }
+
     @Override
     public void onMalzemeSelected(String malzemeKodu, String malzemeAdi, String birim) {
         int selectedRow = tblMalzemeGiris.getSelectedRow();
@@ -79,15 +89,6 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     @Override
     public void firmaEkle() {
 
-    }
-
-    public SarfMalzemeGiris() {
-        initComponents();
-        this.setBorder(null);
-        BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
-        bui.setNorthPane(null);
-        initTable();
-        tblMalzemeGiris.setSelectionBackground(Color.decode("#ff9f43"));
     }
 
     public void malzemeDepoListesiniTabloyaYansit() {
@@ -269,6 +270,8 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         pnlHavuz = new javax.swing.JPanel();
         tbpSarfMalzemeDepoGiris = new javax.swing.JTabbedPane();
         pnlDolumTamirBekleyenler = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblTamirDolumBekleyenler = new javax.swing.JTable();
 
         btnKaydetMalzemeKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/save.png"))); // NOI18N
         btnKaydetMalzemeKarti.setText("Kaydet");
@@ -387,14 +390,14 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
             },
             new String [] {
-                "Kalem İşlem", "Malzeme Kodu", "Malzeme Adı", "Miktar", "Birim", "Malzeme Marka", "Uuid"
+                "Kalem İşlem", "Malzeme Kodu", "Malzeme Adı", "Miktar", "Birim", "Malzeme Marka", "Uuid", "Açıklama"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, true, true, true, false
+                true, false, false, true, true, true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -423,15 +426,42 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
         lblKayitNoText.setText("0");
 
+        tblTamirDolumBekleyenler.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Kalem İşlem", "Malzeme Kodu", "Malzeme Adı", "Birim", "Kalan Miktar", "Uuid"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblTamirDolumBekleyenler);
+
         javax.swing.GroupLayout pnlDolumTamirBekleyenlerLayout = new javax.swing.GroupLayout(pnlDolumTamirBekleyenler);
         pnlDolumTamirBekleyenler.setLayout(pnlDolumTamirBekleyenlerLayout);
         pnlDolumTamirBekleyenlerLayout.setHorizontalGroup(
             pnlDolumTamirBekleyenlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 950, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
         );
         pnlDolumTamirBekleyenlerLayout.setVerticalGroup(
             pnlDolumTamirBekleyenlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 207, Short.MAX_VALUE)
+            .addGroup(pnlDolumTamirBekleyenlerLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         tbpSarfMalzemeDepoGiris.addTab("Dolum / Tamir Bekleyenler", pnlDolumTamirBekleyenler);
@@ -447,45 +477,46 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         );
         pnlHavuzLayout.setVerticalGroup(
             pnlHavuzLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHavuzLayout.createSequentialGroup()
-                .addComponent(tbpSarfMalzemeDepoGiris)
-                .addContainerGap())
+            .addComponent(tbpSarfMalzemeDepoGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout pnlMainFormLayout = new javax.swing.GroupLayout(pnlMainForm);
         pnlMainForm.setLayout(pnlMainFormLayout);
         pnlMainFormLayout.setHorizontalGroup(
             pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlHavuz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlMainFormLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(pnlMainFormLayout.createSequentialGroup()
-                        .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFisNo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTarih)
-                            .addComponent(lblBelgeNo)
-                            .addComponent(lblFirmaKod))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCariKod)
-                            .addComponent(txtBelgeNo)
-                            .addComponent(dateIslemTarihi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFisNo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFirmaSec)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFirmaUnvan, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlMainFormLayout.createSequentialGroup()
-                                .addComponent(lblKayitNo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblKayitNoText, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlMainFormLayout.createSequentialGroup()
                         .addComponent(btnYeniSatir)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addComponent(pnlHavuz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlMainFormLayout.createSequentialGroup()
+                        .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(pnlMainFormLayout.createSequentialGroup()
+                                .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFisNo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTarih)
+                                    .addComponent(lblBelgeNo)
+                                    .addComponent(lblFirmaKod))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCariKod)
+                                    .addComponent(txtBelgeNo)
+                                    .addComponent(dateIslemTarihi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtFisNo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFirmaSec)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFirmaUnvan, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(pnlMainFormLayout.createSequentialGroup()
+                                        .addComponent(lblKayitNo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblKayitNoText, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         pnlMainFormLayout.setVerticalGroup(
             pnlMainFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -515,7 +546,8 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlHavuz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlHavuz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -532,7 +564,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlButtonGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlMainForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlMainForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -578,8 +610,10 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                     int miktar = (int) model.getValueAt(i, 3);
                     String birim = (String) model.getValueAt(i, 4);
                     String uuid = (String) model.getValueAt(i, 6);
+                    Object aciklamaObj = model.getValueAt(i, 7); // Aciklama sütunundaki değeri Object olarak alıyoruz
+                    String aciklama = aciklamaObj != null ? aciklamaObj.toString() : ""; // Boş değerler için kontrol ekliyoruz
 
-                    String sql = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    String sql = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid, aciklama) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     statement = connection.prepareStatement(sql);
                     statement.setString(1, kalemIslem);
                     statement.setString(2, malzemeKodu);
@@ -588,6 +622,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                     statement.setString(5, birim);
                     statement.setInt(6, tablo1Id);
                     statement.setString(7, uuid);
+                    statement.setString(8, aciklama);
                     statement.executeUpdate();
                 }
                 // Veritabanı işlemlerini onayla ve işlemi tamamla
@@ -674,7 +709,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
     private void btnYeniSatirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYeniSatirActionPerformed
         UUID uuid = UUID.randomUUID();
-        Object[] newRow = {"Seç", "", "", "", "", "", uuid.toString()};
+        Object[] newRow = {"Seç", "", "", "", "", "", uuid.toString(), ""};
         model.addRow(newRow);
     }//GEN-LAST:event_btnYeniSatirActionPerformed
 
@@ -762,6 +797,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         comboBox.addItem("DOLUM");
         comboBox.addItem("SATIN ALMA");
         comboBox.addItem("STOK GİRİŞ");
+        comboBox.addItem("GÜVEN TEKNİK DESTEK");
         tblMalzemeGiris.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
         model = (DefaultTableModel) tblMalzemeGiris.getModel();
     }
@@ -778,6 +814,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     private javax.swing.JButton btnYeniSatir;
     private com.toedter.calendar.JDateChooser dateIslemTarihi;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBelgeNo;
     private javax.swing.JLabel lblFirmaKod;
     private javax.swing.JLabel lblFirmaUnvan;
@@ -790,6 +827,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
     private javax.swing.JPanel pnlHavuz;
     private javax.swing.JPanel pnlMainForm;
     private javax.swing.JTable tblMalzemeGiris;
+    private javax.swing.JTable tblTamirDolumBekleyenler;
     private javax.swing.JTabbedPane tbpSarfMalzemeDepoGiris;
     private javax.swing.JTextField txtBelgeNo;
     private javax.swing.JTextField txtCariKod;

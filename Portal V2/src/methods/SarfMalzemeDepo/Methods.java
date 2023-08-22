@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import models.MSarfMalzemeDepo;
 import utils.Bildirim;
 import utils.SQLDosyasındanOku;
@@ -208,7 +210,7 @@ public class Methods {
         }
         return sayi;
     }
-    
+
     public int oncekiKayitSayisi(int kayitNo, JButton btn) {
         int sayi = 0;
 
@@ -275,4 +277,52 @@ public class Methods {
         }
         return sonuc;
     }
+    /* DOLUM TAMIR BEKLEYEN ISLEMLER BAŞLANGIÇ*/
+    public ArrayList<MSarfMalzemeDepo> malzemeDepoTamirDolumBekleyenler() throws SQLException, IOException {
+        ArrayList<MSarfMalzemeDepo> bekleyenIslemler = new ArrayList<>();
+        try {
+            connection = dbHelper.getConnection();
+            statement = connection.createStatement();
+            String query = SQLDosyasındanOku.sorguGetir("SarfMalzemeDepoTamirDolumBekleyenler.sql");
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                bekleyenIslemler.add(new MSarfMalzemeDepo(
+                        resultSet.getString("malzeme_kodu"),
+                        resultSet.getString("malzeme_adi"),
+                        resultSet.getInt("kalan_miktar"),
+                        resultSet.getString("birim"),
+                        resultSet.getString("uuid"),
+                        resultSet.getString("kalem_islem")
+                ));
+            }
+        } catch (SQLException exception) {
+            dbHelper.showErrorMessage(exception);
+        } finally {
+            statement.close();
+            connection.close();
+        }
+        return bekleyenIslemler;
+    }
+    
+    public void malzemeDepoTamirDolumBekleyenlerListesiniTabloyaYansit(JTable tabloAdi) {
+        DefaultTableModel model;
+        model = (DefaultTableModel) tabloAdi.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<MSarfMalzemeDepo> malzemeDepo = malzemeDepoTamirDolumBekleyenler();
+            for (MSarfMalzemeDepo liste : malzemeDepo) {
+                Object[] row = {
+                    liste.getKalem_islem(),
+                    liste.getMalzeme_kodu(),
+                    liste.getMalzeme_adi(),
+                    liste.getBirim(),
+                    liste.getKalan_miktar(),
+                    liste.getUuid()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+    }
+    /* DOLUM TAMIR BEKLEYEN ISLEMLER BİTİŞ*/
 }

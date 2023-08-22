@@ -641,8 +641,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                     String not2 = (String) model2Kalem.getValueAt(i, 6);
                     String cikilan_birim = (String) model2Kalem.getValueAt(i, 7);
                     String teslim_alan = (String) model2Kalem.getValueAt(i, 8);
-                    String uuid = (String) model2Kalem.getValueAt(i, 9);
-                    String sqlTablo2 = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid, not1, not2, cikilan_birim, teslim_alan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    UUID uuid = (UUID) model2Kalem.getValueAt(i, 9);
+                    String sqlTablo2 = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid ,not1, not2, cikilan_birim, teslim_alan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     statementTablo2 = connection.prepareStatement(sqlTablo2);
                     statementTablo2.setString(1, kalem_islem);
                     statementTablo2.setString(2, malzeme_kodu);
@@ -650,7 +650,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                     statementTablo2.setInt(4, miktar);
                     statementTablo2.setString(5, birim);
                     statementTablo2.setInt(6, tablo1Id);
-                    statementTablo2.setString(7, uuid);
+                    statementTablo2.setString(7, uuid.toString());
                     statementTablo2.setString(8, not1);
                     statementTablo2.setString(9, not2);
                     statementTablo2.setString(10, cikilan_birim);
