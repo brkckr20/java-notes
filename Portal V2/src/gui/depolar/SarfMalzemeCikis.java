@@ -353,7 +353,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 true, false, false, true, true, true, true, true, true, false
@@ -641,7 +641,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                     String not2 = (String) model2Kalem.getValueAt(i, 6);
                     String cikilan_birim = (String) model2Kalem.getValueAt(i, 7);
                     String teslim_alan = (String) model2Kalem.getValueAt(i, 8);
-                    UUID uuid = (UUID) model2Kalem.getValueAt(i, 9);
+                    String uuidString = (String) model2Kalem.getValueAt(i, 9); // UUID değerini String olarak al
+                    UUID uuid = UUID.fromString(uuidString);
                     String sqlTablo2 = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid ,not1, not2, cikilan_birim, teslim_alan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     statementTablo2 = connection.prepareStatement(sqlTablo2);
                     statementTablo2.setString(1, kalem_islem);

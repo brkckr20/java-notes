@@ -334,7 +334,7 @@
                     <Column editable="true" title="Not 2" type="java.lang.String"/>
                     <Column editable="true" title="&#xc7;&#x131;k&#x131;lan Birim" type="java.lang.String"/>
                     <Column editable="true" title="Teslim Alan" type="java.lang.String"/>
-                    <Column editable="false" title="Uuid" type="java.lang.Object"/>
+                    <Column editable="false" title="Uuid" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
