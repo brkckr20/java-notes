@@ -16,8 +16,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import gui.kodlama.DepoKodlama;
 import gui.kodlama.KalemIslemKodlama;
 import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.plaf.BorderUIResource;
+import gui.ayarlar.FirmaBilgileri;
 
 public class Main extends javax.swing.JFrame {
 
@@ -70,6 +69,11 @@ public class Main extends javax.swing.JFrame {
 
         menuAyarlarSirketBilgileri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/settings.png"))); // NOI18N
         menuAyarlarSirketBilgileri.setText("Şirket Bilgileri");
+        menuAyarlarSirketBilgileri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAyarlarSirketBilgileriActionPerformed(evt);
+            }
+        });
         menuAyarlar.add(menuAyarlarSirketBilgileri);
 
         MainMenu.add(menuAyarlar);
@@ -257,6 +261,12 @@ public class Main extends javax.swing.JFrame {
         depoKodlama.setClosable(false);
         sekmeyeBaslikAta("Depo Kodlama", depoKodlama);
     }//GEN-LAST:event_menuDepoKodlamaActionPerformed
+
+    private void menuAyarlarSirketBilgileriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyarlarSirketBilgileriActionPerformed
+        FirmaBilgileri firmaBilgileri = new FirmaBilgileri();
+        firmaBilgileri.setClosable(false);
+        sekmeyeBaslikAta("Firma Sabitleri Tanımlama", firmaBilgileri);
+    }//GEN-LAST:event_menuAyarlarSirketBilgileriActionPerformed
 
     public static void main(String args[]) {
         for (UIManager.LookAndFeelInfo lafInfo : UIManager.getInstalledLookAndFeels()) {
