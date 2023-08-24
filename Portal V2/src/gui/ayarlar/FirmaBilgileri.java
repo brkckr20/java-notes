@@ -248,9 +248,17 @@ public class FirmaBilgileri extends javax.swing.JInternalFrame {
     private void btnKaydetFirmaKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaydetFirmaKartiActionPerformed
         try {
             connection = dbHelper.getConnection();
-            String sql = "UPDATE firma_sabitleri SET firma_kodu = ?, firma_unvani = ?, firma_adresi = ?, genel_bilgi = ?, "
-                    + "eirs_user_name = ?, eirs_password = ?, vergi_no = ?, web_sitesi = ?, telefon = ? "
-                    + "WHERE firma_kodu = 1";
+            String sql = "UPDATE firma_sabitleri SET "
+                    + "firma_kodu = ? ,"
+                    + "firma_unvani = ?, "
+                    + "firma_adresi = ?, "
+                    + "genel_bilgi = ?, "
+                    + "eirs_user_name = ?,"
+                    + " eirs_password = ?, "
+                    + "vergi_no = ?, "
+                    + "web_sitesi = ?, "
+                    + "telefon = ? "
+                    + "WHERE id = 1";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, txtFirmaKodu.getText());
             preparedStatement.setString(2, txtFirmaUnvani.getText());
@@ -265,7 +273,7 @@ public class FirmaBilgileri extends javax.swing.JInternalFrame {
             Bildirim.basarili("Kayıt işlemi başarılı!");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());           
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnKaydetFirmaKartiActionPerformed
 

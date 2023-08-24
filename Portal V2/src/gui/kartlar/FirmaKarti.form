@@ -78,6 +78,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Yeni"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnYeniMalzemeKartiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSilFirmaKarti">
           <Properties>
@@ -354,7 +357,7 @@
             <Component class="javax.swing.JTable" name="tblFirmaListesi">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="15" rowCount="0">
+                  <Table columnCount="16" rowCount="0">
                     <Column editable="false" title="Firma Kodu" type="java.lang.String"/>
                     <Column editable="false" title="Firma Unvan 1" type="java.lang.String"/>
                     <Column editable="false" title="Firma Unvan 2" type="java.lang.String"/>
@@ -370,10 +373,16 @@
                     <Column editable="false" title="Telefon" type="java.lang.String"/>
                     <Column editable="false" title="Cari Tipi" type="java.lang.String"/>
                     <Column editable="false" title="Gib Mail" type="java.lang.String"/>
+                    <Column editable="false" title="Kay&#x131;t No" type="java.lang.Integer"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>

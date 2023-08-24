@@ -1,6 +1,5 @@
 package gui.kartlar;
 
-import components.UlkeModal;
 import helpers.DbHelper;
 import interfaces.FirmaKartiYonetimi;
 import java.sql.Connection;
@@ -22,6 +21,7 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
 
     DefaultTableModel model;
     String secilenFirmaKodu = "";
+    int secilenId = 0;
 
     public FirmaKarti() {
         initComponents();
@@ -41,7 +41,7 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         Connection connection = null;
         DbHelper dbHelper = new DbHelper();
         PreparedStatement statement = null;
-        if (secilenFirmaKodu == "") {
+        if (secilenId == 0) {
             try {
                 connection = dbHelper.getConnection();
                 String sql = "INSERT INTO firma_karti (firma_kodu,firma_unvan1,firma_unvan2,adres1,adres2,ulke_adi,ulke_kodu,sehir,ilce,posta_kodu,vergi_dairesi,vergi_no,"
@@ -72,7 +72,48 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                 System.out.println(e.getMessage());
             }
         } else {
-
+            try {
+                connection = dbHelper.getConnection();
+                String sql = "UPDATE firma_karti SET "
+                        + "firma_kodu =?, "
+                        + "firma_unvan1 =?, "
+                        + "firma_unvan2=?, "
+                        + "adres1=?, "
+                        + "adres2=?, "
+                        + "ulke_adi=?, "
+                        + "ulke_kodu=?, "
+                        + "sehir=? ,"
+                        + "ilce=?, "
+                        + "posta_kodu=?, "
+                        + "vergi_dairesi=?, "
+                        + "vergi_no=?, "
+                        + "telefon=?, "
+                        + "cari_tipi=?,"
+                        + "gib_mail=? "
+                        + "WHERE id=?";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, txtFirmaKodu.getText());
+                statement.setString(2, txtFirmaUnvan1.getText());
+                statement.setString(3, txtFirmaUnvan2.getText());
+                statement.setString(4, txtAdres1.getText());
+                statement.setString(5, txtAdres2.getText());
+                statement.setString(6, txtUlke.getText());
+                statement.setString(7, lblUlkeKoduText.getText());
+                statement.setString(8, txtSehir.getText());
+                statement.setString(9, txtIlce.getText());
+                statement.setString(10, txtPostaKodu.getText());
+                statement.setString(11, txtVergiDairesi.getText());
+                statement.setString(12, txtVergiNo.getText());
+                statement.setString(13, txtTelefon.getText());
+                statement.setString(14, (String) cmbCariTipi.getSelectedItem());
+                statement.setString(15, txtGibMail.getText());
+                statement.setInt(16, secilenId);
+                statement.executeUpdate();
+                Bildirim.basarili("Güncelleme işlemi başarılı!");
+                firmalariTabloyaYansit();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
     }
@@ -104,7 +145,8 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                         resultSet.getString("vergi_no"),
                         resultSet.getString("telefon"),
                         resultSet.getString("cari_tipi"),
-                        resultSet.getString("gib_mail")
+                        resultSet.getString("gib_mail"),
+                        resultSet.getInt("id")
                 ));
             }
         } catch (SQLException exception) {
@@ -138,7 +180,8 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                     liste.getVergi_no(),
                     liste.getTelefon(),
                     liste.getCari_tipi(),
-                    liste.getGib_mail()
+                    liste.getGib_mail(),
+                    liste.getId()
                 };
                 model.addRow(row);
             }
@@ -161,6 +204,7 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
         txtVergiNo.setText("");
         txtTelefon.setText("");
         txtGibMail.setText("");
+        secilenId = 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -218,6 +262,11 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
 
         btnYeniMalzemeKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/plus.png"))); // NOI18N
         btnYeniMalzemeKarti.setText("Yeni");
+        btnYeniMalzemeKarti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYeniMalzemeKartiActionPerformed(evt);
+            }
+        });
 
         btnSilFirmaKarti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Delete.png"))); // NOI18N
         btnSilFirmaKarti.setText("Sil");
@@ -287,14 +336,14 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
 
             },
             new String [] {
-                "Firma Kodu", "Firma Unvan 1", "Firma Unvan 2", "Adres 1", "Adres 2", "Ülke", "Ülke Kodu", "Şehir", "İlçe", "Posta Kodu", "Vergi Dairesi", "Vergi No", "Telefon", "Cari Tipi", "Gib Mail"
+                "Firma Kodu", "Firma Unvan 1", "Firma Unvan 2", "Adres 1", "Adres 2", "Ülke", "Ülke Kodu", "Şehir", "İlçe", "Posta Kodu", "Vergi Dairesi", "Vergi No", "Telefon", "Cari Tipi", "Gib Mail", "Kayıt No"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -517,6 +566,8 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
             String telefon = (String) tblFirmaListesi.getValueAt(selectedRow, 12);
             String cariTipi = (String) tblFirmaListesi.getValueAt(selectedRow, 13);
             String gibMail = (String) tblFirmaListesi.getValueAt(selectedRow, 14);
+            int id = (int) tblFirmaListesi.getValueAt(selectedRow, 15);
+            secilenId = id;
 
             txtFirmaKodu.setText(firmaKodu);
             txtFirmaUnvan1.setText(firmaUnvan1);
@@ -535,6 +586,10 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
             txtGibMail.setText(gibMail);
         }
     }//GEN-LAST:event_tblFirmaListesiMouseClicked
+
+    private void btnYeniMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYeniMalzemeKartiActionPerformed
+        resetForm();
+    }//GEN-LAST:event_btnYeniMalzemeKartiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

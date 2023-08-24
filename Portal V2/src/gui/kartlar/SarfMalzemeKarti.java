@@ -256,7 +256,7 @@ public class SarfMalzemeKarti extends javax.swing.JInternalFrame {
                 statement.setString(5, txtMalzemeMarka.getText());
                 statement.setInt(6, secilenSatirId);
                 statement.executeUpdate();
-                Bildirim.basarili("Malzeme güncelleme işlemi başarıyla tamamlandı..");
+                Bildirim.basarili("Malzeme karti güncelleme işlemi başarıyla tamamlandı..");
                 sarfMalzemeMethods.malzemeKartlariniTabloyaYansit(tblSarfMalzemeKartiListesi);
             } catch (Exception e) {
                 System.out.println(e.getMessage());

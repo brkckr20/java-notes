@@ -25,7 +25,7 @@ public class MFirmaKarti {
         this.firma_unvan1 = firma_unvan1;
     }
 
-    public MFirmaKarti(String firma_kodu, String firma_unvan1, String firma_unvan2, String adres1, String adres2, String ulke_adi, String ulke_kodu, String sehir, String ilce, String posta_kodu, String vergi_dairesi, String vergi_no, String telefon, String cari_tipi, String gib_mail) {
+    public MFirmaKarti(String firma_kodu, String firma_unvan1, String firma_unvan2, String adres1, String adres2, String ulke_adi, String ulke_kodu, String sehir, String ilce, String posta_kodu, String vergi_dairesi, String vergi_no, String telefon, String cari_tipi, String gib_mail,int id) {
         this.firma_kodu = firma_kodu;
         this.firma_unvan1 = firma_unvan1;
         this.firma_unvan2 = firma_unvan2;
@@ -41,6 +41,7 @@ public class MFirmaKarti {
         this.telefon = telefon;
         this.cari_tipi = cari_tipi;
         this.gib_mail = gib_mail;
+        this.id = id;
     }
 
     @Override
