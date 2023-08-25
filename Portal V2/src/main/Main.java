@@ -17,6 +17,7 @@ import gui.kodlama.DepoKodlama;
 import gui.kodlama.KalemIslemKodlama;
 import java.awt.Color;
 import gui.ayarlar.FirmaBilgileri;
+import gui.kartlar.PersonelKartlari;
 
 public class Main extends javax.swing.JFrame {
 
@@ -208,14 +209,14 @@ public class Main extends javax.swing.JFrame {
         SarfMalzemeKarti smk = new SarfMalzemeKarti();
         smk.setClosable(false);
         sekmeyeBaslikAta("Malzeme Kartı", smk);
-        sekmeyeCarpiEkle();
+      //  sekmeyeCarpiEkle();
     }//GEN-LAST:event_menuSarfMalzemeKartlariActionPerformed
 
     private void menuSarfMalzemeDepoGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSarfMalzemeDepoGirisActionPerformed
         SarfMalzemeGiris smg = new SarfMalzemeGiris();
         smg.setClosable(false);
         sekmeyeBaslikAta("Sarf Malzeme Depo Giriş İşlemleri", smg);
-        sekmeyeCarpiEkle();
+      //  sekmeyeCarpiEkle();
     }//GEN-LAST:event_menuSarfMalzemeDepoGirisActionPerformed
 
     private void sekmeyeBaslikAta(String baslik, JInternalFrame formInstancesi) {
@@ -236,18 +237,20 @@ public class Main extends javax.swing.JFrame {
         FirmaKarti firmaKarti = new FirmaKarti();
         firmaKarti.setClosable(false);
         sekmeyeBaslikAta("Firma Kartı ", firmaKarti);
-        sekmeyeCarpiEkle();
+      //  sekmeyeCarpiEkle();
     }//GEN-LAST:event_menuFirmaKartlariActionPerformed
 
     private void menuSarfMalzemeDepoCikisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSarfMalzemeDepoCikisActionPerformed
         SarfMalzemeCikis sarfMalzemeCikis = new SarfMalzemeCikis();
         sarfMalzemeCikis.setClosable(true);
         sekmeyeBaslikAta("Sarf Malzeme Depo Çıkış İşlemleri", sarfMalzemeCikis);
-        sekmeyeCarpiEkle();
+      //  sekmeyeCarpiEkle();
     }//GEN-LAST:event_menuSarfMalzemeDepoCikisActionPerformed
 
     private void menuPersonelKartlariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonelKartlariActionPerformed
-
+        PersonelKartlari personelKartlari = new PersonelKartlari();
+        personelKartlari.setClosable(false);
+        sekmeyeBaslikAta("Personel Kartları", personelKartlari);
     }//GEN-LAST:event_menuPersonelKartlariActionPerformed
 
     private void menuKodlamaKalemIslemKodlamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuKodlamaKalemIslemKodlamaActionPerformed
