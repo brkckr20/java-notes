@@ -30,6 +30,7 @@ import utils.Bildirim;
 public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements MalzemeKartiYonetimi, FirmaKartiYonetimi, MalzemeDepoYonetimi {
 
     private DefaultTableModel model;
+    private DefaultTableModel model2DolumTamirBekleyenler;
     private JComboBox<String> comboBox;
     Methods methods = new Methods();
     int kayitNumarasi = 0; // kayit numarası vazgeç tıklandıktan sonra alınacak
@@ -449,6 +450,16 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 return canEdit [columnIndex];
             }
         });
+        tblTamirDolumBekleyenler.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTamirDolumBekleyenlerMouseClicked(evt);
+            }
+        });
+        tblTamirDolumBekleyenler.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblTamirDolumBekleyenlerKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblTamirDolumBekleyenler);
 
         javax.swing.GroupLayout pnlDolumTamirBekleyenlerLayout = new javax.swing.GroupLayout(pnlDolumTamirBekleyenler);
@@ -705,6 +716,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
                 }
             }
         }
+        methods.malzemeDepoTamirDolumBekleyenlerListesiniTabloyaYansit(tblTamirDolumBekleyenler);
     }//GEN-LAST:event_btnKaydetMalzemeKartiActionPerformed
 
     private void btnYeniSatirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYeniSatirActionPerformed
@@ -789,6 +801,25 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         methods.sonrakiKayitSayisi(kayitNumarasi, btnIleriMalzemeKarti);
 
     }//GEN-LAST:event_btnVazgecMalzemeKartiActionPerformed
+
+    private void tblTamirDolumBekleyenlerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTamirDolumBekleyenlerKeyPressed
+        
+    }//GEN-LAST:event_tblTamirDolumBekleyenlerKeyPressed
+
+    private void tblTamirDolumBekleyenlerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTamirDolumBekleyenlerMouseClicked
+        model = (DefaultTableModel) tblMalzemeGiris.getModel();
+        model2DolumTamirBekleyenler = (DefaultTableModel) tblTamirDolumBekleyenler.getModel();
+        if (evt.getClickCount() == 2) {
+            int row = tblTamirDolumBekleyenler.getSelectedRow();
+            if (row != -1) {
+                String malzeme_kodu = (String) tblTamirDolumBekleyenler.getValueAt(row, 1);
+                String malzeme_adi = (String) tblTamirDolumBekleyenler.getValueAt(row, 2);
+                String birim = (String) tblTamirDolumBekleyenler.getValueAt(row, 3);
+                String uuid = (String) tblTamirDolumBekleyenler.getValueAt(row, 5);
+                model.addRow(new Object[]{"", malzeme_kodu, malzeme_adi, "", birim, "", uuid, ""});
+            }
+        }
+    }//GEN-LAST:event_tblTamirDolumBekleyenlerMouseClicked
 
     private void initTable() {
         comboBox = new JComboBox<>();

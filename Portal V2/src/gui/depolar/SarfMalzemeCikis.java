@@ -353,7 +353,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 true, false, false, true, true, true, true, true, true, false
@@ -432,7 +432,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                     .addGroup(pnlSarfMalzemeDepoHavuzLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(txtSarfMalzemeDepoAra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addGap(0, 54, Short.MAX_VALUE))
         );
 
         tbpHavuzlar.addTab("Sarf Malzeme Depo", pnlSarfMalzemeDepoHavuz);
@@ -499,7 +499,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                     .addComponent(jLabel2)
                     .addComponent(txtSMCMalzemeKartiListesi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -515,7 +515,9 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
         );
         pnlHavuzlarLayout.setVerticalGroup(
             pnlHavuzlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbpHavuzlar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pnlHavuzlarLayout.createSequentialGroup()
+                .addComponent(tbpHavuzlar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         lblKayitNo.setText("Kayıt No :");
@@ -581,7 +583,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHavuzlar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -642,7 +644,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                     String cikilan_birim = (String) model2Kalem.getValueAt(i, 7);
                     String teslim_alan = (String) model2Kalem.getValueAt(i, 8);
                     String uuidString = (String) model2Kalem.getValueAt(i, 9); // UUID değerini String olarak al
-                    UUID uuid = UUID.fromString(uuidString);
+                    UUID uuid = UUID.fromString(uuidString); // String'den UUID'ye dönüştür
                     String sqlTablo2 = "INSERT INTO sarf_malzeme_depo2 (kalem_islem, malzeme_kodu, malzeme_adi, miktar, birim, refNoId, uuid ,not1, not2, cikilan_birim, teslim_alan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     statementTablo2 = connection.prepareStatement(sqlTablo2);
                     statementTablo2.setString(1, kalem_islem);
@@ -774,7 +776,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                 String malzeme_adi = (String) tblSMCMalzemeKartiListesi.getValueAt(row, 1);
                 String birim = (String) tblSMCMalzemeKartiListesi.getValueAt(row, 3);
                 UUID uuid = UUID.randomUUID();
-                model2Kalem.addRow(new Object[]{"", malzeme_kodu, malzeme_adi, "", birim, "", "", "", "", uuid});
+                model2Kalem.addRow(new Object[]{"", malzeme_kodu, malzeme_adi, "", birim, "DOLUM İÇİN SEVK", "", "", "", uuid.toString()});
             }
         }
     }//GEN-LAST:event_tblSMCMalzemeKartiListesiMouseClicked
