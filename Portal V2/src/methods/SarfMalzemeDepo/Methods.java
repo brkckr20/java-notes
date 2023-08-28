@@ -292,7 +292,9 @@ public class Methods {
                         resultSet.getInt("kalan_miktar"),
                         resultSet.getString("birim"),
                         resultSet.getString("uuid"),
-                        resultSet.getString("kalem_islem")
+                        resultSet.getString("kalem_islem"),
+                        resultSet.getDate("tarih"),
+                        resultSet.getString("firma_unvan")
                 ));
             }
         } catch (SQLException exception) {
@@ -312,12 +314,15 @@ public class Methods {
             ArrayList<MSarfMalzemeDepo> malzemeDepo = malzemeDepoTamirDolumBekleyenler();
             for (MSarfMalzemeDepo liste : malzemeDepo) {
                 Object[] row = {
+                    liste.getTarih(),
+                    liste.getFirma_unvan(),
                     liste.getKalem_islem(),
                     liste.getMalzeme_kodu(),
                     liste.getMalzeme_adi(),
                     liste.getBirim(),
                     liste.getKalan_miktar(),
                     liste.getUuid()
+                    
                 };
                 model.addRow(row);
             }

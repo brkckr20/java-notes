@@ -776,7 +776,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                 String malzeme_adi = (String) tblSMCMalzemeKartiListesi.getValueAt(row, 1);
                 String birim = (String) tblSMCMalzemeKartiListesi.getValueAt(row, 3);
                 UUID uuid = UUID.randomUUID();
-                model2Kalem.addRow(new Object[]{"", malzeme_kodu, malzeme_adi, "", birim, "DOLUM İÇİN SEVK", "", "", "", uuid.toString()});
+                model2Kalem.addRow(new Object[]{"", malzeme_kodu, malzeme_adi, "", birim, "DOLUM / TAMİR İÇİN SEVK", "", "", "", uuid.toString()});
             }
         }
     }//GEN-LAST:event_tblSMCMalzemeKartiListesiMouseClicked

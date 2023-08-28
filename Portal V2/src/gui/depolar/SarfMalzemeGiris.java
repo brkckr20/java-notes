@@ -7,7 +7,6 @@ import helpers.DbHelper;
 import interfaces.FirmaKartiYonetimi;
 import interfaces.MalzemeKartiYonetimi;
 import interfaces.MalzemeDepoYonetimi;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +40,7 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
         initTable();
-        tblMalzemeGiris.setSelectionBackground(Color.decode("#ff9f43"));
+        //tblMalzemeGiris.setSelectionBackground(Color.decode("#ff9f43"));
         methods.malzemeDepoTamirDolumBekleyenlerListesiniTabloyaYansit(tblTamirDolumBekleyenler);
     }
 
@@ -432,14 +431,14 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
 
             },
             new String [] {
-                "Kalem İşlem", "Malzeme Kodu", "Malzeme Adı", "Birim", "Kalan Miktar", "Uuid"
+                "Tarih", "Firma Ünvan", "Kalem İşlem", "Malzeme Kodu", "Malzeme Adı", "Birim", "Kalan Miktar", "Uuid"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -812,10 +811,10 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         if (evt.getClickCount() == 2) {
             int row = tblTamirDolumBekleyenler.getSelectedRow();
             if (row != -1) {
-                String malzeme_kodu = (String) tblTamirDolumBekleyenler.getValueAt(row, 1);
-                String malzeme_adi = (String) tblTamirDolumBekleyenler.getValueAt(row, 2);
-                String birim = (String) tblTamirDolumBekleyenler.getValueAt(row, 3);
-                String uuid = (String) tblTamirDolumBekleyenler.getValueAt(row, 5);
+                String malzeme_kodu = (String) tblTamirDolumBekleyenler.getValueAt(row, 3);
+                String malzeme_adi = (String) tblTamirDolumBekleyenler.getValueAt(row, 4);
+                String birim = (String) tblTamirDolumBekleyenler.getValueAt(row, 5);
+                String uuid = (String) tblTamirDolumBekleyenler.getValueAt(row, 7);
                 model.addRow(new Object[]{"", malzeme_kodu, malzeme_adi, "", birim, "", uuid, ""});
             }
         }

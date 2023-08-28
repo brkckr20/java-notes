@@ -1,4 +1,6 @@
 SELECT
+	tarih,
+	firma_unvan,
 	kalem_islem,
     malzeme_kodu,
     malzeme_adi,
@@ -15,7 +17,7 @@ SELECT
 FROM sarf_malzeme_depo1 d1
 INNER JOIN sarf_malzeme_depo2 d2 ON d1.id = d2.refNoId
 WHERE islem_cinsi = 'SARF_MALZEME_CIKIS' AND d2.kalem_islem IN ('TAMİRE ÇIKIŞ','DOLUMA ÇIKIŞ')
-GROUP BY kalem_islem,malzeme_kodu, malzeme_adi, birim,`uuid`
+GROUP BY kalem_islem,malzeme_kodu, malzeme_adi, birim,`uuid`,tarih,firma_unvan
 HAVING (SUM(miktar) - IFNULL(
         (
             SELECT SUM(miktar)

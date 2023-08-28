@@ -8,7 +8,7 @@ SELECT
             SELECT SUM(miktar)
             FROM sarf_malzeme_depo1 x
             INNER JOIN sarf_malzeme_depo2 y ON x.id = y.refNoId
-            WHERE islem_cinsi = 'SARF_MALZEME_CIKIS' AND y.not1 NOT IN ('DOLUM İÇİN SEVK','KART') AND Y.`uuid` = d2.`uuid`
+            WHERE islem_cinsi = 'SARF_MALZEME_CIKIS' AND y.not1 NOT IN ('DOLUM İÇİN SEVK','KART','DOLUM / TAMİR İÇİN SEVK') AND Y.`uuid` = d2.`uuid`
         ), 0) AS kalan_miktar
         ,`uuid`
 FROM sarf_malzeme_depo1 d1
@@ -20,7 +20,7 @@ HAVING (SUM(miktar) - IFNULL(
             SELECT SUM(miktar)
             FROM sarf_malzeme_depo1 x
             INNER JOIN sarf_malzeme_depo2 y ON x.id = y.refNoId
-            WHERE islem_cinsi = 'SARF_MALZEME_CIKIS' AND y.not1 NOT IN ('DOLUM İÇİN SEVK','KART') AND y.`uuid` = d2.`uuid`
+            WHERE islem_cinsi = 'SARF_MALZEME_CIKIS' AND y.not1 NOT IN ('DOLUM İÇİN SEVK','KART','DOLUM / TAMİR İÇİN SEVK') AND y.`uuid` = d2.`uuid`
         ), 0)) <> 0;
 
 

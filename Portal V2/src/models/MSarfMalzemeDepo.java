@@ -66,13 +66,15 @@ public class MSarfMalzemeDepo {
     }
 
     /* SARF MALZEME DEPO ÇIKIŞ'TAN DOLUM TAMİR BEKLEYENLER İÇİN OLUŞTURULDU*/
-    public MSarfMalzemeDepo(String malzeme_kodu, String malzeme_adi, int kalan_miktar, String birim, String uuid, String kalem_islem) {
+    public MSarfMalzemeDepo(String malzeme_kodu, String malzeme_adi, int kalan_miktar, String birim, String uuid, String kalem_islem,Date tarih,String firma_unvan) {
         this.malzeme_kodu = malzeme_kodu;
         this.malzeme_adi = malzeme_adi;
         this.kalan_miktar = kalan_miktar;
         this.birim = birim;
         this.uuid = uuid;
         this.kalem_islem = kalem_islem;
+        this.tarih = tarih;
+        this.firma_unvan = firma_unvan;
     }
 
     
