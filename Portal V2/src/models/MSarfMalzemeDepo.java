@@ -64,6 +64,7 @@ public class MSarfMalzemeDepo {
         this.kalem_islem = kalem_islem;
         this.tarih = tarih;
     }
+ 
 
     /* SARF MALZEME DEPO ÇIKIŞ'TAN DOLUM TAMİR BEKLEYENLER İÇİN OLUŞTURULDU*/
     public MSarfMalzemeDepo(String malzeme_kodu, String malzeme_adi, int kalan_miktar, String birim, String uuid, String kalem_islem,Date tarih,String firma_unvan) {

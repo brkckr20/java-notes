@@ -798,7 +798,6 @@ public class SarfMalzemeGiris extends javax.swing.JInternalFrame implements Malz
         int sonKayitNo = malzemeDepoGirisSonKayitGetir();
         kayitNumarasi = sonKayitNo;
         methods.sonrakiKayitSayisi(kayitNumarasi, btnIleriMalzemeKarti);
-
     }//GEN-LAST:event_btnVazgecMalzemeKartiActionPerformed
 
     private void tblTamirDolumBekleyenlerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTamirDolumBekleyenlerKeyPressed
