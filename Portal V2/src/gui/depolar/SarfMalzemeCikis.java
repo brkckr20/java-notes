@@ -192,8 +192,62 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                                 liste.getKalem_islem(),
                                 liste.getMalzeme_kodu(),
                                 liste.getMalzeme_adi(),
-                                liste.getKalan_miktar(),
+                                liste.getMiktar(),
                                 liste.getBirim(),
+                                "",
+                                "",
+                                "",
+                                "",
+                                liste.getUuid()
+                            };
+                            model.addRow(row);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    btnIleriMalzemeKarti.setEnabled(false);
+                }
+
+            } else {
+                MSarfMalzemeDepo ilkKayit = sonuc.get(0);
+                int kayitNoText = ilkKayit.getId();
+                lblKayitNoText.setText(Integer.toString(kayitNoText));
+            }
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void malzemeDepoCikisOncekiKayitGetir(int id) {
+        btnGeriMalzemeCikis.setEnabled(true);
+        model = (DefaultTableModel) tblMalzemeCikis.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<MSarfMalzemeDepo> sonuc = methods.malzemeDepoCikisOncekiKayitGetir(id);
+            if (!sonuc.isEmpty()) {
+
+                if (!sonuc.isEmpty()) {
+                    MSarfMalzemeDepo ilkKayit = sonuc.get(0); // İlk kaydı al
+                    int kayitNoText = ilkKayit.getId();
+
+                    lblKayitNoText.setText(Integer.toString(kayitNoText)); // int değeri String olarak dönüştür
+                    txtCariKod.setText(ilkKayit.getFirma_kodu());
+                    lblFirmaUnvan.setText(ilkKayit.getFirma_unvan());
+                    dateIslemTarihi.setDate(ilkKayit.getTarih());
+                    try {
+                        for (MSarfMalzemeDepo liste : sonuc) {
+                            Object[] row = {
+                                liste.getKalem_islem(),
+                                liste.getMalzeme_kodu(),
+                                liste.getMalzeme_adi(),
+                                liste.getMiktar(),
+                                liste.getBirim(),
+                                "",
+                                "",
+                                "",
                                 "",
                                 liste.getUuid()
                             };
@@ -776,7 +830,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
     }//GEN-LAST:event_btnKaydetMalzemeDepoCikisActionPerformed
 
     private void btnGeriMalzemeCikisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeriMalzemeCikisActionPerformed
-
+        int kayitNo = Integer.parseInt(lblKayitNoText.getText());
+        malzemeDepoCikisOncekiKayitGetir(kayitNo);
     }//GEN-LAST:event_btnGeriMalzemeCikisActionPerformed
 
     private void btnIleriMalzemeKartiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIleriMalzemeKartiActionPerformed
@@ -858,7 +913,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
     private void btnListeMalzemeCikisDepoVazgecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeCikisDepoVazgecActionPerformed
         int gelenSonKayitNo = malzemeDepoCikisSonKayitGetir();
         kayitNumarasi = gelenSonKayitNo;
-        btnIleriMalzemeKarti.setEnabled(false);
+      //  btnIleriMalzemeKarti.setEnabled(false);
     }//GEN-LAST:event_btnListeMalzemeCikisDepoVazgecActionPerformed
 
     private void pnlMainFormMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainFormMouseReleased

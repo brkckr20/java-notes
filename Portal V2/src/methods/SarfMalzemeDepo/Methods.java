@@ -253,9 +253,9 @@ public class Methods {
                         resultSet.getString("not1"),
                         resultSet.getString("not2"),
                         resultSet.getString("cikilan_birim"),
+                        resultSet.getString("teslim_alan"),
                         resultSet.getString("firma_kodu"),
                         resultSet.getString("firma_unvan"),
-                        resultSet.getString("teslim_alan"),
                         resultSet.getString("kalem_islem"),
                         resultSet.getDate("tarih") // tarih değeri getDate() ile alınır
                 ));
@@ -336,6 +336,48 @@ public class Methods {
         try {
             connection = dbHelper.getConnection();
             String query = SQLDosyasındanOku.sorguGetir("SarfMalzemeDepoCikisSonrakiKayitGetir.sql");
+            preparedStatement = connection.prepareStatement(query); // PreparedStatement oluşturuldu
+            preparedStatement.setInt(1, id); // Parametre ayarlandı
+            resultSet = preparedStatement.executeQuery(); // Sorgu çalıştırıldı
+            while (resultSet.next()) {
+                sonuc.add(new MSarfMalzemeDepo(
+                        resultSet.getInt("id"),//
+                        resultSet.getString("malzeme_kodu"),//
+                        resultSet.getString("malzeme_adi"),//
+                        resultSet.getString("birim"),//
+                        resultSet.getString("uuid"),//
+                        resultSet.getInt("miktar"),//
+                        resultSet.getString("not1"),
+                        resultSet.getString("not2"),
+                        resultSet.getString("cikilan_birim"),
+                        resultSet.getString("teslim_alan"),
+                        resultSet.getString("firma_kodu"),//
+                        resultSet.getString("firma_unvan"), // firma_unvan String olarak alınır/
+                        resultSet.getString("kalem_islem"),//
+                        resultSet.getDate("tarih") // tarih değeri getDate() ile alınır
+                ));
+            }
+        } catch (SQLException exception) {
+            dbHelper.showErrorMessage(exception);
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return sonuc;
+    }
+    
+    public ArrayList<MSarfMalzemeDepo> malzemeDepoCikisOncekiKayitGetir(int id) throws SQLException, IOException {
+        ArrayList<MSarfMalzemeDepo> sonuc = new ArrayList<>();
+        try {
+            connection = dbHelper.getConnection();
+            String query = SQLDosyasındanOku.sorguGetir("SarfMalzemeDepoCikisOncekiKayitGetir.sql");
             preparedStatement = connection.prepareStatement(query); // PreparedStatement oluşturuldu
             preparedStatement.setInt(1, id); // Parametre ayarlandı
             resultSet = preparedStatement.executeQuery(); // Sorgu çalıştırıldı
