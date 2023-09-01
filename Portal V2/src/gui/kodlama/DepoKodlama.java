@@ -13,6 +13,7 @@ public class DepoKodlama extends javax.swing.JInternalFrame {
         this.setBorder(null);
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
+        depoMethodlari.depoKodlariniTabloyaYansit(tblDepolar);
 
     }
 
