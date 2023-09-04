@@ -22,5 +22,10 @@ public abstract class Bildirim {
                 options[0]);
         return confirmResult;
     }
+    
+    public static void uyari(String mesaj) {
+        String[] options = {"Tamam"};
+        JOptionPane.showOptionDialog(null, mesaj, "Uyarı", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+    }
 
 }

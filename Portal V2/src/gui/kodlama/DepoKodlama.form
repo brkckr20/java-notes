@@ -46,7 +46,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnKaydetDepoKodlama" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnSilMalzemeGiris" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSilDepoKodlama" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="847" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -56,7 +56,7 @@
               <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                   <Component id="btnKaydetDepoKodlama" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnYeniMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="btnSilMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnSilDepoKodlama" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -73,7 +73,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKaydetDepoKodlamaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSilMalzemeGiris">
+        <Component class="javax.swing.JButton" name="btnSilDepoKodlama">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/assets/Delete.png"/>
@@ -81,7 +81,7 @@
             <Property name="text" type="java.lang.String" value="Sil"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSilMalzemeGirisActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSilDepoKodlamaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnYeniMalzemeGiris">
@@ -188,6 +188,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblDepolarMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

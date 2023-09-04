@@ -1,29 +1,31 @@
 package gui.kodlama;
 
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 import methods.Kodlama.Depo;
 
 public class DepoKodlama extends javax.swing.JInternalFrame {
-
+    
     Depo depoMethodlari = new Depo();
-
+    DefaultTableModel model;
+    int secilenId = 0;
+    
     public DepoKodlama() {
         initComponents();
         /* - border kaldırma */
         this.setBorder(null);
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
-        depoMethodlari.depoKodlariniTabloyaYansit(tblDepolar);
-
+        depoMethodlari.depolariTabloyaYansit(tblDepolar);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnlButtonGroup = new javax.swing.JPanel();
         btnKaydetDepoKodlama = new javax.swing.JButton();
-        btnSilMalzemeGiris = new javax.swing.JButton();
+        btnSilDepoKodlama = new javax.swing.JButton();
         btnYeniMalzemeGiris = new javax.swing.JButton();
         pnlGovde = new javax.swing.JPanel();
         lblDepoAdi = new javax.swing.JLabel();
@@ -41,11 +43,11 @@ public class DepoKodlama extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSilMalzemeGiris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Delete.png"))); // NOI18N
-        btnSilMalzemeGiris.setText("Sil");
-        btnSilMalzemeGiris.addActionListener(new java.awt.event.ActionListener() {
+        btnSilDepoKodlama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Delete.png"))); // NOI18N
+        btnSilDepoKodlama.setText("Sil");
+        btnSilDepoKodlama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSilMalzemeGirisActionPerformed(evt);
+                btnSilDepoKodlamaActionPerformed(evt);
             }
         });
 
@@ -67,7 +69,7 @@ public class DepoKodlama extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnKaydetDepoKodlama)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSilMalzemeGiris)
+                .addComponent(btnSilDepoKodlama)
                 .addContainerGap(847, Short.MAX_VALUE))
         );
         pnlButtonGroupLayout.setVerticalGroup(
@@ -75,7 +77,7 @@ public class DepoKodlama extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlButtonGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnKaydetDepoKodlama, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnYeniMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnSilMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSilDepoKodlama, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         lblDepoAdi.setText("Depo Adı Giriniz : ");
@@ -105,6 +107,11 @@ public class DepoKodlama extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblDepolar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDepolarMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblDepolar);
@@ -162,20 +169,33 @@ public class DepoKodlama extends javax.swing.JInternalFrame {
 
     private void btnKaydetDepoKodlamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaydetDepoKodlamaActionPerformed
         depoMethodlari.depoKaydet(Integer.parseInt(lblDepoIdText.getText()), txtDepoAdi);
+        depoMethodlari.depolariTabloyaYansit(tblDepolar);
     }//GEN-LAST:event_btnKaydetDepoKodlamaActionPerformed
 
-    private void btnSilMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilMalzemeGirisActionPerformed
-
-    }//GEN-LAST:event_btnSilMalzemeGirisActionPerformed
+    private void btnSilDepoKodlamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilDepoKodlamaActionPerformed
+        depoMethodlari.depoKodlamaSil(Integer.parseInt(lblDepoIdText.getText()));
+        depoMethodlari.depolariTabloyaYansit(tblDepolar);
+    }//GEN-LAST:event_btnSilDepoKodlamaActionPerformed
 
     private void btnYeniMalzemeGirisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYeniMalzemeGirisActionPerformed
-
+        txtDepoAdi.setText("");
+        lblDepoIdText.setText(Integer.toString(0));
     }//GEN-LAST:event_btnYeniMalzemeGirisActionPerformed
+
+    private void tblDepolarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDepolarMouseClicked
+        int selectedRow = tblDepolar.getSelectedRow();
+        if (selectedRow >= 0) {
+            int id = (int) tblDepolar.getValueAt(selectedRow, 0);
+            String depoAdi = (String) tblDepolar.getValueAt(selectedRow, 1);
+            txtDepoAdi.setText(depoAdi);
+            lblDepoIdText.setText(Integer.toString(id));
+        }
+    }//GEN-LAST:event_tblDepolarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKaydetDepoKodlama;
-    private javax.swing.JButton btnSilMalzemeGiris;
+    private javax.swing.JButton btnSilDepoKodlama;
     private javax.swing.JButton btnYeniMalzemeGiris;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDepoAdi;
