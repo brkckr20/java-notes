@@ -1,8 +1,10 @@
 package gui.depolar;
 
 import components.FirmaModal;
+import components.PersonelListesiModal;
 import helpers.DbHelper;
 import interfaces.FirmaKartiYonetimi;
+import interfaces.PersonelKartiYonetimi;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +28,7 @@ import models.MMalzemeKarti;
 import utils.Bildirim;
 import utils.GlobalArama;
 
-public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements FirmaKartiYonetimi {
+public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements FirmaKartiYonetimi, PersonelKartiYonetimi {
 
     DefaultTableModel model, modelKartListesi;
     DefaultTableModel model2Kalem;
@@ -58,6 +60,15 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
     public void onFirmaSelected(String ulke, String ulke_kodu) {
         txtCariKod.setText(ulke);
         lblFirmaUnvan.setText(ulke_kodu);
+    }
+
+    @Override
+    public void onPersonelSelected(String ad_soyad, String departman) {
+        int selectedRow = tblMalzemeCikis.getSelectedRow();
+        if (selectedRow != -1) {
+            tblMalzemeCikis.setValueAt(ad_soyad, selectedRow, 7);
+            tblMalzemeCikis.setValueAt(departman, selectedRow, 8);
+        }
     }
 
     public void malzemeDepoListesiniTabloyaYansit() {
@@ -220,7 +231,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void malzemeDepoCikisOncekiKayitGetir(int id) {
         btnGeriMalzemeCikis.setEnabled(true);
         model = (DefaultTableModel) tblMalzemeCikis.getModel();
@@ -869,17 +880,16 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
             int column = tblMalzemeCikis.columnAtPoint(evt.getPoint());
             int row = tblMalzemeCikis.rowAtPoint(evt.getPoint());
 
-            if (column != 1) {
+            if (column != 7) { // 7.indisteki kolon
                 return;
             }
 
             Object cellValue = tblMalzemeCikis.getValueAt(row, column);
 
             if (cellValue != null) {
-                //     MalzemeKoduModal malzemeKoduModal = new MalzemeKoduModal(null, true);
-                //    malzemeKoduModal.setSelectionListener(this);
-                //    malzemeKoduModal.setVisible(true);
-
+                PersonelListesiModal personelListesiModal = new PersonelListesiModal(null, true);
+                personelListesiModal.setSelectionListener(this);
+                personelListesiModal.setVisible(true);
             }
         }
     }//GEN-LAST:event_tblMalzemeCikisMouseClicked
@@ -913,7 +923,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
     private void btnListeMalzemeCikisDepoVazgecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeCikisDepoVazgecActionPerformed
         int gelenSonKayitNo = malzemeDepoCikisSonKayitGetir();
         kayitNumarasi = gelenSonKayitNo;
-      //  btnIleriMalzemeKarti.setEnabled(false);
+        //  btnIleriMalzemeKarti.setEnabled(false);
     }//GEN-LAST:event_btnListeMalzemeCikisDepoVazgecActionPerformed
 
     private void pnlMainFormMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainFormMouseReleased

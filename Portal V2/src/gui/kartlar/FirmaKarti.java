@@ -13,8 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import utils.Bildirim;
 import models.MFirmaKarti;
 import components.UlkeModal;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKartiYonetimi {
@@ -538,8 +536,9 @@ public class FirmaKarti extends javax.swing.JInternalFrame implements FirmaKarti
                 preparedStatement.executeUpdate();
                 Bildirim.basarili("Firma kartı silme işlemi başarıyla gerçekleştirildi...");
                 firmalariTabloyaYansit();
+                resetForm();
             } catch (SQLException ex) {
-                Logger.getLogger(FirmaKarti.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
 
         } else {

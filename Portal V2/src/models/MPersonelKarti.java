@@ -13,6 +13,12 @@ public class MPersonelKarti {
         this.departman = departman;
     }
 
+    public MPersonelKarti(String ad_soyad, String departman) {
+        this.ad_soyad = ad_soyad;
+        this.departman = departman;
+    }
+    
+
     public int getId() {
         return id;
     }
