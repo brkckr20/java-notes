@@ -2,6 +2,7 @@ package gui.depolar;
 
 import components.FirmaModal;
 import components.PersonelListesiModal;
+import components.Raporlar;
 import helpers.DbHelper;
 import interfaces.FirmaKartiYonetimi;
 import interfaces.PersonelKartiYonetimi;
@@ -289,6 +290,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
 
         popUp = new javax.swing.JPopupMenu();
         popupMenuZimmetYazdir = new javax.swing.JMenuItem();
+        popupMenuServisFormuYazdir = new javax.swing.JMenuItem();
         pnlButtonGroup = new javax.swing.JPanel();
         btnKaydetMalzemeDepoCikis = new javax.swing.JButton();
         btnGeriMalzemeCikis = new javax.swing.JButton();
@@ -298,6 +300,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
         btnYeniMalzemeGiris = new javax.swing.JButton();
         btnListeMalzemeCikisDepoYenile = new javax.swing.JButton();
         btnListeMalzemeCikisDepoVazgec = new javax.swing.JButton();
+        btnListeMalzemeCikisDepoYazdir = new javax.swing.JButton();
         pnlMainForm = new javax.swing.JPanel();
         txtFisNo = new javax.swing.JTextField();
         lblFisNo = new javax.swing.JLabel();
@@ -332,6 +335,14 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
 
         popupMenuZimmetYazdir.setText("Zimmet Formu Yazdır");
         popUp.add(popupMenuZimmetYazdir);
+
+        popupMenuServisFormuYazdir.setText("Servis Formu Yazdır");
+        popupMenuServisFormuYazdir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                popupMenuServisFormuYazdirMouseClicked(evt);
+            }
+        });
+        popUp.add(popupMenuServisFormuYazdir);
 
         btnKaydetMalzemeDepoCikis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/save.png"))); // NOI18N
         btnKaydetMalzemeDepoCikis.setText("Kaydet");
@@ -397,6 +408,14 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
             }
         });
 
+        btnListeMalzemeCikisDepoYazdir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Print.png"))); // NOI18N
+        btnListeMalzemeCikisDepoYazdir.setText("Yazdır");
+        btnListeMalzemeCikisDepoYazdir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListeMalzemeCikisDepoYazdirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlButtonGroupLayout = new javax.swing.GroupLayout(pnlButtonGroup);
         pnlButtonGroup.setLayout(pnlButtonGroupLayout);
         pnlButtonGroupLayout.setHorizontalGroup(
@@ -418,6 +437,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                 .addComponent(btnListeMalzemeGiris)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnListeMalzemeCikisDepoYenile)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnListeMalzemeCikisDepoYazdir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlButtonGroupLayout.setVerticalGroup(
@@ -430,7 +451,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
                 .addComponent(btnSilMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnListeMalzemeGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnListeMalzemeCikisDepoYenile, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnListeMalzemeCikisDepoVazgec, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnListeMalzemeCikisDepoVazgec, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnListeMalzemeCikisDepoYazdir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pnlMainForm.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -927,13 +949,13 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
     }//GEN-LAST:event_btnListeMalzemeCikisDepoVazgecActionPerformed
 
     private void pnlMainFormMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainFormMouseReleased
-        if (evt.isPopupTrigger()) {
-            popUp.show(evt.getComponent(), evt.getX(), evt.getY());
-        }
+        /* if (evt.isPopupTrigger()) {
+         popUp.show(evt.getComponent(), evt.getX(), evt.getY());
+         }*/
     }//GEN-LAST:event_pnlMainFormMouseReleased
 
     private void popUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popUpMouseReleased
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_popUpMouseReleased
 
     private void txtSMCMalzemeKartiListesiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSMCMalzemeKartiListesiKeyReleased
@@ -955,6 +977,20 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
         }
     }//GEN-LAST:event_tblSMCMalzemeKartiListesiMouseClicked
 
+    private void popupMenuServisFormuYazdirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popupMenuServisFormuYazdirMouseClicked
+
+    }//GEN-LAST:event_popupMenuServisFormuYazdirMouseClicked
+
+    private void btnListeMalzemeCikisDepoYazdirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeCikisDepoYazdirActionPerformed
+        /*
+         FirmaModal firmaModal = new FirmaModal(null, true);
+         firmaModal.setSelectionListener(this);
+         firmaModal.setVisible(true);
+         */
+        Raporlar raporlar = new Raporlar(null, true);
+        raporlar.setVisible(true);
+    }//GEN-LAST:event_btnListeMalzemeCikisDepoYazdirActionPerformed
+
     private void tabloyaComboboxEkle() {
         comboBox = new JComboBox<>();
         comboBox.addItem("KURUMA ÇIKIŞ");
@@ -972,6 +1008,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
     private javax.swing.JButton btnIleriMalzemeKarti;
     private javax.swing.JButton btnKaydetMalzemeDepoCikis;
     private javax.swing.JButton btnListeMalzemeCikisDepoVazgec;
+    private javax.swing.JButton btnListeMalzemeCikisDepoYazdir;
     private javax.swing.JButton btnListeMalzemeCikisDepoYenile;
     private javax.swing.JButton btnListeMalzemeGiris;
     private javax.swing.JButton btnSilMalzemeGiris;
@@ -994,6 +1031,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
     private javax.swing.JPanel pnlMalzemeKarti;
     private javax.swing.JPanel pnlSarfMalzemeDepoHavuz;
     private javax.swing.JPopupMenu popUp;
+    private javax.swing.JMenuItem popupMenuServisFormuYazdir;
     private javax.swing.JMenuItem popupMenuZimmetYazdir;
     private javax.swing.JTable tblMalzemeCikis;
     private javax.swing.JTable tblSMCMalzemeKartiListesi;

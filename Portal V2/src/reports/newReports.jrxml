@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="newReports" pageWidth="595" pageHeight="419" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be874385-adf1-4b9e-bd4b-fac340eb5b90">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cG9ydGFsMjAyMy5zYXJmX21hbHplbWVfZGVwbzIgQVMgLDI5NSwxNixlODAwNTMyNS01ODI4LTQw
+NjAtOTE5Zi1jOGI5YTEzNzllM2E7cG9ydGFsMjAyMy5zYXJmX21hbHplbWVfZGVwbzEgQVMgLDQ0
+LDI0LDRmMGVjOWM4LWIyZTUtNGEyZC05MDQxLTZhYjlhYzM1NDYxMDs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<parameter name="d1id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT portal2023.sarf_malzeme_depo1.id,
+	portal2023.sarf_malzeme_depo1.islem_cinsi,
+	portal2023.sarf_malzeme_depo1.tarih,
+	portal2023.sarf_malzeme_depo1.firma_kodu,
+	portal2023.sarf_malzeme_depo1.firma_unvan,
+	portal2023.sarf_malzeme_depo1.fatura_no,
+	portal2023.sarf_malzeme_depo2.id,
+	portal2023.sarf_malzeme_depo2.kalem_islem,
+	portal2023.sarf_malzeme_depo2.malzeme_kodu,
+	portal2023.sarf_malzeme_depo2.malzeme_adi,
+	portal2023.sarf_malzeme_depo2.miktar,
+	portal2023.sarf_malzeme_depo2.not1,
+	portal2023.sarf_malzeme_depo2.not2,
+	portal2023.sarf_malzeme_depo2.birim,
+	portal2023.sarf_malzeme_depo2.cikilan_birim,
+	portal2023.sarf_malzeme_depo2.teslim_alan,
+	portal2023.sarf_malzeme_depo2.uuid,
+	portal2023.sarf_malzeme_depo2.`refNoId`,
+	portal2023.sarf_malzeme_depo2.aciklama,
+	portal2023.sarf_malzeme_depo2.fiyat
+FROM portal2023.sarf_malzeme_depo2
+	INNER JOIN portal2023.sarf_malzeme_depo1 ON 
+	 portal2023.sarf_malzeme_depo1.id = portal2023.sarf_malzeme_depo2.`refNoId` 
+WHERE 
+	 portal2023.sarf_malzeme_depo1.id = '$P!{d1id}']]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo1"/>
+	</field>
+	<field name="islem_cinsi" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="islem_cinsi"/>
+		<property name="com.jaspersoft.studio.field.label" value="islem_cinsi"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo1"/>
+	</field>
+	<field name="tarih" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="tarih"/>
+		<property name="com.jaspersoft.studio.field.label" value="tarih"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo1"/>
+	</field>
+	<field name="firma_kodu" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="firma_kodu"/>
+		<property name="com.jaspersoft.studio.field.label" value="firma_kodu"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo1"/>
+	</field>
+	<field name="firma_unvan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="firma_unvan"/>
+		<property name="com.jaspersoft.studio.field.label" value="firma_unvan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo1"/>
+	</field>
+	<field name="fatura_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fatura_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="fatura_no"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo1"/>
+	</field>
+	<field name="COLUMN_7" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="kalem_islem" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="kalem_islem"/>
+		<property name="com.jaspersoft.studio.field.label" value="kalem_islem"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="malzeme_kodu" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="malzeme_kodu"/>
+		<property name="com.jaspersoft.studio.field.label" value="malzeme_kodu"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="malzeme_adi" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="malzeme_adi"/>
+		<property name="com.jaspersoft.studio.field.label" value="malzeme_adi"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="miktar" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="miktar"/>
+		<property name="com.jaspersoft.studio.field.label" value="miktar"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="not1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="not1"/>
+		<property name="com.jaspersoft.studio.field.label" value="not1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="not2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="not2"/>
+		<property name="com.jaspersoft.studio.field.label" value="not2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="birim" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="birim"/>
+		<property name="com.jaspersoft.studio.field.label" value="birim"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="cikilan_birim" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cikilan_birim"/>
+		<property name="com.jaspersoft.studio.field.label" value="cikilan_birim"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="teslim_alan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="teslim_alan"/>
+		<property name="com.jaspersoft.studio.field.label" value="teslim_alan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="uuid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uuid"/>
+		<property name="com.jaspersoft.studio.field.label" value="uuid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="refNoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="refNoId"/>
+		<property name="com.jaspersoft.studio.field.label" value="refNoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="aciklama" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="aciklama"/>
+		<property name="com.jaspersoft.studio.field.label" value="aciklama"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<field name="fiyat" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="fiyat"/>
+		<property name="com.jaspersoft.studio.field.label" value="fiyat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sarf_malzeme_depo2"/>
+	</field>
+	<variable name="miktar1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{miktar}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="560" height="80" backcolor="rgba(255, 255, 255, 0.0)" uuid="b3f58ed6-2020-4c41-b403-f4d43de64ebb"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="180" y="0" width="370" height="39" uuid="20a16330-367f-411a-bec5-845e400f2b92"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Servis Formu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="0" width="170" height="40" uuid="b6432d05-8a19-483b-8535-b4317ed84489"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAKOSAN]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="380" y="40" width="170" height="30" uuid="c46f3cb5-1b5e-4ee0-a2de-f5f48c622147"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="40" width="370" height="30" uuid="11371695-3c6b-4422-814a-4f019fd08971"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{firma_unvan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="280" y="4" width="100" height="20" uuid="2af1b817-c9e9-490f-95bb-2cdd9a457caa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Miktar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="4" width="100" height="20" uuid="232c8367-1933-466a-bd1a-19c1ff9c0786">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Malzeme Kodu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="4" width="180" height="20" uuid="41dfe00b-13c3-4d5f-8253-89fc4837e819">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Malzeme Adı]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="4" width="100" height="20" uuid="be2d9ddf-3138-454c-9d8b-d403ce98349b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Birim]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="4" width="80" height="20" uuid="fce438ec-2e60-44e4-8469-9310b7910005">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[İşlem]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="280" y="2" width="100" height="20" uuid="53b7e49c-7b2b-42d2-ab23-87c3ff230f86">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{miktar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="2" width="100" height="20" uuid="fccf6daa-0074-4f2b-badc-00cafbf42234">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{malzeme_kodu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="2" width="180" height="20" uuid="ef48d18e-50ae-4eed-92b5-7724ae2233fd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{malzeme_adi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="2" width="100" height="20" uuid="64459032-bfad-48d3-9889-e607f7d96ee4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{birim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="2" width="80" height="20" uuid="38028ed1-e014-47cf-8163-30a140a09319">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{kalem_islem}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -16,6 +16,14 @@
             <Property name="text" type="java.lang.String" value="Zimmet Formu Yazd&#x131;r"/>
           </Properties>
         </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="popupMenuServisFormuYazdir">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Servis Formu Yazd&#x131;r"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="popupMenuServisFormuYazdirMouseClicked"/>
+          </Events>
+        </MenuItem>
       </SubComponents>
     </Container>
   </NonVisualComponents>
@@ -75,6 +83,8 @@
                   <Component id="btnListeMalzemeGiris" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnListeMalzemeCikisDepoYenile" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnListeMalzemeCikisDepoYazdir" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -90,6 +100,7 @@
                   <Component id="btnListeMalzemeGiris" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnListeMalzemeCikisDepoYenile" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnListeMalzemeCikisDepoVazgec" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnListeMalzemeCikisDepoYazdir" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -181,6 +192,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListeMalzemeCikisDepoVazgecActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnListeMalzemeCikisDepoYazdir">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/assets/Print.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Yazd&#x131;r"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListeMalzemeCikisDepoYazdirActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
