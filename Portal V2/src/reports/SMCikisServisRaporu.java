@@ -66,7 +66,7 @@ public class SMCikisServisRaporu extends javax.swing.JDialog {
 
     private void btnKayitNumarasiTamamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKayitNumarasiTamamActionPerformed
         try {
-            new Yazdir(93, dbHelper.getConnection());
+            Yazdir yazdir = new Yazdir(93, dbHelper.getConnection());
             
         } catch (SQLException ex) {
             Logger.getLogger(SMCikisServisRaporu.class.getName()).log(Level.SEVERE, null, ex);

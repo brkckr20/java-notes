@@ -19,7 +19,7 @@ public class Yazdir {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("d1id", d1id);
         try {
-            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(getClass().getResourceAsStream("/reports/newReports_1.jasper"));
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(getClass().getResourceAsStream("newReports.jasper"));
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,connection);
             JasperViewer.viewReport(jasperPrint,true);
         } catch (JRException ex) {

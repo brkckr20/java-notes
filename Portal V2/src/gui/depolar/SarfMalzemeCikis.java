@@ -26,6 +26,8 @@ import methods.SarfMalzemeDepo.Methods;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 import models.MMalzemeKarti;
+import reports.SMCikisServisRaporu;
+import reports.Yazdir;
 import utils.Bildirim;
 import utils.GlobalArama;
 
@@ -987,6 +989,7 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
          firmaModal.setSelectionListener(this);
          firmaModal.setVisible(true);
          */
+        
         Raporlar raporlar = new Raporlar(null, true);
         raporlar.setVisible(true);
     }//GEN-LAST:event_btnListeMalzemeCikisDepoYazdirActionPerformed
