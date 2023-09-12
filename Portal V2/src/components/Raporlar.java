@@ -1,6 +1,8 @@
 
 package components;
 
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import reports.SMCikisServisRaporu;
 
 
@@ -10,6 +12,10 @@ public class Raporlar extends javax.swing.JDialog {
     public Raporlar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public Raporlar(Object object, boolean b, JLabel lblKayitNoText) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @SuppressWarnings("unchecked")

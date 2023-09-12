@@ -143,28 +143,28 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="80" splitType="Stretch">
+		<band height="85" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="560" height="80" backcolor="rgba(255, 255, 255, 0.0)" uuid="b3f58ed6-2020-4c41-b403-f4d43de64ebb"/>
+				<reportElement x="10" y="0" width="540" height="80" backcolor="rgba(255, 255, 255, 0.0)" uuid="b3f58ed6-2020-4c41-b403-f4d43de64ebb"/>
 				<graphicElement>
 					<pen lineStyle="Dotted"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="180" y="0" width="370" height="39" uuid="20a16330-367f-411a-bec5-845e400f2b92"/>
+				<reportElement x="460" y="0" width="90" height="39" uuid="20a16330-367f-411a-bec5-845e400f2b92"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Servis Formu]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="0" width="170" height="40" uuid="b6432d05-8a19-483b-8535-b4317ed84489"/>
+				<reportElement x="10" y="0" width="450" height="40" uuid="b6432d05-8a19-483b-8535-b4317ed84489"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -174,23 +174,23 @@ WHERE
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="22" isBold="true"/>
 				</textElement>
-				<text><![CDATA[NAKOSAN]]></text>
+				<text><![CDATA[ NAKOSAN]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="380" y="40" width="170" height="30" uuid="c46f3cb5-1b5e-4ee0-a2de-f5f48c622147"/>
+				<reportElement x="460" y="40" width="90" height="30" uuid="c46f3cb5-1b5e-4ee0-a2de-f5f48c622147"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="40" width="370" height="30" uuid="11371695-3c6b-4422-814a-4f019fd08971"/>
+				<reportElement x="140" y="40" width="320" height="30" uuid="11371695-3c6b-4422-814a-4f019fd08971"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -198,16 +198,29 @@ WHERE
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{firma_unvan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[ $F{firma_unvan}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="10" y="39" width="130" height="31" uuid="424f1eda-a3b3-4dba-b7ba-12d4ad308ab6"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ Firma :]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="29" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<staticText>
-				<reportElement x="280" y="4" width="100" height="20" uuid="2af1b817-c9e9-490f-95bb-2cdd9a457caa">
+				<reportElement x="360" y="0" width="50" height="20" uuid="2af1b817-c9e9-490f-95bb-2cdd9a457caa">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
 				</reportElement>
 				<box>
@@ -215,12 +228,12 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Miktar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="4" width="100" height="20" uuid="232c8367-1933-466a-bd1a-19c1ff9c0786">
+				<reportElement x="410" y="0" width="60" height="20" uuid="be2d9ddf-3138-454c-9d8b-d403ce98349b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
 				</reportElement>
 				<box>
@@ -228,38 +241,12 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Malzeme Kodu]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="100" y="4" width="180" height="20" uuid="41dfe00b-13c3-4d5f-8253-89fc4837e819">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
-				</reportElement>
-				<box>
-					<pen lineWidth="0.25"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Malzeme Adı]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="380" y="4" width="100" height="20" uuid="be2d9ddf-3138-454c-9d8b-d403ce98349b">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
-				</reportElement>
-				<box>
-					<pen lineWidth="0.25"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Birim]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="4" width="80" height="20" uuid="fce438ec-2e60-44e4-8469-9310b7910005">
+				<reportElement x="470" y="0" width="80" height="20" uuid="fce438ec-2e60-44e4-8469-9310b7910005">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
 				</reportElement>
 				<box>
@@ -267,16 +254,42 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[İşlem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="0" width="149" height="20" uuid="232c8367-1933-466a-bd1a-19c1ff9c0786">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Malzeme Kodu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="0" width="201" height="20" uuid="41dfe00b-13c3-4d5f-8253-89fc4837e819">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Malzeme Adı]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="31" splitType="Stretch">
 			<textField>
-				<reportElement x="280" y="2" width="100" height="20" uuid="53b7e49c-7b2b-42d2-ab23-87c3ff230f86">
+				<reportElement x="359" y="2" width="51" height="20" uuid="53b7e49c-7b2b-42d2-ab23-87c3ff230f86">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
 				</reportElement>
 				<box>
@@ -286,11 +299,13 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{miktar}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="2" width="100" height="20" uuid="fccf6daa-0074-4f2b-badc-00cafbf42234">
+				<reportElement x="10" y="2" width="149" height="20" uuid="fccf6daa-0074-4f2b-badc-00cafbf42234">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
 				</reportElement>
 				<box>
@@ -300,11 +315,13 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{malzeme_kodu}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="2" width="180" height="20" uuid="ef48d18e-50ae-4eed-92b5-7724ae2233fd">
+				<reportElement x="159" y="2" width="201" height="20" uuid="ef48d18e-50ae-4eed-92b5-7724ae2233fd">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
 				</reportElement>
 				<box>
@@ -314,11 +331,13 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{malzeme_adi}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="380" y="2" width="100" height="20" uuid="64459032-bfad-48d3-9889-e607f7d96ee4">
+				<reportElement x="410" y="2" width="60" height="20" uuid="64459032-bfad-48d3-9889-e607f7d96ee4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
 				</reportElement>
 				<box>
@@ -328,11 +347,13 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{birim}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="480" y="2" width="80" height="20" uuid="38028ed1-e014-47cf-8163-30a140a09319">
+				<reportElement x="470" y="2" width="80" height="20" uuid="38028ed1-e014-47cf-8163-30a140a09319">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc7f68f-ddfa-47ca-a61b-e92fb5b38168"/>
 				</reportElement>
 				<box>
@@ -342,7 +363,9 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{kalem_islem}]]></textFieldExpression>
 			</textField>
 		</band>

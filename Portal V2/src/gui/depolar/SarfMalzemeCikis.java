@@ -8,6 +8,7 @@ import interfaces.FirmaKartiYonetimi;
 import interfaces.PersonelKartiYonetimi;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,8 +25,15 @@ import javax.swing.table.DefaultTableModel;
 import utils.TabloSecilenRengiDegistir;
 import methods.SarfMalzemeDepo.Methods;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.UUID;
 import models.MMalzemeKarti;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import reports.SMCikisServisRaporu;
 import reports.Yazdir;
 import utils.Bildirim;
@@ -984,14 +992,8 @@ public class SarfMalzemeCikis extends javax.swing.JInternalFrame implements Firm
     }//GEN-LAST:event_popupMenuServisFormuYazdirMouseClicked
 
     private void btnListeMalzemeCikisDepoYazdirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListeMalzemeCikisDepoYazdirActionPerformed
-        /*
-         FirmaModal firmaModal = new FirmaModal(null, true);
-         firmaModal.setSelectionListener(this);
-         firmaModal.setVisible(true);
-         */
-        
-        Raporlar raporlar = new Raporlar(null, true);
-        raporlar.setVisible(true);
+         Raporlar raporlar = new Raporlar(null, true);
+         raporlar.setVisible(true);
     }//GEN-LAST:event_btnListeMalzemeCikisDepoYazdirActionPerformed
 
     private void tabloyaComboboxEkle() {

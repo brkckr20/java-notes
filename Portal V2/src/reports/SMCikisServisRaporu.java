@@ -1,14 +1,27 @@
-
 package reports;
 
 import helpers.DbHelper;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class SMCikisServisRaporu extends javax.swing.JDialog {
-    
+
     DbHelper dbHelper = new DbHelper();
+    Connection con;
+    PreparedStatement pst;
 
     public SMCikisServisRaporu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -65,12 +78,7 @@ public class SMCikisServisRaporu extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKayitNumarasiTamamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKayitNumarasiTamamActionPerformed
-        try {
-            Yazdir yazdir = new Yazdir(93, dbHelper.getConnection());
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(SMCikisServisRaporu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Yazdir yazdir = new Yazdir(txtKayitNumarasi);
     }//GEN-LAST:event_btnKayitNumarasiTamamActionPerformed
 
     public static void main(String args[]) {
