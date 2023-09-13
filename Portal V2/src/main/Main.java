@@ -18,6 +18,7 @@ import gui.kodlama.KalemIslemKodlama;
 import java.awt.Color;
 import gui.ayarlar.FirmaBilgileri;
 import gui.kartlar.PersonelKartlari;
+import utils.RaporYazdir;
 
 public class Main extends javax.swing.JFrame {
 
@@ -182,6 +183,11 @@ public class Main extends javax.swing.JFrame {
 
         menuGuvenBilgisayarHizmetRaporu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/report.png"))); // NOI18N
         menuGuvenBilgisayarHizmetRaporu.setText("Güven Bilgisayar Hizmet Raporu");
+        menuGuvenBilgisayarHizmetRaporu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGuvenBilgisayarHizmetRaporuActionPerformed(evt);
+            }
+        });
         menuGorselRapor.add(menuGuvenBilgisayarHizmetRaporu);
 
         menuRapor.add(menuGorselRapor);
@@ -270,6 +276,11 @@ public class Main extends javax.swing.JFrame {
         firmaBilgileri.setClosable(false);
         sekmeyeBaslikAta("Firma Sabitleri Tanımlama", firmaBilgileri);
     }//GEN-LAST:event_menuAyarlarSirketBilgileriActionPerformed
+
+    private void menuGuvenBilgisayarHizmetRaporuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuvenBilgisayarHizmetRaporuActionPerformed
+        RaporYazdir raporYazdir = new RaporYazdir();
+        raporYazdir.GuvenHizmetRaporu();
+    }//GEN-LAST:event_menuGuvenBilgisayarHizmetRaporuActionPerformed
 
     public static void main(String args[]) {
         for (UIManager.LookAndFeelInfo lafInfo : UIManager.getInstalledLookAndFeels()) {

@@ -189,6 +189,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="G&#xfc;ven Bilgisayar Hizmet Raporu"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuGuvenBilgisayarHizmetRaporuActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
